@@ -73,20 +73,31 @@ export default function Home() {
   // Custom link renderer — CPP links stay in-app, external links open in new tab
   const markdownComponents: Components = {
     a: ({ href, children }) => {
-      const isCppLink =
-        href &&
-        (href.includes("cpp.edu") ||
-          href.startsWith("/") ||
-          href.startsWith("http://www.cpp.edu") ||
-          href.startsWith("https://www.cpp.edu"));
+      const linkText = typeof children === "string" ? children : String(children);
+      const isFullUrl = href && (href.startsWith("http://") || href.startsWith("https://"));
 
-      if (isCppLink) {
+      // Source/citation links and full URLs → open the actual site
+      // These are grounded source attributions the user should visit
+      if (isFullUrl) {
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors"
+          >
+            {children} ↗
+          </a>
+        );
+      }
+
+      // Relative CPP links (e.g. /admissions/freshmen) → ask the agent
+      const isCppRelativeLink = href && href.startsWith("/");
+      if (isCppRelativeLink) {
         return (
           <button
             onClick={(e) => {
               e.preventDefault();
-              // Extract a readable topic from the URL or link text
-              const linkText = typeof children === "string" ? children : String(children);
               const topic = linkText || href || "";
               sendMessage(`Tell me more about: ${topic}`);
             }}
@@ -98,7 +109,7 @@ export default function Home() {
         );
       }
 
-      // External links open in new tab
+      // Anything else — plain link
       return (
         <a
           href={href}
@@ -106,7 +117,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors"
         >
-          {children} ↗
+          {children}
         </a>
       );
     },
