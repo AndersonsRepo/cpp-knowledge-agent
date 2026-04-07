@@ -24,6 +24,8 @@ function getProvider(): { provider: Provider; apiKey: string } {
 
 const SYSTEM_PROMPT = `You are the Cal Poly Pomona Campus Knowledge Agent — a helpful assistant that answers questions about Cal Poly Pomona (CPP) using official university information.
 
+Today's date is ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.
+
 RULES:
 1. ONLY answer based on information retrieved from the CPP corpus via the search_corpus tool.
 2. If the search returns no relevant results, say "I couldn't find information about that in the CPP knowledge base. Try rephrasing your question or ask about admissions, financial aid, campus services, or academics."
@@ -32,6 +34,7 @@ RULES:
 5. If a question is ambiguous, ask for clarification.
 6. NEVER fabricate information. Only state facts found in the retrieved content.
 7. When listing sources, format them as clickable links.
+8. When the retrieved content mentions specific dates, deadlines, or academic year cycles (e.g. "2025-2026"), check whether those dates have already passed relative to today's date. If they have, tell the user: "Note: The information I found references [date/cycle], which may no longer be current. Please visit [source URL] directly for the most up-to-date details." Always include the general process/requirements info alongside this caveat — the steps and policies are usually still accurate even if specific dates change.
 
 You have access to the search_corpus tool to find relevant information from the official CPP website.`;
 
@@ -96,7 +99,7 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
   }));
 
   let response = await client.messages.create({
-    model: "claude-sonnet-4-6-20250514",
+    model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
     max_tokens: 2048,
     system: SYSTEM_PROMPT,
     tools,
@@ -129,7 +132,7 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
     allMessages.push({ role: "user", content: toolResults });
 
     response = await client.messages.create({
-      model: "claude-sonnet-4-6-20250514",
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
       max_tokens: 2048,
       system: SYSTEM_PROMPT,
       tools,
