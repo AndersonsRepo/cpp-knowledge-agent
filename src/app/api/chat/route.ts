@@ -1,0 +1,228 @@
+import { NextRequest, NextResponse } from "next/server";
+import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
+import { searchCorpus } from "@/lib/search";
+
+// --- Provider detection ---
+
+type Provider = "anthropic" | "openai";
+
+function getProvider(): { provider: Provider; apiKey: string } {
+  if (process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== "your-api-key-here") {
+    return { provider: "anthropic", apiKey: process.env.ANTHROPIC_API_KEY };
+  }
+  if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== "your-api-key-here") {
+    return { provider: "openai", apiKey: process.env.OPENAI_API_KEY };
+  }
+  throw new Error("No API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY in .env.local");
+}
+
+// --- Shared ---
+
+const SYSTEM_PROMPT = `You are the Cal Poly Pomona Campus Knowledge Agent — a helpful assistant that answers questions about Cal Poly Pomona (CPP) using official university information.
+
+RULES:
+1. ONLY answer based on information retrieved from the CPP corpus via the search_corpus tool.
+2. If the search returns no relevant results, say "I couldn't find information about that in the CPP knowledge base. Try rephrasing your question or ask about admissions, financial aid, campus services, or academics."
+3. ALWAYS cite your sources using the page URL at the end of your response.
+4. Be conversational and helpful. Use formatting (bold, lists) when it improves readability.
+5. If a question is ambiguous, ask for clarification.
+6. NEVER fabricate information. Only state facts found in the retrieved content.
+7. When listing sources, format them as clickable links.
+
+You have access to the search_corpus tool to find relevant information from the official CPP website.`;
+
+const TOOL_DEFINITION = {
+  name: "search_corpus",
+  description:
+    "Search the Cal Poly Pomona website corpus for relevant information. Use this tool to find answers to student questions about admissions, financial aid, academics, campus services, and more. Call this tool BEFORE answering any factual question.",
+  parameters: {
+    type: "object" as const,
+    properties: {
+      query: {
+        type: "string" as const,
+        description: "The search query. Use specific keywords related to the student's question.",
+      },
+    },
+    required: ["query"],
+  },
+};
+
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+function executeSearch(query: string): string {
+  const results = searchCorpus(query, 8);
+  return JSON.stringify(
+    results.map((r, i) => ({
+      rank: i + 1,
+      title: r.chunk.title,
+      section: r.chunk.section,
+      content: r.chunk.content,
+      url: r.url,
+      score: Math.round(r.score * 100) / 100,
+    })),
+    null,
+    2
+  );
+}
+
+// --- Anthropic provider ---
+
+async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise<string> {
+  const client = new Anthropic({ apiKey });
+
+  const tools: Anthropic.Tool[] = [
+    {
+      name: TOOL_DEFINITION.name,
+      description: TOOL_DEFINITION.description,
+      input_schema: {
+        type: "object" as const,
+        properties: TOOL_DEFINITION.parameters.properties,
+        required: TOOL_DEFINITION.parameters.required,
+      },
+    },
+  ];
+
+  const anthropicMessages: Anthropic.MessageParam[] = messages.map((m) => ({
+    role: m.role,
+    content: m.content,
+  }));
+
+  let response = await client.messages.create({
+    model: "claude-sonnet-4-6-20250514",
+    max_tokens: 2048,
+    system: SYSTEM_PROMPT,
+    tools,
+    messages: anthropicMessages,
+  });
+
+  const allMessages = [...anthropicMessages];
+  let maxToolRounds = 3;
+
+  while (response.stop_reason === "tool_use" && maxToolRounds > 0) {
+    maxToolRounds--;
+
+    const toolUseBlocks = response.content.filter(
+      (block) => block.type === "tool_use"
+    ) as Array<{ type: "tool_use"; id: string; name: string; input: Record<string, string> }>;
+
+    allMessages.push({ role: "assistant", content: response.content });
+
+    const toolResults: Anthropic.ToolResultBlockParam[] = [];
+    for (const toolUse of toolUseBlocks) {
+      if (toolUse.name === "search_corpus") {
+        toolResults.push({
+          type: "tool_result",
+          tool_use_id: toolUse.id,
+          content: executeSearch(toolUse.input.query),
+        });
+      }
+    }
+
+    allMessages.push({ role: "user", content: toolResults });
+
+    response = await client.messages.create({
+      model: "claude-sonnet-4-6-20250514",
+      max_tokens: 2048,
+      system: SYSTEM_PROMPT,
+      tools,
+      messages: allMessages,
+    });
+  }
+
+  return response.content
+    .filter((block): block is Anthropic.TextBlock => block.type === "text")
+    .map((block) => block.text)
+    .join("\n");
+}
+
+// --- OpenAI provider ---
+
+async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<string> {
+  const client = new OpenAI({ apiKey });
+
+  const tools: OpenAI.ChatCompletionTool[] = [
+    {
+      type: "function",
+      function: {
+        name: TOOL_DEFINITION.name,
+        description: TOOL_DEFINITION.description,
+        parameters: TOOL_DEFINITION.parameters,
+      },
+    },
+  ];
+
+  const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...messages.map(
+      (m) => ({ role: m.role, content: m.content }) as OpenAI.ChatCompletionMessageParam
+    ),
+  ];
+
+  let response = await client.chat.completions.create({
+    model: "gpt-4o",
+    max_tokens: 2048,
+    tools,
+    messages: openaiMessages,
+  });
+
+  let maxToolRounds = 3;
+
+  while (response.choices[0]?.finish_reason === "tool_calls" && maxToolRounds > 0) {
+    maxToolRounds--;
+    const choice = response.choices[0];
+    const toolCalls = choice.message.tool_calls || [];
+
+    // Add assistant message with tool calls
+    openaiMessages.push(choice.message);
+
+    // Process each tool call
+    for (const toolCall of toolCalls) {
+      if (toolCall.type === "function" && toolCall.function.name === "search_corpus") {
+        const args = JSON.parse(toolCall.function.arguments);
+        openaiMessages.push({
+          role: "tool",
+          tool_call_id: toolCall.id,
+          content: executeSearch(args.query),
+        });
+      }
+    }
+
+    response = await client.chat.completions.create({
+      model: "gpt-4o",
+      max_tokens: 2048,
+      tools,
+      messages: openaiMessages,
+    });
+  }
+
+  return response.choices[0]?.message?.content || "No response generated.";
+}
+
+// --- Route handler ---
+
+export async function POST(req: NextRequest) {
+  try {
+    const { messages } = (await req.json()) as { messages: ChatMessage[] };
+
+    if (!messages || messages.length === 0) {
+      return NextResponse.json({ error: "No messages provided" }, { status: 400 });
+    }
+
+    const { provider, apiKey } = getProvider();
+
+    const text =
+      provider === "anthropic"
+        ? await handleAnthropic(messages, apiKey)
+        : await handleOpenAI(messages, apiKey);
+
+    return NextResponse.json({ response: text });
+  } catch (error: unknown) {
+    console.error("Chat API error:", error);
+    const message = error instanceof Error ? error.message : "Internal server error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
