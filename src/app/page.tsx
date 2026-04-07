@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
+import { useState, useRef, useEffect, useCallback } from "react";
+import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 interface Message {
@@ -27,38 +27,41 @@ export default function Home() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  async function sendMessage(text: string) {
-    if (!text.trim() || loading) return;
+  const sendMessage = useCallback(
+    async (text: string) => {
+      if (!text.trim() || loading) return;
 
-    const userMessage: Message = { role: "user", content: text.trim() };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
-    setInput("");
-    setLoading(true);
+      const userMessage: Message = { role: "user", content: text.trim() };
+      const newMessages = [...messages, userMessage];
+      setMessages(newMessages);
+      setInput("");
+      setLoading(true);
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
-      });
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: newMessages }),
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      if (data.error) {
-        setMessages([...newMessages, { role: "assistant", content: `Error: ${data.error}` }]);
-      } else {
-        setMessages([...newMessages, { role: "assistant", content: data.response }]);
+        if (data.error) {
+          setMessages([...newMessages, { role: "assistant", content: `Error: ${data.error}` }]);
+        } else {
+          setMessages([...newMessages, { role: "assistant", content: data.response }]);
+        }
+      } catch {
+        setMessages([
+          ...newMessages,
+          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+        ]);
+      } finally {
+        setLoading(false);
       }
-    } catch {
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  }
+    },
+    [messages, loading]
+  );
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -66,6 +69,48 @@ export default function Home() {
       sendMessage(input);
     }
   }
+
+  // Custom link renderer — CPP links stay in-app, external links open in new tab
+  const markdownComponents: Components = {
+    a: ({ href, children }) => {
+      const isCppLink =
+        href &&
+        (href.includes("cpp.edu") ||
+          href.startsWith("/") ||
+          href.startsWith("http://www.cpp.edu") ||
+          href.startsWith("https://www.cpp.edu"));
+
+      if (isCppLink) {
+        return (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              // Extract a readable topic from the URL or link text
+              const linkText = typeof children === "string" ? children : String(children);
+              const topic = linkText || href || "";
+              sendMessage(`Tell me more about: ${topic}`);
+            }}
+            className="inline text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors cursor-pointer"
+            title={`Ask about: ${href}`}
+          >
+            {children}
+          </button>
+        );
+      }
+
+      // External links open in new tab
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors"
+        >
+          {children} ↗
+        </a>
+      );
+    },
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
@@ -124,8 +169,13 @@ export default function Home() {
                 }`}
               >
                 {msg.role === "assistant" ? (
-                  <div className="prose prose-sm max-w-none prose-a:text-[#1E4D2B] prose-a:underline prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-1 prose-td:border prose-td:border-gray-300 prose-td:px-3 prose-td:py-1">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                  <div className="prose prose-sm max-w-none prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-1 prose-td:border prose-td:border-gray-300 prose-td:px-3 prose-td:py-1">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={markdownComponents}
+                    >
+                      {msg.content}
+                    </ReactMarkdown>
                   </div>
                 ) : (
                   <p className="whitespace-pre-wrap">{msg.content}</p>
