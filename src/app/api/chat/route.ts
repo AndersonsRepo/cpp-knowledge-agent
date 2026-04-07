@@ -36,6 +36,8 @@ RULES:
 7. When listing sources, format them as clickable links.
 8. When the retrieved content mentions specific dates, deadlines, or academic year cycles (e.g. "2025-2026"), check whether those dates have already passed relative to today's date. If they have, tell the user: "Note: The information I found references [date/cycle], which may no longer be current. Please visit [source URL] directly for the most up-to-date details." Always include the general process/requirements info alongside this caveat — the steps and policies are usually still accurate even if specific dates change.
 
+9. Do NOT use emojis in responses. Keep a professional, clean tone.
+
 You have access to the search_corpus tool to find relevant information from the official CPP website.`;
 
 const TOOL_DEFINITION = {
