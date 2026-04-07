@@ -5,7 +5,7 @@ import { searchCorpus } from "@/lib/search";
 
 // --- Provider detection ---
 
-type Provider = "anthropic" | "openai";
+type Provider = "anthropic" | "openai" | "openrouter";
 
 function getProvider(): { provider: Provider; apiKey: string } {
   if (process.env.ANTHROPIC_API_KEY && process.env.ANTHROPIC_API_KEY !== "your-api-key-here") {
@@ -14,7 +14,10 @@ function getProvider(): { provider: Provider; apiKey: string } {
   if (process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY !== "your-api-key-here") {
     return { provider: "openai", apiKey: process.env.OPENAI_API_KEY };
   }
-  throw new Error("No API key configured. Set ANTHROPIC_API_KEY or OPENAI_API_KEY in .env.local");
+  if (process.env.OPENROUTER_API_KEY && process.env.OPENROUTER_API_KEY !== "your-api-key-here") {
+    return { provider: "openrouter", apiKey: process.env.OPENROUTER_API_KEY };
+  }
+  throw new Error("No API key configured. Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or OPENROUTER_API_KEY in .env.local");
 }
 
 // --- Shared ---
@@ -53,8 +56,8 @@ interface ChatMessage {
   content: string;
 }
 
-function executeSearch(query: string): string {
-  const results = searchCorpus(query, 8);
+async function executeSearch(query: string): Promise<string> {
+  const results = await searchCorpus(query, 8);
   return JSON.stringify(
     results.map((r, i) => ({
       rank: i + 1,
@@ -63,6 +66,7 @@ function executeSearch(query: string): string {
       content: r.chunk.content,
       url: r.url,
       score: Math.round(r.score * 100) / 100,
+      matchType: r.matchType,
     })),
     null,
     2
@@ -117,7 +121,7 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
         toolResults.push({
           type: "tool_result",
           tool_use_id: toolUse.id,
-          content: executeSearch(toolUse.input.query),
+          content: await executeSearch(toolUse.input.query),
         });
       }
     }
@@ -141,8 +145,16 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
 
 // --- OpenAI provider ---
 
-async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<string> {
-  const client = new OpenAI({ apiKey });
+async function handleOpenAICompatible(
+  messages: ChatMessage[],
+  apiKey: string,
+  opts: { baseURL?: string; model: string; defaultHeaders?: Record<string, string> }
+): Promise<string> {
+  const client = new OpenAI({
+    apiKey,
+    baseURL: opts.baseURL,
+    defaultHeaders: opts.defaultHeaders,
+  });
 
   const tools: OpenAI.ChatCompletionTool[] = [
     {
@@ -163,7 +175,7 @@ async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<st
   ];
 
   let response = await client.chat.completions.create({
-    model: "gpt-4o",
+    model: opts.model,
     max_tokens: 2048,
     tools,
     messages: openaiMessages,
@@ -176,23 +188,21 @@ async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<st
     const choice = response.choices[0];
     const toolCalls = choice.message.tool_calls || [];
 
-    // Add assistant message with tool calls
     openaiMessages.push(choice.message);
 
-    // Process each tool call
     for (const toolCall of toolCalls) {
       if (toolCall.type === "function" && toolCall.function.name === "search_corpus") {
         const args = JSON.parse(toolCall.function.arguments);
         openaiMessages.push({
           role: "tool",
           tool_call_id: toolCall.id,
-          content: executeSearch(args.query),
+          content: await executeSearch(args.query),
         });
       }
     }
 
     response = await client.chat.completions.create({
-      model: "gpt-4o",
+      model: opts.model,
       max_tokens: 2048,
       tools,
       messages: openaiMessages,
@@ -200,6 +210,20 @@ async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<st
   }
 
   return response.choices[0]?.message?.content || "No response generated.";
+}
+
+async function handleOpenAI(messages: ChatMessage[], apiKey: string): Promise<string> {
+  return handleOpenAICompatible(messages, apiKey, {
+    model: process.env.OPENAI_MODEL || "gpt-4o",
+  });
+}
+
+async function handleOpenRouter(messages: ChatMessage[], apiKey: string): Promise<string> {
+  return handleOpenAICompatible(messages, apiKey, {
+    baseURL: "https://openrouter.ai/api/v1",
+    model: process.env.OPENROUTER_MODEL || "anthropic/claude-sonnet-4",
+    defaultHeaders: { "HTTP-Referer": "https://github.com/AndersonsRepo/cpp-knowledge-agent" },
+  });
 }
 
 // --- Route handler ---
@@ -214,10 +238,19 @@ export async function POST(req: NextRequest) {
 
     const { provider, apiKey } = getProvider();
 
-    const text =
-      provider === "anthropic"
-        ? await handleAnthropic(messages, apiKey)
-        : await handleOpenAI(messages, apiKey);
+    let text: string;
+    switch (provider) {
+      case "anthropic":
+        text = await handleAnthropic(messages, apiKey);
+        break;
+      case "openrouter":
+        text = await handleOpenRouter(messages, apiKey);
+        break;
+      case "openai":
+      default:
+        text = await handleOpenAI(messages, apiKey);
+        break;
+    }
 
     return NextResponse.json({ response: text });
   } catch (error: unknown) {
