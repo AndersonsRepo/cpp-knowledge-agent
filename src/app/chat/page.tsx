@@ -81,11 +81,11 @@ const CATEGORIES = [
   },
   {
     title: "Academic Programs",
-    description: "Majors, course descriptions, prerequisites, and degree requirements",
+    description: "Majors, degree programs, and course listings across all colleges",
     icon: "📚",
     questions: [
       "What courses are required for a CS degree?",
-      "What are the prerequisites for CHM 1210?",
+      "What majors does the College of Engineering offer?",
     ],
   },
   {

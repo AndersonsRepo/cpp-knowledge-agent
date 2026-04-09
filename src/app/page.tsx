@@ -23,7 +23,7 @@ const FEATURES = [
     icon: "📚",
     title: "Academic Programs",
     description:
-      "Course descriptions, prerequisites, degree requirements, and program details for 760+ courses and 380+ programs.",
+      "Browse 380+ degree programs and 760+ course listings. For detailed prerequisites and descriptions, the agent links to the official CPP Course Catalog.",
   },
   {
     icon: "💰",
