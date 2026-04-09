@@ -164,9 +164,9 @@ function deduplicateResults(scored: Array<{ idx: number; score: number; matchTyp
     const chunk = chunks[idx];
     const url = getChunkUrl(chunk);
 
-    // Allow up to 2 chunks from same URL for more context
+    // Allow up to 4 chunks from same URL for more context
     const urlCount = results.filter((r) => r.url === url).length;
-    if (urlCount >= 2) continue;
+    if (urlCount >= 4) continue;
 
     results.push({ chunk, score, url, matchType });
   }

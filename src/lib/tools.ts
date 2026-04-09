@@ -105,16 +105,33 @@ function normalize(text: string): string {
 }
 
 function matchScore(query: string, text: string): number {
+  if (!text) return 0;
   const q = normalize(query);
   const t = normalize(text);
+  if (!q || !t) return 0;
   if (t === q) return 1.0;
   if (t.includes(q)) return 0.9;
+  if (q.includes(t)) return 0.8;
 
-  // Word overlap scoring
   const qWords = q.split(" ");
-  const tWords = new Set(t.split(" "));
-  const matches = qWords.filter((w) => tWords.has(w)).length;
-  return matches / qWords.length;
+  const tWords = t.split(" ");
+  const tWordSet = new Set(tWords);
+
+  // Exact word matches
+  let exactMatches = 0;
+  // Substring matches (e.g., "compute" matches "computer")
+  let substringMatches = 0;
+
+  for (const qw of qWords) {
+    if (tWordSet.has(qw)) {
+      exactMatches++;
+    } else if (tWords.some((tw) => tw.includes(qw) || qw.includes(tw))) {
+      substringMatches++;
+    }
+  }
+
+  // Weight exact matches higher than substring matches
+  return (exactMatches + substringMatches * 0.5) / qWords.length;
 }
 
 // ============================================================
@@ -127,15 +144,16 @@ export function lookupFaculty(query: string, limit: number = 5): string {
 
   const scored = faculty
     .map((f) => {
-      // Score against name (highest weight), department, title
       const nameScore = matchScore(query, f.name) * 3;
       const deptScore = matchScore(query, f.department);
       const titleScore = matchScore(query, f.title);
       const emailScore = f.email.toLowerCase().startsWith(q.split(" ")[0]) ? 1.5 : 0;
+      // Boost entries that have more complete data
+      const completenessBoost = (f.phone ? 0.1 : 0) + (f.location ? 0.1 : 0) + (f.officeHours ? 0.15 : 0) + (f.title ? 0.1 : 0);
 
-      return { entry: f, score: nameScore + deptScore + titleScore + emailScore };
+      return { entry: f, score: nameScore + deptScore + titleScore + emailScore + completenessBoost };
     })
-    .filter((s) => s.score > 0.3)
+    .filter((s) => s.score > 0.5)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 
@@ -153,6 +171,7 @@ export function lookupFaculty(query: string, limit: number = 5): string {
       department: s.entry.department,
       title: s.entry.title || "Not listed",
       sourceUrl: s.entry.sourceUrl,
+      confidence: s.score >= 2.0 ? "high" : s.score >= 1.0 ? "medium" : "low",
     })),
   });
 }
@@ -188,7 +207,7 @@ export function financialAidGuide(query: string, limit: number = 8): string {
 
       return { entry: a, score: nameScore + deptScore + descScore + eligScore + amountBoost };
     })
-    .filter((s) => s.score > 0.2)
+    .filter((s) => s.score > 0.35)
     .sort((a, b) => b.score - a.score)
     .slice(0, limit);
 
@@ -204,13 +223,16 @@ export function financialAidGuide(query: string, limit: number = 8): string {
       .slice(0, limit);
 
     return JSON.stringify({
-      results: topByAmount.map(formatAidEntry),
+      results: topByAmount.map((a) => ({ ...formatAidEntry(a), confidence: "low" })),
       message: `No exact matches for "${query}". Showing top scholarships by amount.`,
     });
   }
 
   return JSON.stringify({
-    results: scored.map((s) => formatAidEntry(s.entry)),
+    results: scored.map((s) => ({
+      ...formatAidEntry(s.entry),
+      confidence: s.score >= 1.5 ? "high" : s.score >= 0.7 ? "medium" : "low",
+    })),
   });
 }
 
@@ -254,10 +276,12 @@ export function academicProgramGuide(query: string, limit: number = 5): string {
           code: c.code,
           title: c.title,
           units: c.units,
-          description: c.description || "No description available",
-          prerequisites: c.prerequisites || "None listed",
+          description: c.description || "Not available — check catalog.cpp.edu for full description",
+          prerequisites: c.prerequisites || "Not available — check catalog.cpp.edu for prerequisites",
           department: c.department,
           sourceUrl: c.sourceUrl,
+          confidence: "high",
+          note: (!c.description && !c.prerequisites) ? "This course listing has limited data. For full details, visit https://catalog.cpp.edu and search for " + c.code : undefined,
         })),
       });
     }
@@ -304,8 +328,9 @@ export function academicProgramGuide(query: string, limit: number = 5): string {
       college: s.entry.college,
       totalUnits: s.entry.totalUnits || "See source page",
       requiredCourses: s.entry.requiredCourses.slice(0, 20),
-      description: s.entry.description.slice(0, 300),
+      description: s.entry.description.slice(0, 300) || "See source page for details",
       sourceUrl: s.entry.sourceUrl,
+      confidence: s.score >= 1.5 ? "high" : s.score >= 0.7 ? "medium" : "low",
     }));
   }
 
@@ -315,15 +340,16 @@ export function academicProgramGuide(query: string, limit: number = 5): string {
       code: s.entry.code,
       title: s.entry.title,
       units: s.entry.units,
-      description: s.entry.description || "No description available",
-      prerequisites: s.entry.prerequisites || "None listed",
+      description: s.entry.description || "Not available — check catalog.cpp.edu",
+      prerequisites: s.entry.prerequisites || "Not available — check catalog.cpp.edu",
       department: s.entry.department,
       sourceUrl: s.entry.sourceUrl,
+      confidence: s.score >= 1.5 ? "high" : s.score >= 0.7 ? "medium" : "low",
     }));
   }
 
   if (!result.type) {
-    return JSON.stringify({ results: [], message: `No courses or programs found matching "${query}". Try a specific course code (e.g., CS 2400) or major name (e.g., Computer Science).` });
+    return JSON.stringify({ results: [], message: `No courses or programs found matching "${query}". Try a specific course code (e.g., CS 2400) or major name (e.g., Computer Science). For detailed course prerequisites and descriptions, visit the official CPP Course Catalog at https://catalog.cpp.edu.` });
   }
 
   return JSON.stringify(result);
@@ -361,6 +387,7 @@ export function getSourceDocuments(query: string, limit: number = 5): string {
       section: s.entry.section,
       url: s.entry.url,
       description: s.entry.description,
+      confidence: s.score >= 1.5 ? "high" : s.score >= 0.7 ? "medium" : "low",
     })),
   });
 }
@@ -433,7 +460,7 @@ export const TOOL_DEFINITIONS = [
   {
     name: "academic_program_guide",
     description:
-      "Look up Cal Poly Pomona academic programs, majors, degrees, and course information. Returns degree requirements, course descriptions, prerequisites, and unit counts. Use this when someone asks about a specific major, course, degree requirements, or academic program.",
+      "Look up Cal Poly Pomona academic programs, majors, degrees, and course listings. NOTE: This tool has course codes and titles but often lacks detailed prerequisites and descriptions — that data lives in catalog.cpp.edu which is not in this corpus. If results are missing prerequisites or descriptions, direct the user to https://catalog.cpp.edu to look up the specific course code.",
     parameters: {
       type: "object" as const,
       properties: {
