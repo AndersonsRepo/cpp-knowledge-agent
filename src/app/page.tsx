@@ -60,12 +60,20 @@ export default function LandingPage() {
             </div>
             <span className="text-xl font-bold">BroncoBot</span>
           </div>
-          <Link
-            href="/chat"
-            className="px-5 py-2 bg-[#C4A747] text-[#1E4D2B] rounded-lg font-semibold hover:bg-[#d4b757] transition-colors"
-          >
-            Open Chat
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/analytics"
+              className="px-5 py-2 rounded-lg border border-green-200 font-semibold text-green-50 hover:bg-white hover:text-[#1E4D2B] transition-colors"
+            >
+              Analytics
+            </Link>
+            <Link
+              href="/chat"
+              className="px-5 py-2 bg-[#C4A747] text-[#1E4D2B] rounded-lg font-semibold hover:bg-[#d4b757] transition-colors"
+            >
+              Open Chat
+            </Link>
+          </div>
         </div>
       </header>
 

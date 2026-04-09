@@ -122,6 +122,16 @@ export default function ChatPage() {
   const renameInputRef = useRef<HTMLInputElement>(null);
   const initialized = useRef(false);
 
+  const getSessionId = useCallback(() => {
+    const key = "broncobot-session-id";
+    const existing = window.sessionStorage.getItem(key);
+    if (existing) return existing;
+
+    const nextId = window.crypto.randomUUID();
+    window.sessionStorage.setItem(key, nextId);
+    return nextId;
+  }, []);
+
   // Load from localStorage on mount
   useEffect(() => {
     if (initialized.current) return;
@@ -188,12 +198,12 @@ export default function ChatPage() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: newMessages }),
+          body: JSON.stringify({ messages: newMessages, sessionId: getSessionId() }),
         });
 
         const data = await res.json();
         const assistantContent = data.error
-          ? `Error: ${data.error}`
+          ? data.error
           : data.response;
 
         updateMessages(activeId, [
@@ -203,13 +213,16 @@ export default function ChatPage() {
       } catch {
         updateMessages(activeId, [
           ...newMessages,
-          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+          {
+            role: "assistant",
+            content: "I’m having trouble with that right now. Try another campus question.",
+          },
         ]);
       } finally {
         setLoading(false);
       }
     },
-    [messages, loading, activeId, updateMessages]
+    [messages, loading, activeId, updateMessages, getSessionId]
   );
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -462,6 +475,14 @@ export default function ChatPage() {
                   I can help you find information about Cal Poly Pomona. Choose a
                   category or type your question below.
                 </p>
+                <div className="mb-6">
+                  <Link
+                    href="/analytics"
+                    className="inline-flex items-center justify-center rounded-xl border border-[#1E4D2B] px-4 py-2 text-sm font-semibold text-[#1E4D2B] transition-colors hover:bg-[#1E4D2B] hover:text-white"
+                  >
+                    View Analytics
+                  </Link>
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto mb-6">
                   {CATEGORIES.map((cat) => (
