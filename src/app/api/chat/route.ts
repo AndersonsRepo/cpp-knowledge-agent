@@ -241,10 +241,35 @@ async function handleOpenRouter(messages: ChatMessage[], apiKey: string): Promis
   });
 }
 
+// --- Rate limiting ---
+
+const RATE_LIMIT = 30; // max requests per window
+const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const ipHits = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipHits.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipHits.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return true;
+  }
+  entry.count++;
+  return entry.count <= RATE_LIMIT;
+}
+
 // --- Route handler ---
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { error: "Rate limit exceeded. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const { messages } = (await req.json()) as { messages: ChatMessage[] };
 
     if (!messages || messages.length === 0) {
