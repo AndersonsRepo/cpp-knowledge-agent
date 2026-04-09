@@ -31,12 +31,17 @@ const args = process.argv.slice(2);
 let providerOverride: EmbeddingProvider | undefined;
 let batchSize = 50; // Ollama does 1-at-a-time anyway; OpenAI/OpenRouter can batch
 
+let firstPerPage = false;
+
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--provider" && args[i + 1]) {
     providerOverride = args[++i] as EmbeddingProvider;
   }
   if (args[i] === "--batch-size" && args[i + 1]) {
     batchSize = parseInt(args[++i], 10);
+  }
+  if (args[i] === "--first-per-page") {
+    firstPerPage = true;
   }
 }
 
@@ -51,6 +56,8 @@ interface Chunk {
   content: string;
   title: string;
   section: string;
+  source_url: string;
+  chunk_index: number;
 }
 
 async function main() {
@@ -97,7 +104,13 @@ async function main() {
 
     // Load chunks from this shard
     const lines = fs.readFileSync(path.join(dataDir, shardFile), "utf-8").split("\n").filter(Boolean);
-    const chunks: Chunk[] = lines.map((l) => JSON.parse(l));
+    let chunks: Chunk[] = lines.map((l) => JSON.parse(l));
+
+    // If --first-per-page, only embed chunk_index 0 for each URL
+    if (firstPerPage) {
+      chunks = chunks.filter((c) => c.chunk_index === 0);
+    }
+
     totalChunks += chunks.length;
 
     // Filter out already-embedded chunks
@@ -112,19 +125,34 @@ async function main() {
     // Open append stream for this shard
     const fd = fs.openSync(embPath, "a");
 
-    // Process in batches
+    // Process with concurrency for Gemini (1-at-a-time API but parallel requests)
+    const concurrency = config.provider === "gemini" ? 20 : (config.provider === "ollama" ? 1 : 1);
     const effectiveBatch = config.provider === "ollama" ? 1 : batchSize;
-    for (let i = 0; i < toEmbed.length; i += effectiveBatch) {
-      const batch = toEmbed.slice(i, i + effectiveBatch);
-      const texts = batch.map((c) => `${c.title} — ${c.section}\n${c.content}`.slice(0, 6000));
+
+    for (let i = 0; i < toEmbed.length; i += concurrency * effectiveBatch) {
+      const concurrentBatches = [];
+      for (let c = 0; c < concurrency && i + c * effectiveBatch < toEmbed.length; c++) {
+        const start = i + c * effectiveBatch;
+        const batch = toEmbed.slice(start, start + effectiveBatch);
+        const texts = batch.map((ch) => `${ch.title} — ${ch.section}\n${ch.content}`.slice(0, 6000));
+        concurrentBatches.push({ batch, texts });
+      }
 
       try {
-        const embeddings = await generateEmbeddings(texts, config);
+        const results = await Promise.all(
+          concurrentBatches.map(async ({ batch, texts }) => {
+            const embeddings = await generateEmbeddings(texts, config);
+            return batch.map((ch, j) => ({ chunk_id: ch.id, embedding: embeddings[j] }));
+          })
+        );
 
-        for (let j = 0; j < batch.length; j++) {
-          const entry = { chunk_id: batch[j].id, embedding: embeddings[j] };
-          fs.writeSync(fd, JSON.stringify(entry) + "\n");
-          totalEmbedded++;
+        for (const entries of results) {
+          for (const entry of entries) {
+            // Truncate to 4 decimal places to reduce file size (~40% smaller)
+            entry.embedding = entry.embedding.map((v: number) => Math.round(v * 10000) / 10000);
+            fs.writeSync(fd, JSON.stringify(entry) + "\n");
+            totalEmbedded++;
+          }
         }
 
         // Progress
@@ -135,11 +163,10 @@ async function main() {
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);
         console.error(`\n    Error at batch ${i}: ${msg}`);
-        // Save progress and continue
-        if (msg.includes("429") || msg.includes("rate")) {
-          console.log("    Rate limited — waiting 30s...");
-          await new Promise((r) => setTimeout(r, 30000));
-          i -= effectiveBatch; // Retry this batch
+        if (msg.includes("429") || msg.includes("rate") || msg.includes("RESOURCE_EXHAUSTED")) {
+          console.log("    Rate limited — waiting 10s...");
+          await new Promise((r) => setTimeout(r, 10000));
+          i -= concurrency * effectiveBatch; // Retry
         }
       }
     }

@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 import { searchCorpus } from "@/lib/search";
+import {
+  lookupFaculty,
+  financialAidGuide,
+  academicProgramGuide,
+  getSourceDocuments,
+  TOOL_DEFINITIONS,
+} from "@/lib/tools";
 
 // --- Provider detection ---
 
@@ -26,56 +33,65 @@ const SYSTEM_PROMPT = `You are the Cal Poly Pomona Campus Knowledge Agent — a 
 
 Today's date is ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.
 
+You have access to 5 specialized tools. Choose the most appropriate tool(s) for each question:
+
+- **search_corpus**: General campus knowledge — admissions, dining, housing, campus services, policies, student life. Use this as your default for broad questions.
+- **lookup_faculty**: Faculty/staff directory — find specific professors, their email, phone, office location, and office hours. Use this when someone mentions a professor's name or asks about faculty in a department.
+- **academic_program_guide**: Academic programs and courses — degree requirements, course descriptions, prerequisites, units. Use this for questions about majors, courses, or graduation requirements.
+- **financial_aid_guide**: Scholarships and financial aid — scholarship names, amounts, eligibility, deadlines. Use this for funding-related questions.
+- **get_source_documents**: Official CPP pages — find direct links to official university web pages. Use this to provide authoritative source links or when someone wants the official page for a topic.
+
+You can call multiple tools in sequence to build a comprehensive answer. For example:
+- "Who teaches CS 2400 and what's the course about?" → lookup_faculty + academic_program_guide
+- "How do I apply for financial aid and where's the office?" → financial_aid_guide + search_corpus
+- "Link me to the CS department page and show me their faculty" → get_source_documents + lookup_faculty
+
 RULES:
-1. ONLY answer based on information retrieved from the CPP corpus via the search_corpus tool.
-2. If the search returns no relevant results, say "I couldn't find information about that in the CPP knowledge base. Try rephrasing your question or ask about admissions, financial aid, campus services, or academics."
+1. ONLY answer based on information retrieved from your tools. Never fabricate information.
+2. If no tool returns relevant results, say so honestly and suggest the user visit cpp.edu directly.
 3. ALWAYS cite your sources using the page URL at the end of your response.
 4. Be conversational and helpful. Use formatting (bold, lists) when it improves readability.
-5. If a question is ambiguous, ask for clarification.
-6. NEVER fabricate information. Only state facts found in the retrieved content.
-7. When listing sources, format them as clickable links.
-8. When the retrieved content mentions specific dates, deadlines, or academic year cycles (e.g. "2025-2026"), check whether those dates have already passed relative to today's date. If they have, tell the user: "Note: The information I found references [date/cycle], which may no longer be current. Please visit [source URL] directly for the most up-to-date details." Always include the general process/requirements info alongside this caveat — the steps and policies are usually still accurate even if specific dates change.
-
-9. Do NOT use emojis in responses. Keep a professional, clean tone.
-
-You have access to the search_corpus tool to find relevant information from the official CPP website.`;
-
-const TOOL_DEFINITION = {
-  name: "search_corpus",
-  description:
-    "Search the Cal Poly Pomona website corpus for relevant information. Use this tool to find answers to student questions about admissions, financial aid, academics, campus services, and more. Call this tool BEFORE answering any factual question.",
-  parameters: {
-    type: "object" as const,
-    properties: {
-      query: {
-        type: "string" as const,
-        description: "The search query. Use specific keywords related to the student's question.",
-      },
-    },
-    required: ["query"],
-  },
-};
+5. When listing sources, format them as clickable links.
+6. When retrieved content mentions specific dates or academic year cycles, check whether those dates have already passed relative to today. If they have, note this and suggest visiting the source URL for current information.
+7. Do NOT use emojis. Keep a professional, clean tone.
+8. When showing faculty info, format it clearly with name, department, contact details, and office hours.`;
 
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
 }
 
-async function executeSearch(query: string): Promise<string> {
-  const results = await searchCorpus(query, 8);
-  return JSON.stringify(
-    results.map((r, i) => ({
-      rank: i + 1,
-      title: r.chunk.title,
-      section: r.chunk.section,
-      content: r.chunk.content,
-      url: r.url,
-      score: Math.round(r.score * 100) / 100,
-      matchType: r.matchType,
-    })),
-    null,
-    2
-  );
+// --- Tool execution ---
+
+async function executeTool(name: string, args: Record<string, string>): Promise<string> {
+  switch (name) {
+    case "search_corpus": {
+      const results = await searchCorpus(args.query, 8);
+      return JSON.stringify(
+        results.map((r, i) => ({
+          rank: i + 1,
+          title: r.chunk.title,
+          section: r.chunk.section,
+          content: r.chunk.content,
+          url: r.url,
+          score: Math.round(r.score * 100) / 100,
+          matchType: r.matchType,
+        })),
+        null,
+        2
+      );
+    }
+    case "lookup_faculty":
+      return lookupFaculty(args.query);
+    case "financial_aid_guide":
+      return financialAidGuide(args.query);
+    case "academic_program_guide":
+      return academicProgramGuide(args.query);
+    case "get_source_documents":
+      return getSourceDocuments(args.query);
+    default:
+      return JSON.stringify({ error: `Unknown tool: ${name}` });
+  }
 }
 
 // --- Anthropic provider ---
@@ -83,17 +99,15 @@ async function executeSearch(query: string): Promise<string> {
 async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise<string> {
   const client = new Anthropic({ apiKey });
 
-  const tools: Anthropic.Tool[] = [
-    {
-      name: TOOL_DEFINITION.name,
-      description: TOOL_DEFINITION.description,
-      input_schema: {
-        type: "object" as const,
-        properties: TOOL_DEFINITION.parameters.properties,
-        required: TOOL_DEFINITION.parameters.required,
-      },
+  const tools: Anthropic.Tool[] = TOOL_DEFINITIONS.map((t) => ({
+    name: t.name,
+    description: t.description,
+    input_schema: {
+      type: "object" as const,
+      properties: t.parameters.properties,
+      required: t.parameters.required,
     },
-  ];
+  }));
 
   const anthropicMessages: Anthropic.MessageParam[] = messages.map((m) => ({
     role: m.role,
@@ -109,7 +123,7 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
   });
 
   const allMessages = [...anthropicMessages];
-  let maxToolRounds = 3;
+  let maxToolRounds = 5; // Allow more rounds for multi-tool chains
 
   while (response.stop_reason === "tool_use" && maxToolRounds > 0) {
     maxToolRounds--;
@@ -122,13 +136,11 @@ async function handleAnthropic(messages: ChatMessage[], apiKey: string): Promise
 
     const toolResults: Anthropic.ToolResultBlockParam[] = [];
     for (const toolUse of toolUseBlocks) {
-      if (toolUse.name === "search_corpus") {
-        toolResults.push({
-          type: "tool_result",
-          tool_use_id: toolUse.id,
-          content: await executeSearch(toolUse.input.query),
-        });
-      }
+      toolResults.push({
+        type: "tool_result",
+        tool_use_id: toolUse.id,
+        content: await executeTool(toolUse.name, toolUse.input),
+      });
     }
 
     allMessages.push({ role: "user", content: toolResults });
@@ -161,16 +173,14 @@ async function handleOpenAICompatible(
     defaultHeaders: opts.defaultHeaders,
   });
 
-  const tools: OpenAI.ChatCompletionTool[] = [
-    {
-      type: "function",
-      function: {
-        name: TOOL_DEFINITION.name,
-        description: TOOL_DEFINITION.description,
-        parameters: TOOL_DEFINITION.parameters,
-      },
+  const tools: OpenAI.ChatCompletionTool[] = TOOL_DEFINITIONS.map((t) => ({
+    type: "function" as const,
+    function: {
+      name: t.name,
+      description: t.description,
+      parameters: t.parameters,
     },
-  ];
+  }));
 
   const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
     { role: "system", content: SYSTEM_PROMPT },
@@ -186,7 +196,7 @@ async function handleOpenAICompatible(
     messages: openaiMessages,
   });
 
-  let maxToolRounds = 3;
+  let maxToolRounds = 5;
 
   while (response.choices[0]?.finish_reason === "tool_calls" && maxToolRounds > 0) {
     maxToolRounds--;
@@ -196,12 +206,12 @@ async function handleOpenAICompatible(
     openaiMessages.push(choice.message);
 
     for (const toolCall of toolCalls) {
-      if (toolCall.type === "function" && toolCall.function.name === "search_corpus") {
+      if (toolCall.type === "function") {
         const args = JSON.parse(toolCall.function.arguments);
         openaiMessages.push({
           role: "tool",
           tool_call_id: toolCall.id,
-          content: await executeSearch(args.query),
+          content: await executeTool(toolCall.function.name, args),
         });
       }
     }

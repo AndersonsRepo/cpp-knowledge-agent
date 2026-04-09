@@ -1,0 +1,4612 @@
+[
+  {
+    "name": "A curriculum vitae (max 5 pages) emphasizing accomplishments related to the award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Outstanding Teaching Award",
+    "sourceUrl": "http://www.cpp.edu/~engineering/departments/awards.shtml"
+  },
+  {
+    "name": "Significant contributions to the field of engineering research including educational research as evidenced by publications and funded grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Outstanding Research, Scholarly & Creative Activity Award",
+    "sourceUrl": "http://www.cpp.edu/~engineering/departments/awards.shtml"
+  },
+  {
+    "name": "BKF Engineering Recruitment Scholarship for Civil Engineering",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Recruitment Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "The Jaramillo Recruitment Scholarship",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Recruitment Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "DRC Engineering Recruitment Scholarship for Civil Engineering",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Recruitment Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Hob and Suzanne Issa Mechanical Engineering (Endowed) Scholarship",
+    "type": "scholarship",
+    "amount": "$5,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Recruitment Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Andrew Cole Lawson Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "$2,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Andre Bullock Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$2,375",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Bridget and Michael Beckage Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$5,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Edison STEM Scholars Scholarship",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Fluor Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$2,200",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Michael P. Smith Scholarship",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "STEM Success Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Student Scholarship Endowment",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Ziermann Family Engineering Excellence (Endowed) Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Boeing Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Aersospace Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Lord Family Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Aersospace Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Chevron Scholarship",
+    "type": "scholarship",
+    "amount": "$4,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Chemical and Materials Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Pat and Usha lyer Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Chemical and Materials Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Beavers Construction Scholarship Endowment",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Donald G. Wells Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "$1,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Huff Family Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Joan E. Cox Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "$1,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "LA County Foundation of Civil Engineers & Land Surveyors Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "TKDA Civil Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Shafiqa Rashidi Environmental Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$5,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Transtech Engineers Scholarship",
+    "type": "scholarship",
+    "amount": "$3,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Paul Matt Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Graves Family Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Vinnell Foundation Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Schoenwetter Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electromechanical Engineering Technology",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Christopher S. Wilborn Electrical and Computer Engineering Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$10,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Dr. Akbar Nouhi Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Dr. Jacob and Irene Castleman Scholarship Endowment",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "E. James 'Skip' Perry Mentorship Endowment",
+    "type": "scholarship",
+    "amount": "$1,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Professor Alexander E. Koutras Power Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Professor Norman S. and Ellen L. Nise Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Huff Family Endowment in Industrial and Manufacturing Engineering",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Industrial and Manufacturing Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Industrial and Manufacturing Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Industrial and Manufacturing Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "John D. and Mary L. O'Neil Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Industrial and Manufacturing Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Dr. Edward M. Gates Memorial Scholarship Endowment",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Mechanical Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "James and Carolyn Goodin Mechanical Engineering Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Mechanical Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Terry and Corola Slawson Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Mechanical Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Andre Bullock Engineering DRC Scholarship",
+    "type": "scholarship",
+    "amount": "$2,375",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "DRC (Disabled Resources Center)",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Leadership Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Maximizing Engineering Potential",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Southern California Gas Company Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Maximizing Engineering Potential",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "William Randolph Hearst (Endowed) Scholarship Fund",
+    "type": "fund",
+    "amount": "$1,250",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Maximizing Engineering Potential",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Young Leaders in Engineering (Endowed) Scholarship",
+    "type": "scholarship",
+    "amount": "$7,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Society of Women Engineers",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Stephen and Susan Hess Scholarship",
+    "type": "scholarship",
+    "amount": "$5,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Women in Science and Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Bridget and Michael Beckage Scholarship",
+    "type": "scholarship",
+    "amount": "$5,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Women in Science and Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "CPP Engineering Recruitment Scholarship",
+    "type": "scholarship",
+    "amount": "$2,500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Recruitment Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Gene Haas Foundation Scholarship",
+    "type": "scholarship",
+    "amount": "$1,300",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Engineering Scholarships",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "William Skasol Muzzy & Elizabeth Benning-Moore (Endowment) Scholarship",
+    "type": "scholarship",
+    "amount": "$3,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Chemical and Materials Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Industry Partnership CE Graduate Student Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "James Gates Scholarship Endowment",
+    "type": "scholarship",
+    "amount": "$2,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Civil Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "John Santi Jutiyasantayanon Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Mohammad and Parvin Massoudi Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Electrical and Computer Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Eric Chun Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Maximizing Engineering Potential",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Larry Gates Scholarship",
+    "type": "scholarship",
+    "amount": "$1,000",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Maximizing Engineering Potential",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Technip Energies Scholarship for SWE Student Leaders",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Society of Women Engineers",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Lockheed Martin Scholarship",
+    "type": "scholarship",
+    "amount": "$500",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Women in Science and Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "Terracon Scholarship",
+    "type": "scholarship",
+    "amount": "$1,250",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Women in Science and Engineering",
+    "sourceUrl": "http://www.cpp.edu/~engineering/honors/coe-scholarship-recipients.shtml"
+  },
+  {
+    "name": "[CyberCorps® Scholarship for Service](https://www.sfs.opm.gov/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Related Links",
+    "sourceUrl": "https://www.cpp.edu/~sfs"
+  },
+  {
+    "name": "recipients can only receive the award once",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Distinguished Alumni Awards",
+    "sourceUrl": "http://www.cpp.edu/agri/about/college-awards.shtml"
+  },
+  {
+    "name": "[2024 Summer Assessment Mini Grant Award Recipients (PDF)](assessment/2024-summer-assessment-mini-grant-exceutive-summaries.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "2024",
+    "sourceUrl": "http://www.cpp.edu/assessment/mini-grants.shtml"
+  },
+  {
+    "name": "[2023 Summer Assessment Mini Grant Award Recipients (PDF)](assessment/2023_summer_assessment_mini_grant_exceutive_summaries_final.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "2023",
+    "sourceUrl": "http://www.cpp.edu/assessment/mini-grants.shtml"
+  },
+  {
+    "name": "[2022 Summer Assessment Mini Grant Award Recipients (PDF)](assessment/2022-assessment-practice-and-discovery-mini-grant-award-recipients.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "2022",
+    "sourceUrl": "http://www.cpp.edu/assessment/mini-grants.shtml"
+  },
+  {
+    "name": "[2019 Summer Assessment Mini Grant Award Recipients (PDF)](mini-grant-documents/2019-assessment-practice-and-discovery-mini-grant-participants.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "2019",
+    "sourceUrl": "http://www.cpp.edu/assessment/mini-grants.shtml"
+  },
+  {
+    "name": "[Golden Leaves Author Awards Playlist (YouTube)](https://youtube.com/playlist?list=PLJE-23NYAbJRWTLgBpbcX8Hfg3J4u0dVw&si=tDXuOr87lF8EOhSl)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Golden Leaves Honorable Mention Author",
+    "sourceUrl": "https://www.cpp.edu/library/about/news-events/golden-leaves/gl-index-about.shtml"
+  },
+  {
+    "name": "[List of Institutions offering McNair-specific fellowships](http://www.rochester.edu/college/McNair-Program/fellowships.html)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "McNair-specific Fee Waivers and Fellowships",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[Cornell Graduate School's Website for Graduate Fellowships](https://gradschool.cornell.edu/financial-support/fellowships/)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "General",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[National Hispanic Scholarship Fund](http://www.nhsf.org/): Provides grants up to $1,000 for Hispanic undergraduate and graduate students.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "General",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[American Psychological Association Minority Fellowship Program For doctoral students in psychology](http://www.apa.org/about/awards/index.aspx)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Arts, Humanities & Social Sciences",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[GEM Fellowships in Engineering, Physical, and Life Sciences](http://www.gemfellowship.org/)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Engineering",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[National Medical Fellowships](http://www.nmfonline.org/): For minority students in first and second year medical studies.",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Life Sciences",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[Fannie and John Hertz Foundation Graduate Fellowships](http://www.hertzfoundation.org/)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Physical Sciences",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[The Free Scholarship Search Service](http://www.freschinfo.com/ \"Free Scholarship page\")",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Additional Resources",
+    "sourceUrl": "http://www.cpp.edu/mcnair/resources/financial-aid.shtml"
+  },
+  {
+    "name": "[Heritage Award](/news/all-news.shtml?tag=Heritage Award)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Tags",
+    "sourceUrl": "https://www.cpp.edu/news/content/2025/11/student-innovation-labs-create-custom-awards-for-san-gabriel-valley-economic-partnership-gala"
+  },
+  {
+    "name": "[Legacy Leadership Award](/news/all-news.shtml?tag=Legacy Leadership Award)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Tags",
+    "sourceUrl": "https://www.cpp.edu/news/content/2025/11/student-innovation-labs-create-custom-awards-for-san-gabriel-valley-economic-partnership-gala"
+  },
+  {
+    "name": "[SGVEP Award Gala trophy](/news/all-news.shtml?tag=SGVEP Award Gala trophy)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Tags",
+    "sourceUrl": "https://www.cpp.edu/news/content/2025/11/student-innovation-labs-create-custom-awards-for-san-gabriel-valley-economic-partnership-gala"
+  },
+  {
+    "name": "A cash award of $3,000 for the Scholarly and Creative Activity Award; $3,000 for the Service Award; and $5,000 for the Teaching Award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Background",
+    "sourceUrl": "https://www.cpp.edu/provostsawards/about-the-awards/about.shtml"
+  },
+  {
+    "name": "An award plaque.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Background",
+    "sourceUrl": "https://www.cpp.edu/provostsawards/about-the-awards/about.shtml"
+  },
+  {
+    "name": "Placement of a letter noting the award in their Personnel Action Files.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Background",
+    "sourceUrl": "https://www.cpp.edu/provostsawards/about-the-awards/about.shtml"
+  },
+  {
+    "name": "Dissemination of information on the scholarship of teaching through publications, presentations, electronic media and workshops",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Criteria",
+    "sourceUrl": "https://www.cpp.edu/provostsawards/about-the-awards/teaching.shtml"
+  },
+  {
+    "name": "Grants & Contracts Accounting – The Foundation will support the  post-award administration",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Post-Award (Awards Administration Services)",
+    "sourceUrl": "http://www.cpp.edu/research/sponsored-program/post-award.shtml"
+  },
+  {
+    "name": "Alvarez/Microsoft - First Generation - Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "James Lebowitz Memorial Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "BBH Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "Dr. Debra Brum Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "Keith Soon and Sung Ja Kim Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "Boeing Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "Checkpoint Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Opportunities",
+    "sourceUrl": "https://www.cpp.edu/sci/computer-science/undergraduate-program/scholarship-opportunities.shtml"
+  },
+  {
+    "name": "By the first Monday in March, the dean will announce the recipient of the Ralph W. Ames Distinguished Research Award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Timeline**",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/distinguished-research-award.shtml"
+  },
+  {
+    "name": "During fall semester, the recipient will receive their award and give a presentation about their research to the college.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Timeline**",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/distinguished-research-award.shtml"
+  },
+  {
+    "name": "Receipt of external funding grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Criteria**",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/distinguished-research-award.shtml"
+  },
+  {
+    "name": "[Jasmine Hyland, Instructional Support Technician, (Biological Sciences) - Spring](../newsletter/spring-2025-staff-award.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Annie Montes, Administrative Support Coordinator II, (Computer Science) - Fall](https://www.cpp.edu/sci/newsletter/fall-2024-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Mark Tang, Instructional Support Technician (Physics & Astronomy)- Fall](https://www.cpp.edu/sci/newsletter/fall-2024-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Dan Griggs, Communications and Events Coordinator (Dean's Office) -Spring](https://www.cpp.edu/sci/newsletter/spring-2024-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Kevin Chung,  Instructional Support Technician (Biology Stockroom) -Fall](https://www.cpp.edu/sci/newsletter/fall-2023-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Nicolle Garcia, Administrative Support Assistant (Science Advising Center) - Fall](https://www.cpp.edu/sci/newsletter/fall-2023-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Ian Carlson, Student Success Advisor (Science Advising Center) - Spring](https://www.cpp.edu/sci/newsletter/spring-2023-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Becki King, Administrative Support Coordinator II (CEMaST) - Spring](https://www.cpp.edu/sci/newsletter/spring-2023-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Cidni Griffith, Administrative Support Coordinator II (MAT) - Fall](https://www.cpp.edu/sci/newsletter/fall-2020-staff-award-recipients.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Diana Ascencio, Student Services Professional II (Advising Center) - Fall](https://www.cpp.edu/sci/newsletter/fall-2020-staff-award-recipients.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Yen Phun, Administrative Support Coordinator I (MAT) - Spring](https://www.cpp.edu/sci/newsletter/spring-2020-staff-award-recipients.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Desiree Tax, Instructional Support Technician II, (CHM) - Spring](https://www.cpp.edu/sci/newsletter/spring-2020-staff-award-recipients.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Eve Garcia, Administrative Support Coordinator II (DO) - Spring](https://www.cpp.edu/sci/newsletter/spring-2019-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[Sabrina Otero, Administrative Support Assistant II (MAT) - Spring](https://www.cpp.edu/sci/newsletter/spring-2019-staff-awards.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past Winners",
+    "sourceUrl": "https://www.cpp.edu/sci/faculty-staff-awards/staff-awards.shtml"
+  },
+  {
+    "name": "[CSU Biotechnology Grant & Award Programs](https://www.calstate.edu/impact-of-the-csu/research/csubiotech)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grants & Awards**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Federal, State and Institutional Grants](https://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grants & Awards**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[PELL Grant](https://studentaid.gov/understand-aid/types/grants/pell)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grants & Awards**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Bronco Scholarship Portal - Online application that allows searching for opportunities](https://csupomona.academicworks.com/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Campuswide Scholarship Information**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Additional Scholarship Links](https://www.cpp.edu/financial-aid/scholarships/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Campuswide Scholarship Information**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Lockheed Martin Scholarship](https://www.lockheedmartin.com/en-us/who-we-are/communities/stem-education/lm-scholarship-program.html)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**STEM Scholarships**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[MSTI Scholarship](https://www.cpp.edu/msti/awards-and-programs/msti-scholar.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Support for Prospective Math and Science Teachers**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[PIE Scholarship](https://www.cpp.edu/~ceis/partners-in-education/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Support for Prospective Math and Science Teachers**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[TEACH Grant](https://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Support for Prospective Math and Science Teachers**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[The Mr. And Mrs. Keith Soon Kim College of Science Scholarship](https://www.cpp.edu/sci/mathematics-statistics/scholarship-opportunities/kim.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**College of Science Scholarships**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Chuck Bayless Memorial Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Timothy W. Brown Memorial Scholarship for Field Biology",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Rachel Carson Environmental Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Peter Castro Evolution and Biodiversity Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Vernon Gregory Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Don Huntley Biotechnology Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Harold Lint memorial Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Microbiology Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Ed T. Roche Research Assistant Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Karen Dundas Sorci Biological Sciences Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "David F. Steele Pre-Professional Health Careers Biological Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Steven J. Wickler Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Jia-His Wu Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Biological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/sci/chemistry-biochemistry/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Erika B. Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Chemistry Golden (Au) 50 th  Anniversary Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Chevy Axelrad Goldstein Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Dev/Zimmerman Family Endowed Chemistry Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Reza Ehsani Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Earl Pye Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Ernie Simpson Cooperative Education Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Mario Sorci Endowed Scholarship for Chemistry",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Valspar Chemistry Student Development Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Friedrich J. and Hildegard A. Weck Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Chemistry and Biochemistry**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Alvarez/Microsoft Computer Science Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "BBH Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[The Boeing Company Computer Science Department Scholarship](https://csupomona.academicworks.com/opportunities/9142)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Cyber Corps Scholarship for Service Program - Apply   [HERE](http://sfs.cpp.edu/#sfs.cpp.edu \"sfs.cpp.edu\")",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Debra A. Brum memorial endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "James Lebowitz memorial endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Computer Science**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "The Margaret Claire Van Buskirk Memorial Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Geological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "The Ernest Prete, Jr. Geological Sciences Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Geological Sciences**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Anooshian Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Kinesiology and Health Promotion**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/~sci/mathematics-statistics/scholarship-opportunities/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "John and Rosetrina Flaig endowed mathematics scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Stuart Friedman memorial endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Armando Gallegos memorial mathematics endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Samuel Gendelman memorial endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "The Emil Herzog Scholarship in Mathematics",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Keith Soon and Sung Ja Kim mathematics scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Kenneth B. Kriege endowed scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Mathematics**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Dr. Vincent and Jesse Parker Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Physics and Astronomy**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "The Boeing Company Physics Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Physics and Astronomy**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Mary E. Mogge Endowed Physics Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Physics and Astronomy**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Vincent and Jesse Parker Endowed Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Physics and Astronomy**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Out-Laws of Physics Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Physics and Astronomy**",
+    "sourceUrl": "https://www.cpp.edu/sci/resources/scholarships.shtml"
+  },
+  {
+    "name": "Post-graduation government service requirement for a period equivalent to the length of the scholarship.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Components",
+    "sourceUrl": "https://www.cpp.edu/sfs/about.shtml"
+  },
+  {
+    "name": "EOP grants will only be awarded as long as funds are available.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Criteria/Eligibility",
+    "sourceUrl": "https://www.cpp.edu/ssep/eop/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2024](../docs/2024-scholarship-awards.pdf)  (PDF)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2023](../docs/2023-scholarship-awards.pdf)  (PDF)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2022](../docs/2022-scholarship-awards.pdf)  (PDF)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2021](../docs/2021-scholarship-awards.pdf \"2021 scholarship awardees\")  (PDF)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2020](../docs/2020-scholarship-awards.pdf)  (PDF)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2019](../docs/2019-scholarship-awards.docx)  (DOC)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2018](../docs/2018-scholarship-awards)  (DOC)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2017](../docs/2017.%202017%20Scholarship%20Awards.docx)  (DOC)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2016](../docs/2016.%2071416%20Scholarship%20Awards%20201611.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2015](../docs/2015.%2020152Scholarships.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2014](../docs/2014.%20Scholarship_Awards_2014.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2013](../docs/2013.%2001160-2013_Scholarships.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2012](../docs/2012.%2001119-2012_Scholarships_dept_website.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2011](../docs/2011.%2000849-Scholarship_Awards_Fall_2011.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "[Scholarship Awards 2010](../docs/2010.%202010.%2000731-For_the_Web_Winners_Applicant_Information_Scholarship_2010.xlsx)  (XLSX)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Annual Recognition Scholarship",
+    "sourceUrl": "https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml"
+  },
+  {
+    "name": "2024-2025 McElligatt Family Scholarship: Aaron Catanyag",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2024-2025 CIS Leadership Scholarship: Brandon Lin",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2024-2025 CIS Leadership Scholarship: Nirali Patel",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2024-2025 CIS Leadership Scholarship: Jackson Thiel",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2024-2025 CIS Boeing Scholarship:Arpanjot Dosanjh",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2023-2024 McElligatt Family Scholarship: Farouk Ajibola",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2023-2024 McElligatt Family Scholarship: Harini Rootheri",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2023-2024 CIS Leadership Scholarship: Caitlin Mulholland",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2023-2024 CIS Leadership Scholarship: Nirali Patel",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2021-2022 McElligatt Family Scholarship: Alexey Tselevich",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2021-2022 CIS Wagener Scholarship: Valleri Gobel, Lawrence Kin, Beshoy Sadek, Kevin Zheng.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2021-2022 CIS Boeing Scholarship: Nhi Dang, Arpitha Sundararajan, Hunter Night, Jade Braman.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2021-2022 CIS Leadership Scholarship: Kelsea Ryan, Nirali Patel.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2019-2020 CIS Wagner scholarship: Kevin Lee and Omar Pelcastre.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2018-2019 CIS Boeing scholarship: David Hernandez Montes, Edgar Carbajal, Mohamed Dandachi, and Taifa Humayun.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2018-2019 CIS Wagner scholarship: Ori Kenett.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2017-2018  CIS Boeing scholarship: Dennis Tran, Mohamed Dandachi, Andrew Leung, and Angel Millet.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2017-2018  CIS Wagner scholarship : Ori Kenett and Toby Yu.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2016-2017 CIS Boeing scholarship: Corey Stevens, Johnny Mai, Seth Russo, and Zarifa Islam.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2016-2017  CIS Academic scholarship: Brandon Yeung.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2016-2017 CIS Leadership scholarship: Ashish Hingle.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2016-2017 CIS Wagner scholarship: Zarifa Islam.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2015-2016 CIS Boeing scholarship: Quoc Luu and Gwendy Lumpkin.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2015-2016 Wagner scholarship: Ashish Hingle and Vernes Okanovich.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2014-2015 CIS Boeing scholarship: Kevin Ferris, Frank Chau and Nathan Nguyen.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2014-2015 Wagner scholarship: Kevin Ferris.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2013-2014 CIS Boeing scholarship: Edward Chua and Renee Lacson.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "2013-2014 Wagner scholarship: Joel Julag-ay.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Prior Awardees",
+    "sourceUrl": "https://www.cpp.edu/cba/computer-information-systems/students/scholarship.shtml"
+  },
+  {
+    "name": "[College of Business Administration Scholarships](https://www.cpp.edu/cba/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship links",
+    "sourceUrl": "https://www.cpp.edu/cba/international-business-marketing/undergraduate/scholarships.shtml"
+  },
+  {
+    "name": "[Cal Poly Pomona (CPP) Bronco Scholarship Portal](https://csupomona.academicworks.com/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship links",
+    "sourceUrl": "https://www.cpp.edu/cba/international-business-marketing/undergraduate/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - Accounting - Accounting Scholarship](https://csupomona.academicworks.com/opportunities/17051)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Accounting",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - Accounting - Donald Putnam Scholarship](https://csupomona.academicworks.com/opportunities/16953)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Accounting",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - The Jermadas and Kamla Idnani Memorial Scholarship](https://csupomona.academicworks.com/opportunities/16684)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Accounting",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Collins College - Hospitality Fin & Tech Professionals Scholarship (Fall Application)](https://csupomona.academicworks.com/opportunities/17233)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Accounting",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/accounting/current-students/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Accounting",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Engineering - Edison STEM Scholars Scholarship](https://csupomona.academicworks.com/opportunities/16663)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - Accenture Jr. Achievement Award](https://csupomona.academicworks.com/opportunities/17409)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - CIS - Boeing Scholarship](https://csupomona.academicworks.com/opportunities/16697)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - CIS - Computer Information System Leadership Scholarship](https://csupomona.academicworks.com/opportunities/16699)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - CIS - McElligatt Family Scholarship](https://csupomona.academicworks.com/opportunities/16991)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA and College of Science - The Avanade Robert Vito Cristobal Memorial STEM Scholarship](https://csupomona.academicworks.com/opportunities/17121)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/computer-information-systems/current-students/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Computer Information Systems",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Engineering - CME - Chevron Scholarship](https://csupomona.academicworks.com/opportunities/17096)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "E-Business",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/technology-and-operations-management/current-students/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "E-Business",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - FRL - FRL Department Scholarship](https://csupomona.academicworks.com/opportunities/17088)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Finance, Real Estate, and Law",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - FRL - Tomkoria's Scholarship](https://csupomona.academicworks.com/opportunities/17237)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Finance, Real Estate, and Law",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - FRL- Omar Benitez Scholarship](https://csupomona.academicworks.com/opportunities/16707)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Finance, Real Estate, and Law",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/finance-real-estate-and-law/scholarships/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Finance, Real Estate, and Law",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - IBM - International Business & Marketing Endowed Scholarship](https://csupomona.academicworks.com/opportunities/17431)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "International Business and Marketing",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - IBM - International Business & Marketing Scholarships](https://csupomona.academicworks.com/opportunities/17444)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "International Business and Marketing",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[FA&S - Brad Burlingame Honorary Scholarship](https://csupomona.academicworks.com/opportunities/17184)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "International Business and Marketing",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/international-business-marketing/undergraduate/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "International Business and Marketing",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - MHR - Eileen Inay Simon Memorial Scholarship](https://csupomona.academicworks.com/opportunities/16922)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - MHR - Management and Human Resources Scholarship](https://csupomona.academicworks.com/opportunities/17450)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - MHR - Peggy J. Snyder Endowed Scholarship Fund](https://csupomona.academicworks.com/opportunities/17074)",
+    "type": "fund",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - MHR - Sharifzadeh Scholarship in the College of Business Administration](https://csupomona.academicworks.com/opportunities/16749)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[EODA/HR Operations Scholarship](https://csupomona.academicworks.com/opportunities/17349)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/management-and-human-resources/current-students/scholarships.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Management and Human Resources",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - TOM & EBZ - APICS Scholarship](https://csupomona.academicworks.com/opportunities/17079)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Technology and Operations Management",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - TOM & EBZ - Distribution Management Association Scholarship](https://csupomona.academicworks.com/opportunities/16721)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Technology and Operations Management",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[CBA - TOM - Boeing Scholarship](https://csupomona.academicworks.com/opportunities/16696)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Technology and Operations Management",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Department Scholarship Page](https://www.cpp.edu/cba/technology-and-operations-management/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Technology and Operations Management",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "[Engineering - MEP - Leadership Scholarship](https://csupomona.academicworks.com/opportunities/16581)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Singelyn Graduate School of Business Graduate Scholarships",
+    "sourceUrl": "https://www.cpp.edu/cba/scholarships.shtml"
+  },
+  {
+    "name": "Bronco Scholarship Application",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "TOM & EBZ Scholarship Deadlines",
+    "sourceUrl": "http://www.cpp.edu/cba/technology-and-operations-management/current-students/scholarships.shtml"
+  },
+  {
+    "name": "Students should be mindful of random organizations claiming you have won a scholarship without applying.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Private Scholarships",
+    "sourceUrl": "http://www.cpp.edu/ceis/education/scholarships.shtml"
+  },
+  {
+    "name": "[2025 PIE Fellowship Program (PDF)](pie-program-2025.pdf)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Welcome to our archive page of past PIE Newsletters and PIE Fellowship Programs.",
+    "sourceUrl": "https://www.cpp.edu/ceis/partners-in-education/newsletter.shtml"
+  },
+  {
+    "name": "[2024 PIE Fellowship Program (PDF)](2024-pie-program.pdf)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Welcome to our archive page of past PIE Newsletters and PIE Fellowship Programs.",
+    "sourceUrl": "https://www.cpp.edu/ceis/partners-in-education/newsletter.shtml"
+  },
+  {
+    "name": "[2023 PIE Fellowship Program (PDF)](2023_pieprogram.pdf)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Welcome to our archive page of past PIE Newsletters and PIE Fellowship Programs.",
+    "sourceUrl": "https://www.cpp.edu/ceis/partners-in-education/newsletter.shtml"
+  },
+  {
+    "name": "[2022 PIE Fellowship Program (PDF)](2022_pieprogram.pdf)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Welcome to our archive page of past PIE Newsletters and PIE Fellowship Programs.",
+    "sourceUrl": "https://www.cpp.edu/ceis/partners-in-education/newsletter.shtml"
+  },
+  {
+    "name": "[2017 PIE Fellowship Program (PDF)](pie-program2017.pdf)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Welcome to our archive page of past PIE Newsletters and PIE Fellowship Programs.",
+    "sourceUrl": "https://www.cpp.edu/ceis/partners-in-education/newsletter.shtml"
+  },
+  {
+    "name": "2013-14: no award given",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Kershaw Award",
+    "sourceUrl": "http://www.cpp.edu/class/history/advising-and-student-life/awards.shtml"
+  },
+  {
+    "name": "Music Talent Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Music Department Scholarships: Investing In Your Future",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Performance Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Music Department Scholarships: Investing In Your Future",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Composition Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Music Department Scholarships: Investing In Your Future",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Music Industry Studies Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Music Department Scholarships: Investing In Your Future",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Financial Aid: Comprehensive Support for Your Education",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "University Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CPP Financial Aid: Comprehensive Support for Your Education",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Scholarship-specific Questions: scholarships@cpp.edu",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Questions Regarding Financial Aid or Scholarships?",
+    "sourceUrl": "http://www.cpp.edu/class/music/prospective-students/scholarships-and-financial-aid.shtml"
+  },
+  {
+    "name": "Must be a full-time student at the time of applying and time of award disbursement",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships",
+    "sourceUrl": "http://www.cpp.edu/class/sociology/student-resources/scholarships.shtml"
+  },
+  {
+    "name": "Grade level must be Junior at time of award disbursement",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships",
+    "sourceUrl": "http://www.cpp.edu/class/sociology/student-resources/scholarships.shtml"
+  },
+  {
+    "name": "Morse Family Scholarship: In honor of former chair, William Morse II, awarded to a student who has excelled in design or technical theatre.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past and Present Scholarships",
+    "sourceUrl": "http://www.cpp.edu/class/theatre-new-dance/students/scholarships.shtml"
+  },
+  {
+    "name": "Terry Gullo Scholarship: In honor of former Costume Shop Supervisor, Terry Gullo, for an exceptional student in Costume Design.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Past and Present Scholarships",
+    "sourceUrl": "http://www.cpp.edu/class/theatre-new-dance/students/scholarships.shtml"
+  },
+  {
+    "name": "50% awarded before travel, and",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Information",
+    "sourceUrl": "https://www.cpp.edu/crest/events/summer-fellowship.shtml"
+  },
+  {
+    "name": "50% awarded upon successful completion of the fellowship.",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarship Information",
+    "sourceUrl": "https://www.cpp.edu/crest/events/summer-fellowship.shtml"
+  },
+  {
+    "name": "+ Boeing Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "MEP Scholarships",
+    "sourceUrl": "http://www.cpp.edu/engineering/mep/events/scholarships.shtml"
+  },
+  {
+    "name": "[2023 James Corner](https://www.cpp.edu/news/content/2023/10/landscape-architect-james-corner-to-receive-neutra-award-at-cpp/index.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "[2022 Tatiana Bilbao](https://www.cpp.edu/env/architecture/news-events/news/2022-neutra-award-tatiana-bilbao.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "[2019 Alejandro Aravena](../news-events/public-lectures-pages/alejandro-aravena-2019-neutra-award-for-professional-excellence.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "[2018 Frank O. Gehry](../news-events/public-lectures-pages/2018-neutra-award-for-professional-excellence-frank-gehry.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "[2017 Guy Nordenson](../news-events/events/2017-neutra-award-special-lecture-guy-nordenson.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "[2016 Carme Pinós](../news-events/events/life-as-inspiration-neutra-awards-first-female-recipient-carme-pinoss.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "2007 Ilze & Grant Jones",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "2002 Samuel Mockbee (posthumous award)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Richard Neutra Award for Professional Excellence",
+    "sourceUrl": "http://www.cpp.edu/env/architecture/distinguished-scholars-practitioners/neutra-award.shtml"
+  },
+  {
+    "name": "California Middle Class Scholarship - Tuition reduction program for California residents.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/financial-aid.shtml"
+  },
+  {
+    "name": "TEACH Grant  - A grant/loan combination that requires a TEACH Grant Agreement to Serve (ATS).",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/financial-aid.shtml"
+  },
+  {
+    "name": "[Scholarships](https://www.cpp.edu/financial-aid/scholarships/index.shtml \"Scholarships (opens in new window)\") or",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "DON BRINKERHOFF LANDSCAPE ARCHITECTURE SCHOLARSHIP - One (1) $10,000 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "RUTH SHELLHORN MEMORIAL SCHOLARSHIP -  One (1) $5,000 award or two (2) $2500 awards or in any other amount determined by the Scholarship Committee",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "CLASS FUND SCHOLARSHIP - Two (2) $2,500 awards",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "GRISOL LUPITA RAMIREZ MEMORIAL SCHOLARSHIP - One (1) $2,000 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "CHAPMAN FORESTRY FOUNDATION SCHOLARSHIPS - Fifteen (15) awards, a maximum of $1,000 each",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "ONA SCHOLARS SCHOLARSHIP - One (1) $1,500 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "TAKEO UESUGI SCHOLARS SCHOLARSHIP - One (1) $1,000 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "LIFESCAPES INTERNATIONAL SCHOLARSHIP - Two (2) $1,000 awards",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "HOWARD O. BOLTZ MEMORIAL SCHOLARSHIP - One (1) $500 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "EDAW SCHOLARSHIP in HONOR of FRANCIS DEAN - One (1) $500 award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Department Scholarships",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "Any scholarships awarding less than $1,000 need only submit a one-page letter of intent responding to the scholarship criteria.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Application Requirements",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "Students awarded scholarships requiring portfolios must submit a hard copy of the portfolio, and send a \"thank you\" letter to the scholarship donor.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Application Requirements",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "All award recipients will be required to participate in a public presentation at a future scholarship event, such a Pecha Kucha.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Application Requirements",
+    "sourceUrl": "http://www.cpp.edu/env/landscape-architecture/academic-student-resources/scholarships.shtml"
+  },
+  {
+    "name": "[One Team Award](index.shtml)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "One Team Award",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-committee.shtml"
+  },
+  {
+    "name": "Nominations must be submitted on the One Team Award application (1-2 pages).",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Process",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "The top 3-5 highest team scores will be considered for the One Team Award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Process",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "The selection committee may choose to interview the top 3 teams to determine the One Team Awardee.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Process",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "One Team Award winners cannot be nominated again for the same project in for consecutive years.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Criteria",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "The One Team Award will be announced by President during Fall Convocation.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Award",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "One Team Award members will join President and the University leaders for a celebratory lunch.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Award",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "One Team Award members will be featured on the EODA webpage for one year.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Award",
+    "sourceUrl": "https://www.cpp.edu/fallconference/one-team/selection-process.shtml"
+  },
+  {
+    "name": "Complete the Credential - TEACH Grant Request (2025-26) available online at [cpp.studentforms.com](https://cpp.studentforms.com)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Office of Financial Aid & Scholarships will verify completion of required documentation and student eligibility for grant.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Received at least one payment in the Cal Grant A or B program as an undergraduate;",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Determining Eligibility – Who is Eligible to Apply?**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Maintain financial need for a Cal Grant renewal.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Determining Eligibility – Who is Eligible to Apply?**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "[10 Things Students Need to Know about Cal Grants](https://www.csac.ca.gov/sites/main/files/file-attachments/top_10_cal_grants.pdf?1539992923)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Additional Resources**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "[10 Things You Need to Know about California’s Middle Class Scholarship](https://www.csac.ca.gov/middle-class-scholarship)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Additional Resources**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Submit a [Golden State Teacher Grant Program Application](https://gstg.csac.ca.gov/).",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Eligibility Criteria**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "1 year = Repay 75% of the awarded amount",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Repayment**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "2 years = Repay 50% of the awarded amount",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Repayment**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "3 years = Repay 25% of the awarded amount",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Repayment**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "1 year = Repay 50% of the awarded amount",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Repayment**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in 6 units, your SUG award will be adjusted to reflect the lower Tuition Fee",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Impact of Enrollment on SUG Awards:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Make sure you select the correct Award Year at the top of the application (example: Fall 2024 and Spring and Summer 2025 would be the 2024-2025 year)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Federal PLUS Loans for Parents",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/aid-programs.shtml"
+  },
+  {
+    "name": "Grants are awarded based on your financial need as determined by the FAFSA or DREAM Application information.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grants and Scholarships**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/award-notification.shtml"
+  },
+  {
+    "name": "Does your Aid Summary reflect any benefits, scholarships, or other outside awards you will be receiving?",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "What if I Think There are Mistakes on My Aid Application?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/award-notification.shtml"
+  },
+  {
+    "name": "Fee waivers, department awards, or awards from outside agencies were recently reported to our office, triggering a revision to your offer.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Changes to Your Aid Package",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/award-notification.shtml"
+  },
+  {
+    "name": "Have an Award Summary that contains “Official” awards, as opposed to estimated awards.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Getting Your Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/getting-your-aid.shtml"
+  },
+  {
+    "name": "Have accepted any loan offer you wish to use (on Your Award Summary).",
+    "type": "loan",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Getting Your Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/getting-your-aid.shtml"
+  },
+  {
+    "name": "Funds from the Federal TEACH Grant are released after the Grant Recalculation Date each semester.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Federal TEACH Grant**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/getting-your-aid.shtml"
+  },
+  {
+    "name": "Not cashing a refund check does not cancel any loans you have been awarded.  Contact our office for details on how to cancel your loans.",
+    "type": "loan",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**A Few Important Notes About Refunds**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/getting-your-aid.shtml"
+  },
+  {
+    "name": "You must not hold a valid non-immigrant visa (F, J, H, L, A, B, C, D, E, etc.).",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Eligibility for DREAM",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-dream.shtml"
+  },
+  {
+    "name": "California Middle Class Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Missed the Priority Filing Deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-dream.shtml"
+  },
+  {
+    "name": "Cal Grant (Tuition and/or Access Grant)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Missed the Priority Filing Deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-dream.shtml"
+  },
+  {
+    "name": "State University Grant (SUG)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Missed the Priority Filing Deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-dream.shtml"
+  },
+  {
+    "name": "Federal Pell Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Missed the Priority Filing Deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-fafsa.shtml"
+  },
+  {
+    "name": "Federal TEACH Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Missed the Priority Filing Deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/how-to-apply-for-aid-fafsa.shtml"
+  },
+  {
+    "name": "Financial Aid Grants or Scholarships may be adjusted based on specific enrollment requirements for each grant.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Period I:****First two weeks****(Fall & Spring)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/keeping-your-aid.shtml"
+  },
+  {
+    "name": "Financial Aid Grants and Scholarships that were already releasedwill not be adjusted.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Period I****I:  Third Week through the end of the semester****(****Fall****&****Spring****)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/credentials/current/keeping-your-aid.shtml"
+  },
+  {
+    "name": "Complete the TEACH Grant Application from the Office of Financial Aid & Scholarships - available July 1, 2025",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/newly-admitted/aid-programs.shtml"
+  },
+  {
+    "name": "Complete [TEACH Grant counseling](https://studentaid.gov/teach-grant-program) after requirement appears on Bronco Direct",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/newly-admitted/aid-programs.shtml"
+  },
+  {
+    "name": "Sign a [TEACH Grant Agreement to Serve](https://studentaid.gov/teach-grant-program) after requirement appears on Bronco Direct",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/newly-admitted/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in less than 6 units, your award will be canceled for the semester.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Impact of Enrollment on SUG Awards:**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/newly-admitted/aid-programs.shtml"
+  },
+  {
+    "name": "You must not hold a valid non-immigrant visa (F, J, H, L, A, B, C, D, E, etc.)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Eligibility for DREAM",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/newly-admitted/how-to-apply-for-aid-dream.shtml"
+  },
+  {
+    "name": "[Federal Student Grant Programs Factsheet (PDF)](https://studentaid.gov/sites/default/files/federal-grant-programs.pdf) (English)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Federal Grant****Fact Sheets**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/prospective/aid-programs.shtml"
+  },
+  {
+    "name": "Meets the income and asset criteria to be eligible for a Cal Grant A grant (pursuant to subdivision (k) of California Education Code Section 69432.7)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Golden State Education and Training Grant",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/credentials/prospective/aid-programs.shtml"
+  },
+  {
+    "name": "To respond to all requests from the Office of Financial Aid and Scholarships in a timely manner.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Your Responsibilities as a FWS Employer",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/federal-work-study/on-campus-employers-information.shtml"
+  },
+  {
+    "name": "Grants, Scholarships, and Fellowships: This is \"free money\" that you don't need to repay once you complete your enrollment.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Financial Aid Information",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current"
+  },
+  {
+    "name": "Students who are pursuing a second Master’s or second Doctoral Degree are only eligible for scholarships, federal loans or private education loans.",
+    "type": "loan",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Aid Programs",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in 3 - 6 units, your SUG award will be adjusted to reflect the lower Tuition",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Impact of Enrollment on SUG Awards:**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in less than 3 units, your award will be canceled for the semester.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Impact of Enrollment on SUG Awards:**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "Not have another award or waiver fee waiver covering the GBP Fee.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grant Eligibility Criteria**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "Have a grant eligible SAI (-1,500 - 4,000 for the 2025-2026 year)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grant Eligibility Criteria**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "Have an grant eligible SAI (-1,500 - 4,000 for the 2025 - 2026 year)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grant Eligibility Criteria**",
+    "sourceUrl": "https://www.cpp.edu/financial-aid/graduate/newly-admitted-and-current1/aid-programs.shtml"
+  },
+  {
+    "name": "Cal GrantTuition Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Aid Programs Impacted by Cross Enrollment",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/cross-enrollment.shtml"
+  },
+  {
+    "name": "Cal GrantAccess Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Aid Programs Impacted by Cross Enrollment",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/cross-enrollment.shtml"
+  },
+  {
+    "name": "[Cal Poly Pomona International Center Study Abroad Website](https://www.cpp.edu/international/study-abroad/students/scholarships-fundraising.shtml)",
+    "type": "fund",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships for Study Abroad",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/study-abroad.shtml"
+  },
+  {
+    "name": "[Cal Poly Pomona Scholarships Information](../scholarships/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships for Study Abroad",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/study-abroad.shtml"
+  },
+  {
+    "name": "[American Legion](https://www.legion.org/scholarships)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**What Scholarships are Available for Veterans and Military Dependents?**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/veterans.shtml"
+  },
+  {
+    "name": "[AMVETS](http://amvets.org/scholarships/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**What Scholarships are Available for Veterans and Military Dependents?**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/veterans.shtml"
+  },
+  {
+    "name": "[Paralyzed Veterans of America](http://www.pva.org/find-support/membership/scholarship-program)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**What Scholarships are Available for Veterans and Military Dependents?**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/other-programs/veterans.shtml"
+  },
+  {
+    "name": "Federal Pell Grant recipients",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Emergency Broadband Program for Pell Grant Recipients",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/announcements.shtml"
+  },
+  {
+    "name": "Scholarship-specific Questions: scholarships@cpp.edu",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Email",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/contact.shtml"
+  },
+  {
+    "name": "The SAI will replace the Expected Family Contribution (EFC) starting in the 2024–25 award year.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "What is the Student Aid Index (SAI)?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/fafsa-simplification/faqs.shtml"
+  },
+  {
+    "name": "You must admitted to Cal Poly Pomona before we can award you financial aid",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Do I have to be admitted to apply for financial aid?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/faqs.shtml"
+  },
+  {
+    "name": "FAFSA Applicants:   Federal Grants & Federal Loans are available – regardless of when you apply.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Can I apply for financial aid after the priority deadline?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/faqs.shtml"
+  },
+  {
+    "name": "Your eligibility for certain awards based on award “lifetime” limits",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Why did my package change from last year?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/faqs.shtml"
+  },
+  {
+    "name": "The Financial Aid & Scholarships team member assigned to your presentation will contact you to refine the details and logistics of the presentation.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Presentation Guidelines**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-outreach.shtml"
+  },
+  {
+    "name": "Financial Aid Essentials- High School Seniors:Review of ffinancial aid and scholarship opportunities and pprocesses (approximately 1 hour)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Popular Presentation Topics**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-outreach.shtml"
+  },
+  {
+    "name": "Financial Aid Essentials–Newly Admitted Students:Review of financial aid and scholarship opportunities and processes (approximately 1 hour)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Popular Presentation Topics**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-outreach.shtml"
+  },
+  {
+    "name": "General FfinancialAid andSscholarshipooverview (approximately 25 – 35 minutes)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Popular Presentation Topics**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-outreach.shtml"
+  },
+  {
+    "name": "How to apply for scholarships (approximately 25 minutes)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Popular Presentation Topics**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-outreach.shtml"
+  },
+  {
+    "name": "Institutional Grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds COA**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Cal Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds COA**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Federal SEOG Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds COA**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Cal Poly Pomona Scholarships",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds COA**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Cal Poly Pomona need-based grants (including State University Grant)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds Need**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Cal Grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Aid Exceeds Need**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Federal Pell and SEOG Grants",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Release (Disbursement) of Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Education Opportunity Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Release (Disbursement) of Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Cal Grant Grant (Tuition & Access)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Release (Disbursement) of Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "State University Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Release (Disbursement) of Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Certain private outside scholarships and certain private or alternative loans",
+    "type": "loan",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Release (Disbursement) of Financial Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "For Cal Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Disbursement Delays**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Are not receiving a Cal Grant or other award or waiver designated to cover fees",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**SUG Eligibility**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "The amount of SUG awarded is:",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grant Amount**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Submit a written appeal that is approved by CPP’s Office of Financial Aid & Scholarships SAP Committee.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Regaining Eligibility**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Additional Documents as determined by the Office of Financial Aid & Scholarships as part of the review process",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Commonly Requested Verification Items & Documents**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Federal Direct Pell Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Treatment of Unearned Title IV Aid**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Federal Supplemental Educational Opportunity Grant (FSEOG)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Treatment of Unearned Title IV Aid**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "How the Financial Aid and Scholarship Office determines whether you are making satisfactory academic progress, and what happens if you are not.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**You have the right to know**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Return any additional documentation and new information requested by the Office of Financial Aid and Scholarships.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**You have the responsibility to**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Seek advice from a tax professional to determine if any portion of grants, fellowships, or scholarships are considered taxable income.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**You have the responsibility to**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Keep track of your fall semester earnings to be sure you do not earn more than half of your academic year award in the fall semester.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**When you are hired for a FWS job you must**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Carefully monitor your earnings so you don’t exceed your award for the academic year.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**When you are hired for a FWS job you must**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/financial-aid-policies.shtml"
+  },
+  {
+    "name": "Make sure you select the correct Award Year at the top of the application (example: Fall 2022 and Spring and Summer 2023 would be the 2022-2023 year)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Applying for the Grad PLUS Loan at Cal Poly Pomona**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/loan-information.shtml"
+  },
+  {
+    "name": "Make monthly payments on your loan after leaving school, unless you are granted a deferment or forbearance; and",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Student Loan Borrower Responsibilities**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/loan-information.shtml"
+  },
+  {
+    "name": "ISIR data to determine award eligibility, and the resulting awards and disbursement data;",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "January 2023: Can the Financial Aid Office share student FAFSA Data with other offices on campus?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Federal Work-Study (FWS) awards and pay dates;",
+    "type": "work-study",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "January 2023: Can the Financial Aid Office share student FAFSA Data with other offices on campus?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Whether or not a student is Pell Grant eligible.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "January 2023: Can the Financial Aid Office share student FAFSA Data with other offices on campus?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "A student’s Federal Pell Grant will never be reduced, regardless of other aid a student is receiving.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Compliance with Federal and State financial aid rules are still required**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "If a student is receiving aid (other than a Federal Pell Grant and Scholarships) that exceeds their Cost of Attendance.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Compliance with Federal and State financial aid rules are still required**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Classes added after the Recalculation Date will not count towards a student’s Grant eligibility, regardless of class start date.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "July 2022: Beginning with Fall 2022, the Grant Recalculation Date for Fall & Spring semesters will be the day after the Add / Drop Period ends (the 10th day of classes). Why the change?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Similarly, classes dropped after the Recalculation Date will not reduce Grants (unless the student fully withdraws from the term)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "July 2022: Beginning with Fall 2022, the Grant Recalculation Date for Fall & Spring semesters will be the day after the Add / Drop Period ends (the 10th day of classes). Why the change?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Cal Grant (Tuition & Access Grants)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "July 2022: Beginning with Fall 2022, the Grant Recalculation Date for Fall & Spring semesters will be the day after the Add / Drop Period ends (the 10th day of classes). Why the change?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "Middle Class Scholarship",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "July 2022: Beginning with Fall 2022, the Grant Recalculation Date for Fall & Spring semesters will be the day after the Add / Drop Period ends (the 10th day of classes). Why the change?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "EOP Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "July 2022: Beginning with Fall 2022, the Grant Recalculation Date for Fall & Spring semesters will be the day after the Add / Drop Period ends (the 10th day of classes). Why the change?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/question-of-the-month.shtml"
+  },
+  {
+    "name": "represents 100% of your Pell Grant eligibility for that award year.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "How is my Federal Pell Grant Lifetime Eligibility Used calculated?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-aid-program-limits.shtml"
+  },
+  {
+    "name": "Not have reached your 26th birthday as of July 1st of the award year. AND",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Chafee Grant",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-aid-program-limits.shtml"
+  },
+  {
+    "name": "Cal Grant is limited to a maximum of 4 years at full-time study (depending on your year in college when first awarded the grant).",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Full Time (12 or more Semester Units)",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-enrollment-requirements.shtml"
+  },
+  {
+    "name": "If you are enrolled in 7 or more units, there is no change to the State University Grant, since the Tuition Fee remains the same.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**\\*\\*State University Grant Adjustments**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-enrollment-requirements.shtml"
+  },
+  {
+    "name": "You must return any overpayment of Federal Grant funds directly to Student Accounting and Cashiering Services",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "How will I Know the Results?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-return-of-federal-aid.shtml"
+  },
+  {
+    "name": "Not owe a repayment for a previously received student grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**SUG Eligibility Criteria:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "Have a household income that aligns with Cal Grant eligibility",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**SUG Eligibility Criteria:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "Not be eligible for a Cal Grant Tuition Grant",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Undergraduate Priority Group Criteria:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "Not be receiving a Cal Grant or other grant, scholarship or waiver designated to cover the tuition fee",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Undergraduate Priority Group Criteria:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "Not be eligible for a Cal Grant Tuition Grant (Credential Students)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Credential and Graduate Priority Group Criteria:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "Subject to change based on information regarding a student’s standing that could reduce or cancel an award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Grant Amount",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-state-university-grant-eligibility.shtml"
+  },
+  {
+    "name": "[Understanding State University Grant Eligibility](understanding-state-university-grant-eligibility.shtml)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Don B. Huntley College of Agriculture",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/understanding-unit-maximums.shtml"
+  },
+  {
+    "name": "Any Grants or Scholarships that you have been offered",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Step 2:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "Your Net Cost (Cost of Attendance minus Grants and Scholarships)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Step 2:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "Once an item has been disbursed you will not be able to decline or reduce the award",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Important Things to Know About Accepting/Declining Awards:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "You cannot decline or reduce a loan award amount if the loan has been originated",
+    "type": "loan",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Important Things to Know About Accepting/Declining Awards:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "If you want to accept a previously declined award, you must contact the Office of Financial Aid & Scholarships.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Important Things to Know About Accepting/Declining Awards:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "Category (Grant, Scholarship, Loan, etc.)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Step 2:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "Grants and Scholarships are automatically accepted when offered - so no action is necessary",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Requirements for a Disbursement Date to Display**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/using-broncodirect-financial-aid-information.shtml"
+  },
+  {
+    "name": "Students whose appeal is denied may submit a written request for a 2nd review of the appeal to the Director of Financial Aid & Scholarships.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "#6: SAP Appeal Decisions",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/resources/writing-a-successful-sap-appeal.shtml"
+  },
+  {
+    "name": "Visit the [Bronco Scholarship Portal (BSP)](https://csupomona.academicworks.com/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Cal Poly Pomona Scholarship Season Cycle",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Select scholarship(s), complete all required criteria and submit your application by the deadline",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Cal Poly Pomona Scholarship Season Cycle",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Scholarship review committees will review eligible scholarship applicants",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Selection (March 3 - June 30)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Selected recipients will be notified of their award via their @cpp.edu email and donor thank you letters may be requested from recipients",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Selection (March 3 - June 30)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Financial Aid packages will be adjusted to include scholarship(s) awards",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Selection (March 3 - June 30)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Scholarships will be awarded beginning in May and will continue through the summer",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Disbursement (10 days prior to the start of the semester)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "Disbursement of scholarships will occur nightly, but not earlier than 10 days prior to the first day of classes for each semester",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Disbursement (10 days prior to the start of the semester)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/cal-poly-pomona-scholarships.shtml"
+  },
+  {
+    "name": "CSU Scholarship Applicant Information Form & Application",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Application Requirements**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/csu-systemwide-scholarships.shtml"
+  },
+  {
+    "name": "Application will be available through the Bronco Scholarship Portal in early Spring",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Submit Your Application**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/csu-systemwide-scholarships.shtml"
+  },
+  {
+    "name": "Recipients must remain a California State University full-time equivalent student during the scholarship period.",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Eligibility Requirements**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/csu-systemwide-scholarships.shtml"
+  },
+  {
+    "name": "Applicants may not be a previous recipient of this award.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Eligibility Requirements**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/csu-systemwide-scholarships.shtml"
+  },
+  {
+    "name": "Scholarships – general email: scholarships@cpp.edu",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Financial Aid and Scholarships Office Contact",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/department-staff-and-faculty-information.shtml"
+  },
+  {
+    "name": "Never pay for a scholarship application!",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Outside Scholarship Opportunities",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/outside-scholarships.shtml"
+  },
+  {
+    "name": "Never pay for a Scholarship Search Engine!",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Outside Scholarship Search Engines",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/outside-scholarships.shtml"
+  },
+  {
+    "name": "\"This scholarship is guaranteed or your money back.\"",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "I've been contacted by companies offering to help me find scholarships for a fee.  Is it worth it?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/scholarship-faqs.shtml"
+  },
+  {
+    "name": "\"This scholarship will cost you some money.\"",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "I've been contacted by companies offering to help me find scholarships for a fee.  Is it worth it?",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/scholarships/scholarship-faqs.shtml"
+  },
+  {
+    "name": "[Federal Student Grant Programs Factsheet (PDF)](https://studentaid.gov/sites/default/files/federal-grant-programs.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Additional Resources:**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "Complete the 2025-2026 UGRD - TEACH Grant Request available online at [cpp.studentforms.com](https://cpp.studentforms.com)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**How to Apply for the TEACH Grant**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "At Cal Poly Pomona, the Bachelor's in Architecture is the only program approved as a mandatory five-year program for Cal Grant eligibility.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Cal Grant A and****B – Tuition Grants**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "Not have reached age 26 as of July 1 of the award year",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**California Chafee Grant**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "[Chafee Grant Fact Sheet (PDF)](https://chafee.csac.ca.gov/SupportFiles/Chafee_factsheet.pdf)",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Additional Resources**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in 6 units, your SUG grant will be adjusted to reflect the lower Tuition Fee",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**State University Grant (SUG)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "If you are enrolled in less than 6 units, your grant will be canceled for the semester.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**State University Grant (SUG)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "Foster youth students may renew their Cal Grant B awards for the equivalent of eight years of full-time attendance in an undergraduate program.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Types of Aid specific to Foster Youth**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "Foster youth students have until their 26th birthday to apply for the Cal Grant High School Entitlement Award.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Types of Aid specific to Foster Youth**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/aid-programs.shtml"
+  },
+  {
+    "name": "Accepted the Awards on Your Award Summary.",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Getting Your Aid",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/getting-your-aid.shtml"
+  },
+  {
+    "name": "Financial Aid Grants and Scholarships may be adjusted based on specific enrollment requirements for each award.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Period I:****First two weeks****(Fall & Spring)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/keeping-your-aid.shtml"
+  },
+  {
+    "name": "Financial Aid Grants  that were already releasedwill not be adjusted.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Period II****:  Second Week through the end of the semester****(****Fall****&****Spring****)**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/current/keeping-your-aid.shtml"
+  },
+  {
+    "name": "Grants are offered based on your financial need as determined by the FAFSA or DREAM Application information.",
+    "type": "grant",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**Grants and Scholarships**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/newly-admitted/award-notification.shtml"
+  },
+  {
+    "name": "Have an Award Summary that contains “Official” awards, as opposed to estimated awards",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**When Aid Is****Released**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/parent-and-family.shtml"
+  },
+  {
+    "name": "Have Accepted the Awards on their Aid Summary  in their [MyCPP Student Center](https://my.cpp.edu)",
+    "type": "award",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "**When Aid Is****Released**",
+    "sourceUrl": "http://www.cpp.edu/financial-aid/undergraduate/parent-and-family.shtml"
+  },
+  {
+    "name": "[Gates Cambridge Scholarship](https://www.gatescambridge.org/programme/the-scholarship/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Barry Goldwater Scholarship](https://goldwaterscholarship.gov/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Ernest F. Hollings Scholarship](https://www.noaa.gov/office-education/hollings-scholarship)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[EPP/MSI Scholarship](https://www.noaa.gov/office-education/epp-msi/undergraduate-scholarship)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Mitchell Scholarship](https://www.us-irelandalliance.org/mitchellscholarship)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Harry S. Truman Scholarship](https://www.truman.gov/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Jack Kent College Scholarship](https://www.jkcf.org/our-scholarships/college-scholarship-program/how-to-apply/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Jack Kent Undergraduate Transfer Scholarship](https://www.jkcf.org/our-scholarships/undergraduate-transfer-scholarship/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Marshall Scholarship](https://www.marshallscholarship.org/about)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[James Madison Fellowship](https://www.jamesmadison.gov/fellowship-information/fellowship-eligibility)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Rhodes Scholarship](https://www.rhodeshouse.ox.ac.uk/office-of-the-american-secretary/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Soros Fellowship](https://www.pdsoros.org/apply)",
+    "type": "fellowship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Udall Scholarship](https://www.udall.gov/OurPrograms/Scholarship/Scholarship.aspx)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Fellowships & Scholarships",
+    "sourceUrl": "http://www.cpp.edu/honorscollege/current/resources.shtml"
+  },
+  {
+    "name": "[Cal Poly Pomona Scholarships Information](https://www.cpp.edu/financial-aid/scholarships/)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "Scholarships for Study Abroad",
+    "sourceUrl": "http://www.cpp.edu/international/study-abroad/students/financial-aid-loans.shtml"
+  },
+  {
+    "name": "[Financial Aid & Scholarships](https://www.cpp.edu/financial-aid/index.shtml)",
+    "type": "scholarship",
+    "amount": "",
+    "description": "",
+    "eligibility": "",
+    "deadline": "",
+    "department": "CEU Footer",
+    "sourceUrl": "http://www.cpp.edu/international/study-abroad/students/financial-aid-loans.shtml"
+  }
+]

@@ -9,12 +9,52 @@ interface Message {
   content: string;
 }
 
-const STARTER_QUESTIONS = [
-  "What are the admission requirements for freshmen?",
-  "How do I apply for financial aid at CPP?",
-  "What dining options are available on campus?",
-  "How do I change my major at Cal Poly Pomona?",
-  "Where is the student health center located?",
+const CATEGORIES = [
+  {
+    title: "Campus Knowledge",
+    description: "Admissions, dining, housing, campus services, and student life",
+    icon: "🏛",
+    questions: [
+      "What are the admission requirements for freshmen?",
+      "What dining options are available on campus?",
+    ],
+  },
+  {
+    title: "Faculty Directory",
+    description: "Professor contact info, office hours, and office locations",
+    icon: "👤",
+    questions: [
+      "What are Dr. El Naga's office hours?",
+      "Who are the Computer Science faculty?",
+    ],
+  },
+  {
+    title: "Academic Programs",
+    description: "Majors, course descriptions, prerequisites, and degree requirements",
+    icon: "📚",
+    questions: [
+      "What courses are required for a CS degree?",
+      "What are the prerequisites for CHM 1210?",
+    ],
+  },
+  {
+    title: "Financial Aid",
+    description: "Scholarships, grants, eligibility, and application deadlines",
+    icon: "💰",
+    questions: [
+      "What engineering scholarships are available?",
+      "How do I apply for financial aid at CPP?",
+    ],
+  },
+  {
+    title: "Official Resources",
+    description: "Direct links to official CPP pages, forms, and documents",
+    icon: "🔗",
+    questions: [
+      "Link me to the housing application page",
+      "Where can I find the graduation requirements?",
+    ],
+  },
 ];
 
 export default function Home() {
@@ -70,14 +110,10 @@ export default function Home() {
     }
   }
 
-  // Custom link renderer — CPP links stay in-app, external links open in new tab
   const markdownComponents: Components = {
     a: ({ href, children }) => {
-      const linkText = typeof children === "string" ? children : String(children);
       const isFullUrl = href && (href.startsWith("http://") || href.startsWith("https://"));
 
-      // Source/citation links and full URLs → open the actual site
-      // These are grounded source attributions the user should visit
       if (isFullUrl) {
         return (
           <a
@@ -91,9 +127,9 @@ export default function Home() {
         );
       }
 
-      // Relative CPP links (e.g. /admissions/freshmen) → ask the agent
       const isCppRelativeLink = href && href.startsWith("/");
       if (isCppRelativeLink) {
+        const linkText = typeof children === "string" ? children : String(children);
         return (
           <button
             onClick={(e) => {
@@ -109,7 +145,6 @@ export default function Home() {
         );
       }
 
-      // Anything else — plain link
       return (
         <a
           href={href}
@@ -132,8 +167,8 @@ export default function Home() {
             B
           </div>
           <div>
-            <h1 className="text-xl font-bold">CPP Campus Knowledge Agent</h1>
-            <p className="text-sm text-green-200">Ask anything about Cal Poly Pomona</p>
+            <h1 className="text-xl font-bold">BroncoBot</h1>
+            <p className="text-sm text-green-200">Your Cal Poly Pomona Campus Assistant</p>
           </div>
         </div>
       </header>
@@ -142,26 +177,41 @@ export default function Home() {
       <div className="flex-1 overflow-y-auto px-4 py-6">
         <div className="max-w-4xl mx-auto space-y-4">
           {messages.length === 0 && (
-            <div className="text-center py-12">
+            <div className="text-center py-8">
               <div className="w-20 h-20 bg-[#1E4D2B] rounded-full flex items-center justify-center text-3xl font-bold text-[#C4A747] mx-auto mb-4">
                 B
               </div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Welcome to CPP Campus Knowledge Agent
+                Welcome to BroncoBot
               </h2>
-              <p className="text-gray-500 mb-8 max-w-md mx-auto">
-                I can help you find information about admissions, financial aid, academics, campus
-                services, and more at Cal Poly Pomona.
+              <p className="text-gray-500 mb-8 max-w-lg mx-auto">
+                I can help you find information about Cal Poly Pomona. Choose a category or type your question below.
               </p>
-              <div className="flex flex-wrap gap-2 justify-center max-w-2xl mx-auto">
-                {STARTER_QUESTIONS.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => sendMessage(q)}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:bg-[#1E4D2B] hover:text-white hover:border-[#1E4D2B] transition-colors shadow-sm"
+
+              {/* Category cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto mb-6">
+                {CATEGORIES.map((cat) => (
+                  <div
+                    key={cat.title}
+                    className="bg-white border border-gray-200 rounded-xl p-4 text-left shadow-sm hover:shadow-md transition-shadow"
                   >
-                    {q}
-                  </button>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-lg">{cat.icon}</span>
+                      <h3 className="font-semibold text-gray-800 text-sm">{cat.title}</h3>
+                    </div>
+                    <p className="text-xs text-gray-500 mb-3">{cat.description}</p>
+                    <div className="flex flex-col gap-1.5">
+                      {cat.questions.map((q) => (
+                        <button
+                          key={q}
+                          onClick={() => sendMessage(q)}
+                          className="text-xs text-left px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-gray-600 hover:bg-[#1E4D2B] hover:text-white hover:border-[#1E4D2B] transition-colors"
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -237,7 +287,7 @@ export default function Home() {
           </button>
         </div>
         <p className="text-center text-xs text-gray-400 mt-2">
-          Powered by AI. Answers are based on official Cal Poly Pomona website content.
+          Powered by AI with tool-calling. Answers are sourced from official Cal Poly Pomona website content.
         </p>
       </div>
     </div>

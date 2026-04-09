@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Ensure data/ files are bundled with serverless functions
+  outputFileTracingIncludes: {
+    "/api/chat": ["./data/**/*"],
+  },
 };
 
 export default nextConfig;
