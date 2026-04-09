@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CPP Campus Knowledge Agent",
-  description: "AI-powered assistant for Cal Poly Pomona campus information",
+  title: "BroncoBot — Cal Poly Pomona Campus Assistant",
+  description: "AI-powered assistant for Cal Poly Pomona campus information using tool-calling and hybrid search",
 };
 
 export default function RootLayout({

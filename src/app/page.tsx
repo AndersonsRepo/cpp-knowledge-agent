@@ -1,295 +1,218 @@
-"use client";
+import Link from "next/link";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import ReactMarkdown, { Components } from "react-markdown";
-import remarkGfm from "remark-gfm";
-
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
-
-const CATEGORIES = [
+const FEATURES = [
   {
-    title: "Campus Knowledge",
-    description: "Admissions, dining, housing, campus services, and student life",
-    icon: "🏛",
-    questions: [
-      "What are the admission requirements for freshmen?",
-      "What dining options are available on campus?",
-    ],
+    icon: "🔍",
+    title: "Hybrid Search",
+    description:
+      "Combines BM25 keyword matching with Gemini semantic embeddings for accurate retrieval across 72,000+ chunks from cpp.edu.",
   },
   {
-    title: "Faculty Directory",
-    description: "Professor contact info, office hours, and office locations",
+    icon: "🛠",
+    title: "5-Tool Architecture",
+    description:
+      "Claude Sonnet selects from specialized tools — corpus search, faculty lookup, academic programs, financial aid, and source documents — chaining up to 5 tool calls per query.",
+  },
+  {
     icon: "👤",
-    questions: [
-      "What are Dr. El Naga's office hours?",
-      "Who are the Computer Science faculty?",
-    ],
+    title: "Faculty Directory",
+    description:
+      "Structured lookup of 2,000+ faculty with contact info, office hours, and locations — extracted and indexed from the corpus.",
   },
   {
-    title: "Academic Programs",
-    description: "Majors, course descriptions, prerequisites, and degree requirements",
     icon: "📚",
-    questions: [
-      "What courses are required for a CS degree?",
-      "What are the prerequisites for CHM 1210?",
-    ],
+    title: "Academic Programs",
+    description:
+      "Course descriptions, prerequisites, degree requirements, and program details for 760+ courses and 380+ programs.",
   },
   {
-    title: "Financial Aid",
-    description: "Scholarships, grants, eligibility, and application deadlines",
     icon: "💰",
-    questions: [
-      "What engineering scholarships are available?",
-      "How do I apply for financial aid at CPP?",
-    ],
+    title: "Financial Aid Guide",
+    description:
+      "Search 460+ scholarships, grants, and aid programs with amounts, eligibility, and deadlines.",
   },
   {
-    title: "Official Resources",
-    description: "Direct links to official CPP pages, forms, and documents",
     icon: "🔗",
-    questions: [
-      "Link me to the housing application page",
-      "Where can I find the graduation requirements?",
-    ],
+    title: "Source Documents",
+    description:
+      "Direct links to 8,000+ official CPP pages so users can verify answers from authoritative sources.",
   },
 ];
 
-export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+const TECH_STACK = [
+  { name: "Next.js 16", role: "Full-stack framework" },
+  { name: "Claude Sonnet", role: "LLM with tool-calling" },
+  { name: "Gemini Embeddings", role: "768d semantic vectors" },
+  { name: "BM25 + Cosine", role: "Hybrid retrieval" },
+  { name: "Vercel", role: "Serverless deployment" },
+  { name: "TypeScript", role: "End-to-end type safety" },
+];
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const sendMessage = useCallback(
-    async (text: string) => {
-      if (!text.trim() || loading) return;
-
-      const userMessage: Message = { role: "user", content: text.trim() };
-      const newMessages = [...messages, userMessage];
-      setMessages(newMessages);
-      setInput("");
-      setLoading(true);
-
-      try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: newMessages }),
-        });
-
-        const data = await res.json();
-
-        if (data.error) {
-          setMessages([...newMessages, { role: "assistant", content: `Error: ${data.error}` }]);
-        } else {
-          setMessages([...newMessages, { role: "assistant", content: data.response }]);
-        }
-      } catch {
-        setMessages([
-          ...newMessages,
-          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [messages, loading]
-  );
-
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage(input);
-    }
-  }
-
-  const markdownComponents: Components = {
-    a: ({ href, children }) => {
-      const isFullUrl = href && (href.startsWith("http://") || href.startsWith("https://"));
-
-      if (isFullUrl) {
-        return (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors"
-          >
-            {children} ↗
-          </a>
-        );
-      }
-
-      const isCppRelativeLink = href && href.startsWith("/");
-      if (isCppRelativeLink) {
-        const linkText = typeof children === "string" ? children : String(children);
-        return (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              const topic = linkText || href || "";
-              sendMessage(`Tell me more about: ${topic}`);
-            }}
-            className="inline text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors cursor-pointer"
-            title={`Ask about: ${href}`}
-          >
-            {children}
-          </button>
-        );
-      }
-
-      return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#1E4D2B] font-semibold underline underline-offset-2 decoration-[#C4A747] decoration-2 hover:bg-[#1E4D2B] hover:text-white hover:decoration-transparent rounded px-0.5 transition-colors"
-        >
-          {children}
-        </a>
-      );
-    },
-  };
-
+export default function LandingPage() {
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-[#1E4D2B] text-white px-6 py-4 shadow-md">
-        <div className="max-w-4xl mx-auto flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#C4A747] rounded-full flex items-center justify-center text-xl font-bold">
-            B
+      <header className="bg-[#1E4D2B] text-white">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#C4A747] rounded-full flex items-center justify-center text-xl font-bold">
+              B
+            </div>
+            <span className="text-xl font-bold">BroncoBot</span>
           </div>
-          <div>
-            <h1 className="text-xl font-bold">BroncoBot</h1>
-            <p className="text-sm text-green-200">Your Cal Poly Pomona Campus Assistant</p>
-          </div>
+          <Link
+            href="/chat"
+            className="px-5 py-2 bg-[#C4A747] text-[#1E4D2B] rounded-lg font-semibold hover:bg-[#d4b757] transition-colors"
+          >
+            Open Chat
+          </Link>
         </div>
       </header>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto space-y-4">
-          {messages.length === 0 && (
-            <div className="text-center py-8">
-              <div className="w-20 h-20 bg-[#1E4D2B] rounded-full flex items-center justify-center text-3xl font-bold text-[#C4A747] mx-auto mb-4">
-                B
-              </div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                Welcome to BroncoBot
-              </h2>
-              <p className="text-gray-500 mb-8 max-w-lg mx-auto">
-                I can help you find information about Cal Poly Pomona. Choose a category or type your question below.
-              </p>
+      {/* Hero */}
+      <section className="bg-[#1E4D2B] text-white pb-20 pt-16">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="w-24 h-24 bg-[#C4A747] rounded-full flex items-center justify-center text-5xl font-bold mx-auto mb-6">
+            B
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">BroncoBot</h1>
+          <p className="text-xl text-green-200 mb-2">
+            Your Cal Poly Pomona Campus Knowledge Agent
+          </p>
+          <p className="text-green-300 max-w-2xl mx-auto mb-8">
+            An AI-powered assistant that answers questions about Cal Poly Pomona
+            using tool-calling and hybrid search over 72,000+ chunks from
+            cpp.edu.
+          </p>
+          <Link
+            href="/chat"
+            className="inline-block px-8 py-3 bg-[#C4A747] text-[#1E4D2B] rounded-xl font-bold text-lg hover:bg-[#d4b757] transition-colors shadow-lg"
+          >
+            Try BroncoBot
+          </Link>
+        </div>
+      </section>
 
-              {/* Category cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto mb-6">
-                {CATEGORIES.map((cat) => (
-                  <div
-                    key={cat.title}
-                    className="bg-white border border-gray-200 rounded-xl p-4 text-left shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-lg">{cat.icon}</span>
-                      <h3 className="font-semibold text-gray-800 text-sm">{cat.title}</h3>
-                    </div>
-                    <p className="text-xs text-gray-500 mb-3">{cat.description}</p>
-                    <div className="flex flex-col gap-1.5">
-                      {cat.questions.map((q) => (
-                        <button
-                          key={q}
-                          onClick={() => sendMessage(q)}
-                          className="text-xs text-left px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-gray-600 hover:bg-[#1E4D2B] hover:text-white hover:border-[#1E4D2B] transition-colors"
-                        >
-                          {q}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+      {/* How It Works */}
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
+          How It Works
+        </h2>
+        <p className="text-gray-500 text-center max-w-2xl mx-auto mb-12">
+          BroncoBot uses a multi-tool agentic architecture. Claude Sonnet
+          analyzes each question, selects the right tool(s), and chains results
+          to build comprehensive answers.
+        </p>
 
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                  msg.role === "user"
-                    ? "bg-[#1E4D2B] text-white"
-                    : "bg-white border border-gray-200 text-gray-800 shadow-sm"
-                }`}
-              >
-                {msg.role === "assistant" ? (
-                  <div className="prose prose-sm max-w-none prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-1 prose-td:border prose-td:border-gray-300 prose-td:px-3 prose-td:py-1">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      components={markdownComponents}
-                    >
-                      {msg.content}
-                    </ReactMarkdown>
-                  </div>
-                ) : (
-                  <p className="whitespace-pre-wrap">{msg.content}</p>
-                )}
+        {/* Pipeline diagram */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16">
+          {[
+            { step: "1", label: "User Question" },
+            { step: "2", label: "Claude Sonnet" },
+            { step: "3", label: "Tool Selection" },
+            { step: "4", label: "Hybrid Search" },
+            { step: "5", label: "Cited Answer" },
+          ].map((s, i) => (
+            <div key={s.step} className="flex items-center gap-3">
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 bg-[#1E4D2B] text-white rounded-full flex items-center justify-center font-bold text-lg">
+                  {s.step}
+                </div>
+                <span className="text-sm text-gray-600 mt-1 font-medium">
+                  {s.label}
+                </span>
               </div>
+              {i < 4 && (
+                <span className="text-gray-300 text-2xl hidden sm:block">
+                  &rarr;
+                </span>
+              )}
             </div>
           ))}
+        </div>
 
-          {loading && (
-            <div className="flex justify-start">
-              <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 shadow-sm">
-                <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                  <span
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "0.1s" }}
-                  />
-                  <span
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "0.2s" }}
-                  />
-                </div>
-              </div>
+        {/* Features grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {FEATURES.map((f) => (
+            <div
+              key={f.title}
+              className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <span className="text-2xl mb-3 block">{f.icon}</span>
+              <h3 className="font-bold text-gray-800 mb-2">{f.title}</h3>
+              <p className="text-sm text-gray-500">{f.description}</p>
             </div>
-          )}
-
-          <div ref={messagesEndRef} />
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* Input */}
-      <div className="border-t bg-white px-4 py-4">
-        <div className="max-w-4xl mx-auto flex gap-3">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask about Cal Poly Pomona..."
-            rows={1}
-            className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#1E4D2B] focus:border-transparent placeholder:text-gray-400"
-          />
-          <button
-            onClick={() => sendMessage(input)}
-            disabled={loading || !input.trim()}
-            className="px-6 py-3 bg-[#1E4D2B] text-white rounded-xl font-medium hover:bg-[#163D22] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      {/* Tech Stack */}
+      <section className="bg-white border-t border-gray-200 py-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
+            Tech Stack
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {TECH_STACK.map((t) => (
+              <div
+                key={t.name}
+                className="border border-gray-200 rounded-lg p-4 text-center"
+              >
+                <p className="font-semibold text-gray-800">{t.name}</p>
+                <p className="text-xs text-gray-500 mt-1">{t.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Corpus Stats */}
+      <section className="max-w-4xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
+          Corpus Coverage
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+          {[
+            { stat: "72,499", label: "Text Chunks" },
+            { stat: "8,042", label: "Pages Indexed" },
+            { stat: "2,027", label: "Faculty Entries" },
+            { stat: "760+", label: "Courses" },
+          ].map((s) => (
+            <div key={s.label}>
+              <p className="text-3xl font-bold text-[#1E4D2B]">{s.stat}</p>
+              <p className="text-sm text-gray-500 mt-1">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-[#1E4D2B] text-white py-12">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-2xl font-bold mb-4">Ready to try it?</h2>
+          <p className="text-green-200 mb-6">
+            Ask BroncoBot anything about Cal Poly Pomona.
+          </p>
+          <Link
+            href="/chat"
+            className="inline-block px-8 py-3 bg-[#C4A747] text-[#1E4D2B] rounded-xl font-bold text-lg hover:bg-[#d4b757] transition-colors"
           >
-            Send
-          </button>
+            Open Chat
+          </Link>
         </div>
-        <p className="text-center text-xs text-gray-400 mt-2">
-          Powered by AI with tool-calling. Answers are sourced from official Cal Poly Pomona website content.
-        </p>
-      </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-100 border-t border-gray-200 py-6">
+        <div className="max-w-6xl mx-auto px-6 text-center text-sm text-gray-500">
+          <p>
+            Built for the ITC Hackathon 2026 — Cal Poly Pomona
+          </p>
+          <p className="mt-1">
+            Powered by Claude Sonnet + Gemini Embeddings
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
