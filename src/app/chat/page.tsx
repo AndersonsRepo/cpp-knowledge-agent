@@ -116,7 +116,10 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingTitle, setEditingTitle] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const renameInputRef = useRef<HTMLInputElement>(null);
   const initialized = useRef(false);
 
   // Load from localStorage on mount
@@ -251,6 +254,28 @@ export default function ChatPage() {
     }
   }
 
+  function startRename(id: string, currentTitle: string) {
+    setEditingId(id);
+    setEditingTitle(currentTitle);
+    setTimeout(() => renameInputRef.current?.focus(), 0);
+  }
+
+  function commitRename() {
+    if (!editingId) return;
+    const trimmed = editingTitle.trim();
+    if (trimmed) {
+      setConversations((prev) => {
+        const updated = prev.map((c) =>
+          c.id === editingId ? { ...c, title: trimmed } : c
+        );
+        saveConversations(updated);
+        return updated;
+      });
+    }
+    setEditingId(null);
+    setEditingTitle("");
+  }
+
   const markdownComponents: Components = {
     a: ({ href, children }) => {
       const isFullUrl = href && (href.startsWith("http://") || href.startsWith("https://"));
@@ -336,15 +361,43 @@ export default function ChatPage() {
           {conversations.map((c) => (
             <div
               key={c.id}
-              className={`group flex items-center gap-2 px-3 py-2 rounded-lg mb-1 cursor-pointer text-sm transition-colors ${
+              className={`group flex items-center gap-1 px-3 py-2 rounded-lg mb-1 cursor-pointer text-sm transition-colors ${
                 c.id === activeId
                   ? "bg-[#1E4D2B] text-white"
                   : "text-green-300 hover:bg-[#1E4D2B]/50 hover:text-white"
               }`}
-              onClick={() => switchTab(c.id)}
+              onClick={() => editingId !== c.id && switchTab(c.id)}
+              onDoubleClick={() => startRename(c.id, c.title)}
             >
-              <span className="flex-1 truncate">{c.title}</span>
-              {conversations.length > 1 && (
+              {editingId === c.id ? (
+                <input
+                  ref={renameInputRef}
+                  value={editingTitle}
+                  onChange={(e) => setEditingTitle(e.target.value)}
+                  onBlur={commitRename}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") commitRename();
+                    if (e.key === "Escape") { setEditingId(null); setEditingTitle(""); }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 bg-[#0d2a16] text-white text-sm px-1 py-0.5 rounded outline-none border border-green-600 min-w-0"
+                />
+              ) : (
+                <span className="flex-1 truncate">{c.title}</span>
+              )}
+              {editingId !== c.id && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    startRename(c.id, c.title);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 text-green-400 hover:text-white transition-all text-xs"
+                  title="Rename chat"
+                >
+                  ✎
+                </button>
+              )}
+              {editingId !== c.id && conversations.length > 1 && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
