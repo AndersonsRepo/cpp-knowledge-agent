@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect, useCallback } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -63,6 +64,16 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const getSessionId = useCallback(() => {
+    const key = "broncobot-session-id";
+    const existing = window.sessionStorage.getItem(key);
+    if (existing) return existing;
+
+    const nextId = window.crypto.randomUUID();
+    window.sessionStorage.setItem(key, nextId);
+    return nextId;
+  }, []);
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -81,26 +92,30 @@ export default function Home() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: newMessages }),
+          body: JSON.stringify({ messages: newMessages, sessionId: getSessionId() }),
         });
 
         const data = await res.json();
 
         if (data.error) {
-          setMessages([...newMessages, { role: "assistant", content: `Error: ${data.error}` }]);
+          setMessages([...newMessages, { role: "assistant", content: data.error }]);
         } else {
           setMessages([...newMessages, { role: "assistant", content: data.response }]);
         }
       } catch {
         setMessages([
           ...newMessages,
-          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+          {
+            role: "assistant",
+            content:
+              "I’m having trouble with that right now. Try another campus question.",
+          },
         ]);
       } finally {
         setLoading(false);
       }
     },
-    [messages, loading]
+    [getSessionId, loading, messages]
   );
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -162,14 +177,22 @@ export default function Home() {
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-[#1E4D2B] text-white px-6 py-4 shadow-md">
-        <div className="max-w-4xl mx-auto flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#C4A747] rounded-full flex items-center justify-center text-xl font-bold">
-            B
+        <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#C4A747] rounded-full flex items-center justify-center text-xl font-bold">
+              B
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">BroncoBot</h1>
+              <p className="text-sm text-green-200">Your Cal Poly Pomona Campus Assistant</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold">BroncoBot</h1>
-            <p className="text-sm text-green-200">Your Cal Poly Pomona Campus Assistant</p>
-          </div>
+          <Link
+            href="/analytics"
+            className="rounded-xl border border-green-200 px-3 py-2 text-sm font-medium text-green-50 transition-colors hover:bg-white hover:text-[#1E4D2B]"
+          >
+            View Analytics
+          </Link>
         </div>
       </header>
 

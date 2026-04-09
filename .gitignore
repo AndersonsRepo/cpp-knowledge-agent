@@ -38,6 +38,7 @@ yarn-error.log*
 /data/chunks.json
 /data/chunks.jsonl
 /data/chunks-0.json
+/data/analytics-log.jsonl
 
 # vercel
 .vercel
