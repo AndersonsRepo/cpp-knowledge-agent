@@ -161,18 +161,26 @@ export function lookupFaculty(query: string, limit: number = 5): string {
     return JSON.stringify({ results: [], message: "No faculty found matching your query. Try a different name or department." });
   }
 
+  const results = scored.map((s) => ({
+    name: s.entry.name,
+    email: s.entry.email,
+    phone: s.entry.phone || "Not listed",
+    office: s.entry.location || "Not listed",
+    officeHours: s.entry.officeHours || "Not listed",
+    department: s.entry.department,
+    title: s.entry.title || "Not listed",
+    sourceUrl: s.entry.sourceUrl,
+    confidence: s.score >= 2.0 ? "high" : s.score >= 1.0 ? "medium" : "low",
+  }));
+
+  // If any results are missing key details, suggest a corpus search
+  const missingDetails = results.some((r) => r.officeHours === "Not listed" || r.office === "Not listed");
+
   return JSON.stringify({
-    results: scored.map((s) => ({
-      name: s.entry.name,
-      email: s.entry.email,
-      phone: s.entry.phone || "Not listed",
-      office: s.entry.location || "Not listed",
-      officeHours: s.entry.officeHours || "Not listed",
-      department: s.entry.department,
-      title: s.entry.title || "Not listed",
-      sourceUrl: s.entry.sourceUrl,
-      confidence: s.score >= 2.0 ? "high" : s.score >= 1.0 ? "medium" : "low",
-    })),
+    results,
+    ...(missingDetails && {
+      suggestion: "Some results are missing office hours or location. Use search_corpus with the faculty member's name to find this information from their department page.",
+    }),
   });
 }
 

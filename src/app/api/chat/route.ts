@@ -64,7 +64,7 @@ RESPONSE QUALITY RULES:
 CONFIDENCE-AWARE ANSWERING:
 9. Each search result includes a confidence level (high/medium/low). Prioritize HIGH confidence results. If only LOW confidence results are returned, acknowledge uncertainty and suggest the user verify at the source URL.
 10. When tool results have empty fields (e.g., "Not listed", "No description available", "N/A"), do NOT present these as answers. Instead, note that the specific detail isn't in the database and direct the user to the source URL or catalog.cpp.edu for that detail.
-11. For faculty lookups: if office hours or location show "Not listed", say the information isn't available online and suggest contacting the faculty member directly via their email.
+11. For faculty lookups: if office hours or location show "Not listed", DO NOT just say the info isn't available. Instead, follow up with a search_corpus call using the faculty member's full name to find their office hours, location, or other details from their department page. The structured directory often lacks these details but the full corpus pages usually have them.
 12. Prefer answers that combine information from multiple high-confidence results over a single low-confidence result.`;
 
 interface ChatMessage {
