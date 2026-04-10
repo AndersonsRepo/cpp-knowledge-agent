@@ -3,13 +3,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import OpenAI from "openai";
 import { searchCorpus } from "@/lib/search";
 import {
-  lookupFaculty,
-  financialAidGuide,
-  academicProgramGuide,
-  getSourceDocuments,
-  TOOL_DEFINITIONS,
-} from "@/lib/tools";
-import {
   appendAnalyticsEntry,
   type AnalyticsEntry,
   type SearchAnalytics,
@@ -38,39 +31,18 @@ const SYSTEM_PROMPT = `You are the Cal Poly Pomona Campus Knowledge Agent — a 
 
 Today's date is ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}.
 
-You have access to 5 specialized tools. Choose the most appropriate tool(s) for each question:
+You have access to the search_corpus tool to find relevant information from 8,000+ official CPP web pages covering admissions, academics, faculty, financial aid, dining, housing, campus services, student life, and more.
 
-- **search_corpus**: General campus knowledge — admissions, dining, housing, campus services, policies, student life. Use this as your default for broad questions.
-- **lookup_faculty**: Faculty/staff directory — find specific professors, their email, phone, office location, and office hours. Use this when someone mentions a professor's name or asks about faculty in a department.
-- **academic_program_guide**: Academic programs and courses — degree requirements, course descriptions, prerequisites, units. Use this for questions about majors, courses, or graduation requirements.
-- **financial_aid_guide**: Scholarships and financial aid — scholarship names, amounts, eligibility, deadlines. Use this for funding-related questions.
-- **get_source_documents**: Official CPP pages — find direct links to official university web pages. Use this to provide authoritative source links or when someone wants the official page for a topic.
-
-You can call multiple tools in sequence to build a comprehensive answer. For example:
-- "Who teaches CS 2400 and what's the course about?" → lookup_faculty + academic_program_guide
-- "How do I apply for financial aid and where's the office?" → financial_aid_guide + search_corpus
-- "Link me to the CS department page and show me their faculty" → get_source_documents + lookup_faculty
-
-IMPORTANT LIMITATIONS:
-- The corpus covers the main cpp.edu website (admissions, departments, campus services, student life, faculty pages) but does NOT include the official course catalog from catalog.cpp.edu.
-- As a result, detailed course information (prerequisites, full descriptions, credit breakdowns) is often missing or incomplete. When a user asks about specific course prerequisites, descriptions, or requirements and the tools return empty or insufficient data, direct them to the CPP Course Catalog at https://catalog.cpp.edu where they can search by course code or department.
-- Do NOT guess or fabricate course codes. If you are unsure of an exact course code, say so.
-
-RESPONSE QUALITY RULES:
-1. ONLY answer based on information retrieved from your tools. Never fabricate information.
-2. If no tool returns relevant results, say so honestly. For academic/course questions, direct users to https://catalog.cpp.edu. For other topics, suggest visiting cpp.edu directly.
+RULES:
+1. ONLY answer based on information retrieved from the search_corpus tool. Never fabricate information.
+2. If the search returns no relevant results, say "I couldn't find information about that in the CPP knowledge base." and suggest the user visit cpp.edu directly. For course-specific questions (prerequisites, descriptions), direct them to https://catalog.cpp.edu.
 3. ALWAYS cite your sources using the page URL at the end of your response.
 4. Be conversational and helpful. Use formatting (bold, lists) when it improves readability.
-5. When listing sources, format them as clickable links.
-6. When retrieved content mentions specific dates or academic year cycles, check whether those dates have already passed relative to today. If they have, note this and suggest visiting the source URL for current information.
-7. Do NOT use emojis. Keep a professional, clean tone.
-8. When showing faculty info, format it clearly with name, department, contact details, and office hours.
-
-CONFIDENCE-AWARE ANSWERING:
-9. Each search result includes a confidence level (high/medium/low). Prioritize HIGH confidence results. If only LOW confidence results are returned, acknowledge uncertainty and suggest the user verify at the source URL.
-10. When tool results have empty fields (e.g., "Not listed", "No description available", "N/A"), do NOT present these as answers. Instead, note that the specific detail isn't in the database and direct the user to the source URL or catalog.cpp.edu for that detail.
-11. For faculty lookups: if office hours or location show "Not listed", DO NOT just say the info isn't available. Instead, follow up with a search_corpus call using the faculty member's full name to find their office hours, location, or other details from their department page. The structured directory often lacks these details but the full corpus pages usually have them.
-12. Prefer answers that combine information from multiple high-confidence results over a single low-confidence result.`;
+5. If a question is ambiguous, ask for clarification.
+6. When listing sources, format them as clickable links.
+7. When retrieved content mentions specific dates or academic year cycles, check whether those dates have already passed relative to today. If they have, note this and suggest visiting the source URL for current information.
+8. Do NOT use emojis. Keep a professional, clean tone.
+9. Do NOT guess or fabricate course codes, faculty names, or other specific details.`;
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -162,45 +134,26 @@ async function executeTool(
 ): Promise<string> {
   analytics.toolCalls.push(name);
 
-  switch (name) {
-    case "search_corpus": {
-      const results = await searchCorpus(args.query, 15);
-      const normalizedResults = results.map((r, i) => ({
-        rank: i + 1,
-        title: r.chunk.title,
-        section: r.chunk.section,
-        content: r.chunk.content,
-        url: r.url,
-        score: roundScore(r.score),
-        confidence: r.score >= 0.6 ? "high" : r.score >= 0.35 ? "medium" : "low",
-        matchType: r.matchType,
-      }));
+  const results = await searchCorpus(args.query, 8);
+  const normalizedResults = results.map((r, i) => ({
+    rank: i + 1,
+    title: r.chunk.title,
+    section: r.chunk.section,
+    content: r.chunk.content,
+    url: r.url,
+    score: roundScore(r.score),
+    matchType: r.matchType,
+  }));
 
-      analytics.searches.push({
-        query: args.query,
-        resultCount: normalizedResults.length,
-        topScore: normalizedResults[0]?.score ?? null,
-        matchTypes: Array.from(new Set(normalizedResults.map((r) => r.matchType))),
-        sourceUrls: Array.from(new Set(normalizedResults.map((r) => r.url))),
-      });
+  analytics.searches.push({
+    query: args.query,
+    resultCount: normalizedResults.length,
+    topScore: normalizedResults[0]?.score ?? null,
+    matchTypes: Array.from(new Set(normalizedResults.map((r) => r.matchType))),
+    sourceUrls: Array.from(new Set(normalizedResults.map((r) => r.url))),
+  });
 
-      return JSON.stringify(
-        normalizedResults,
-        null,
-        2
-      );
-    }
-    case "lookup_faculty":
-      return lookupFaculty(args.query);
-    case "financial_aid_guide":
-      return financialAidGuide(args.query);
-    case "academic_program_guide":
-      return academicProgramGuide(args.query);
-    case "get_source_documents":
-      return getSourceDocuments(args.query);
-    default:
-      return JSON.stringify({ error: `Unknown tool: ${name}` });
-  }
+  return JSON.stringify(normalizedResults, null, 2);
 }
 
 // --- Anthropic provider ---
@@ -212,15 +165,17 @@ async function handleAnthropic(
 ): Promise<string> {
   const client = new Anthropic({ apiKey });
 
-  const tools: Anthropic.Tool[] = TOOL_DEFINITIONS.map((t) => ({
-    name: t.name,
-    description: t.description,
+  const tools: Anthropic.Tool[] = [{
+    name: "search_corpus",
+    description: "Search the Cal Poly Pomona website corpus. Covers admissions, academics, faculty, courses, programs, dining, housing, financial aid, campus services, and all official cpp.edu content. Call this tool BEFORE answering any factual question.",
     input_schema: {
       type: "object" as const,
-      properties: t.parameters.properties,
-      required: t.parameters.required,
+      properties: {
+        query: { type: "string" as const, description: "Search query. Use specific keywords from the student's question." },
+      },
+      required: ["query"],
     },
-  }));
+  }];
 
   const anthropicMessages: Anthropic.MessageParam[] = messages.map((m) => ({
     role: m.role,
@@ -236,7 +191,7 @@ async function handleAnthropic(
   });
 
   const allMessages = [...anthropicMessages];
-  let maxToolRounds = 5; // Allow more rounds for multi-tool chains
+  let maxToolRounds = 3;
 
   while (response.stop_reason === "tool_use" && maxToolRounds > 0) {
     maxToolRounds--;
@@ -287,14 +242,20 @@ async function handleOpenAICompatible(
     defaultHeaders: opts.defaultHeaders,
   });
 
-  const tools: OpenAI.ChatCompletionTool[] = TOOL_DEFINITIONS.map((t) => ({
+  const tools: OpenAI.ChatCompletionTool[] = [{
     type: "function" as const,
     function: {
-      name: t.name,
-      description: t.description,
-      parameters: t.parameters,
+      name: "search_corpus",
+      description: "Search the Cal Poly Pomona website corpus. Covers admissions, academics, faculty, courses, programs, dining, housing, financial aid, campus services, and all official cpp.edu content.",
+      parameters: {
+        type: "object" as const,
+        properties: {
+          query: { type: "string" as const, description: "Search query. Use specific keywords from the student's question." },
+        },
+        required: ["query"],
+      },
     },
-  }));
+  }];
 
   const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
     { role: "system", content: SYSTEM_PROMPT },

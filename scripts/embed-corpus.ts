@@ -1,47 +1,39 @@
 /**
- * Corpus Embedding Script
+ * Corpus Embedding Script — Supabase pgvector
  *
- * Reads preprocessed chunk shards, generates embeddings via the configured
- * provider, and writes embedding shards alongside the chunk data.
+ * Phase 1: Bulk-upsert all chunks (text only) into Supabase
+ * Phase 2: Generate embeddings via Gemini and update each row
  *
- * Usage: npx tsx scripts/embed-corpus.ts [--provider ollama|openai|openrouter] [--batch-size 50]
+ * Usage: npx tsx scripts/embed-corpus.ts [--provider gemini|ollama|openai] [--chunks-only]
  *
- * Env vars:
- *   EMBEDDING_PROVIDER   — ollama (default), openai, openrouter
- *   OLLAMA_URL           — default http://localhost:11434
- *   OLLAMA_EMBED_MODEL   — default nomic-embed-text
- *   OPENAI_API_KEY       — for OpenAI provider
- *   OPENAI_EMBED_MODEL   — default text-embedding-3-small
- *   OPENROUTER_API_KEY   — for OpenRouter provider
- *   OPENROUTER_EMBED_MODEL — default openai/text-embedding-3-small
- *
- * Output: data/embeddings-{shard}.jsonl (one embedding per line, matching chunk IDs)
+ * --chunks-only: Only upload chunk text, skip embedding generation
  */
 
 import fs from "fs";
 import path from "path";
+import { createClient } from "@supabase/supabase-js";
 import {
   getEmbeddingProvider,
   generateEmbeddings,
   type EmbeddingProvider,
 } from "../src/lib/embeddings";
 
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+
+dotenv.config({ path: path.join(process.cwd(), ".env.local") });
+
 // --- Args ---
 const args = process.argv.slice(2);
 let providerOverride: EmbeddingProvider | undefined;
-let batchSize = 50; // Ollama does 1-at-a-time anyway; OpenAI/OpenRouter can batch
-
-let firstPerPage = false;
+let chunksOnly = false;
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--provider" && args[i + 1]) {
     providerOverride = args[++i] as EmbeddingProvider;
   }
-  if (args[i] === "--batch-size" && args[i + 1]) {
-    batchSize = parseInt(args[++i], 10);
-  }
-  if (args[i] === "--first-per-page") {
-    firstPerPage = true;
+  if (args[i] === "--chunks-only") {
+    chunksOnly = true;
   }
 }
 
@@ -49,26 +41,33 @@ if (providerOverride) {
   process.env.EMBEDDING_PROVIDER = providerOverride;
 }
 
-// --- Main ---
+// --- Supabase client ---
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local");
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
+
+// --- Types ---
 interface Chunk {
   id: string;
-  content: string;
-  title: string;
-  section: string;
   source_url: string;
+  filename: string;
+  title: string;
+  content: string;
+  section: string;
   chunk_index: number;
 }
 
-async function main() {
-  const config = getEmbeddingProvider();
-  if (!config) {
-    console.error("No embedding provider configured. Set EMBEDDING_PROVIDER or an API key.");
-    process.exit(1);
-  }
-
-  console.log(`Provider: ${config.provider} (${config.model}, ${config.dimensions}d)`);
-  console.log(`Batch size: ${config.provider === "ollama" ? 1 : batchSize}`);
+// --- Phase 1: Upload chunks ---
+async function uploadChunks(): Promise<Chunk[]> {
+  console.log("Phase 1: Uploading chunks to Supabase...");
 
   const dataDir = path.join(process.cwd(), "data");
   const shardFiles = fs.readdirSync(dataDir)
@@ -80,104 +79,158 @@ async function main() {
     process.exit(1);
   }
 
-  // Check for existing embeddings to support resume
-  const existingIds = new Set<string>();
-  const embFiles = fs.readdirSync(dataDir).filter((f) => f.startsWith("embeddings-") && f.endsWith(".jsonl"));
-  for (const ef of embFiles) {
-    const lines = fs.readFileSync(path.join(dataDir, ef), "utf-8").split("\n").filter(Boolean);
+  // Load all chunks
+  const allChunks: Chunk[] = [];
+  for (const file of shardFiles) {
+    const lines = fs.readFileSync(path.join(dataDir, file), "utf-8").split("\n").filter(Boolean);
     for (const line of lines) {
-      const entry = JSON.parse(line);
-      existingIds.add(entry.chunk_id);
-    }
-  }
-  if (existingIds.size > 0) {
-    console.log(`Resuming: ${existingIds.size} chunks already embedded`);
-  }
-
-  let totalEmbedded = existingIds.size;
-  let totalChunks = 0;
-  const startTime = Date.now();
-
-  for (const shardFile of shardFiles) {
-    const shardIdx = shardFile.match(/chunks-(\d+)\.jsonl/)?.[1] || "0";
-    const embPath = path.join(dataDir, `embeddings-${shardIdx}.jsonl`);
-
-    // Load chunks from this shard
-    const lines = fs.readFileSync(path.join(dataDir, shardFile), "utf-8").split("\n").filter(Boolean);
-    let chunks: Chunk[] = lines.map((l) => JSON.parse(l));
-
-    // If --first-per-page, only embed chunk_index 0 for each URL
-    if (firstPerPage) {
-      chunks = chunks.filter((c) => c.chunk_index === 0);
-    }
-
-    totalChunks += chunks.length;
-
-    // Filter out already-embedded chunks
-    const toEmbed = chunks.filter((c) => !existingIds.has(c.id));
-    if (toEmbed.length === 0) {
-      console.log(`  Shard ${shardIdx}: all ${chunks.length} chunks already embedded, skipping`);
-      continue;
-    }
-
-    console.log(`  Shard ${shardIdx}: embedding ${toEmbed.length}/${chunks.length} chunks...`);
-
-    // Open append stream for this shard
-    const fd = fs.openSync(embPath, "a");
-
-    // Process with concurrency for Gemini (1-at-a-time API but parallel requests)
-    const concurrency = config.provider === "gemini" ? 20 : (config.provider === "ollama" ? 1 : 1);
-    const effectiveBatch = config.provider === "ollama" ? 1 : batchSize;
-
-    for (let i = 0; i < toEmbed.length; i += concurrency * effectiveBatch) {
-      const concurrentBatches = [];
-      for (let c = 0; c < concurrency && i + c * effectiveBatch < toEmbed.length; c++) {
-        const start = i + c * effectiveBatch;
-        const batch = toEmbed.slice(start, start + effectiveBatch);
-        const texts = batch.map((ch) => `${ch.title} — ${ch.section}\n${ch.content}`.slice(0, 6000));
-        concurrentBatches.push({ batch, texts });
-      }
-
       try {
-        const results = await Promise.all(
-          concurrentBatches.map(async ({ batch, texts }) => {
-            const embeddings = await generateEmbeddings(texts, config);
-            return batch.map((ch, j) => ({ chunk_id: ch.id, embedding: embeddings[j] }));
-          })
-        );
+        allChunks.push(JSON.parse(line) as Chunk);
+      } catch {
+        // Skip malformed lines
+      }
+    }
+  }
 
-        for (const entries of results) {
-          for (const entry of entries) {
-            // Truncate to 4 decimal places to reduce file size (~40% smaller)
-            entry.embedding = entry.embedding.map((v: number) => Math.round(v * 10000) / 10000);
-            fs.writeSync(fd, JSON.stringify(entry) + "\n");
-            totalEmbedded++;
-          }
-        }
+  console.log(`  Loaded ${allChunks.length} chunks from ${shardFiles.length} shards`);
 
-        // Progress
-        const pct = ((totalEmbedded / totalChunks) * 100).toFixed(1);
-        const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
-        const rate = (totalEmbedded / ((Date.now() - startTime) / 1000)).toFixed(1);
-        process.stdout.write(`\r    ${totalEmbedded}/${totalChunks} (${pct}%) — ${rate} chunks/s — ${elapsed}s elapsed`);
-      } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : String(err);
-        console.error(`\n    Error at batch ${i}: ${msg}`);
-        if (msg.includes("429") || msg.includes("rate") || msg.includes("RESOURCE_EXHAUSTED")) {
-          console.log("    Rate limited — waiting 10s...");
-          await new Promise((r) => setTimeout(r, 10000));
-          i -= concurrency * effectiveBatch; // Retry
-        }
+  // Check how many already exist
+  const { count } = await supabase.from("chunks").select("id", { count: "exact", head: true });
+  if (count && count >= allChunks.length) {
+    console.log(`  All ${count} chunks already in Supabase, skipping upload`);
+    return allChunks;
+  }
+
+  // Batch upsert 500 at a time
+  const batchSize = 500;
+  let uploaded = 0;
+
+  for (let i = 0; i < allChunks.length; i += batchSize) {
+    const batch = allChunks.slice(i, i + batchSize).map((c) => ({
+      id: c.id,
+      source_url: c.source_url,
+      filename: c.filename,
+      title: c.title,
+      content: c.content,
+      section: c.section,
+      chunk_index: c.chunk_index,
+    }));
+
+    const { error } = await supabase.from("chunks").upsert(batch, { onConflict: "id" });
+    if (error) {
+      console.error(`  Error at batch ${i}: ${error.message}`);
+      // Retry once
+      await new Promise((r) => setTimeout(r, 2000));
+      const { error: retryError } = await supabase.from("chunks").upsert(batch, { onConflict: "id" });
+      if (retryError) {
+        console.error(`  Retry failed: ${retryError.message}`);
+        continue;
       }
     }
 
-    fs.closeSync(fd);
-    console.log(); // newline after progress
+    uploaded += batch.length;
+    process.stdout.write(`\r  Uploaded ${uploaded}/${allChunks.length} chunks`);
+  }
+
+  console.log(`\n  Done: ${uploaded} chunks uploaded`);
+  return allChunks;
+}
+
+// --- Phase 2: Generate and store embeddings ---
+async function embedChunks(allChunks: Chunk[]) {
+  const config = getEmbeddingProvider();
+  if (!config) {
+    console.error("No embedding provider configured. Set GOOGLE_API_KEY or EMBEDDING_PROVIDER.");
+    process.exit(1);
+  }
+
+  console.log(`\nPhase 2: Generating embeddings with ${config.provider} (${config.model}, ${config.dimensions}d)`);
+
+  // Get IDs of chunks that already have embeddings (for resume)
+  const existingIds = new Set<string>();
+  let offset = 0;
+  const pageSize = 1000;
+
+  while (true) {
+    const { data, error } = await supabase
+      .from("chunks")
+      .select("id")
+      .not("embedding", "is", null)
+      .range(offset, offset + pageSize - 1);
+
+    if (error) {
+      console.error(`  Error fetching existing embeddings: ${error.message}`);
+      break;
+    }
+    if (!data || data.length === 0) break;
+
+    for (const row of data) {
+      existingIds.add(row.id);
+    }
+    offset += pageSize;
+  }
+
+  console.log(`  ${existingIds.size} chunks already embedded, ${allChunks.length - existingIds.size} remaining`);
+
+  const toEmbed = allChunks.filter((c) => !existingIds.has(c.id));
+  if (toEmbed.length === 0) {
+    console.log("  All chunks already embedded!");
+    return;
+  }
+
+  const concurrency = config.provider === "gemini" ? 20 : 1;
+  const startTime = Date.now();
+  let embedded = existingIds.size;
+
+  for (let i = 0; i < toEmbed.length; i += concurrency) {
+    const batch = toEmbed.slice(i, i + concurrency);
+    const texts = batch.map((ch) => `${ch.title} — ${ch.section}\n${ch.content}`.slice(0, 6000));
+
+    try {
+      const embeddings = await generateEmbeddings(texts, config);
+
+      // Update each row with its embedding
+      const updates = batch.map((ch, j) => {
+        const truncated = embeddings[j].map((v: number) => Math.round(v * 10000) / 10000);
+        return supabase
+          .from("chunks")
+          .update({ embedding: JSON.stringify(truncated) })
+          .eq("id", ch.id);
+      });
+
+      await Promise.all(updates);
+      embedded += batch.length;
+
+      // Progress
+      const total = allChunks.length;
+      const pct = ((embedded / total) * 100).toFixed(1);
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
+      const rate = ((embedded - existingIds.size) / ((Date.now() - startTime) / 1000)).toFixed(1);
+      process.stdout.write(`\r  ${embedded}/${total} (${pct}%) — ${rate} chunks/s — ${elapsed}s elapsed`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`\n  Error at chunk ${i}: ${msg}`);
+      if (msg.includes("429") || msg.includes("rate") || msg.includes("RESOURCE_EXHAUSTED")) {
+        console.log("  Rate limited — waiting 10s...");
+        await new Promise((r) => setTimeout(r, 10000));
+        i -= concurrency; // Retry
+      }
+    }
   }
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  console.log(`\nDone: ${totalEmbedded} embeddings in ${elapsed}s`);
-  console.log(`Stored in: ${dataDir}/embeddings-*.jsonl`);
+  console.log(`\n\nDone: ${embedded} total embeddings in ${elapsed}s`);
+}
+
+// --- Main ---
+async function main() {
+  const allChunks = await uploadChunks();
+
+  if (!chunksOnly) {
+    await embedChunks(allChunks);
+  } else {
+    console.log("\n--chunks-only: Skipping embedding generation");
+  }
 }
 
 main().catch(console.error);

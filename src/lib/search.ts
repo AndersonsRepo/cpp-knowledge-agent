@@ -1,11 +1,11 @@
 /**
- * Corpus Search Engine — Hybrid BM25 + Semantic
+ * Corpus Search Engine — Hybrid BM25 + Supabase pgvector Semantic
  *
- * BM25 keyword search always available. Semantic search activates when
- * embeddings are present (data/embeddings-*.jsonl). Hybrid scoring combines
- * both at 70% semantic + 30% BM25 (same ratio as AI Harness).
+ * BM25 keyword search runs in-memory (chunks loaded from local JSONL).
+ * Semantic search queries Supabase pgvector via RPC.
+ * Hybrid scoring: 70% semantic + 30% BM25.
  *
- * Falls back to BM25-only when no embeddings or embedding provider unavailable.
+ * Falls back to BM25-only when Supabase or embedding provider unavailable.
  */
 
 import fs from "fs";
@@ -13,8 +13,8 @@ import path from "path";
 import {
   getEmbeddingProvider,
   generateSingleEmbedding,
-  cosineSimilarity,
 } from "./embeddings";
+import { createAdminClient } from "./supabase";
 
 export interface Chunk {
   id: string;
@@ -37,22 +37,16 @@ export interface SearchResult {
 const K1 = 1.2;
 const B = 0.75;
 
-// Hybrid weights (same as AI Harness)
+// Hybrid weights
 const SEMANTIC_WEIGHT = 0.7;
 const BM25_WEIGHT = 0.3;
 
-// In-memory corpus + index
+// In-memory corpus + BM25 index
 let chunks: Chunk[] = [];
 let chunkIdToIdx: Map<string, number> = new Map();
 let invertedIndex: Map<string, Map<number, number>> = new Map();
 let docLengths: number[] = [];
 let avgDocLength = 0;
-
-// Embedding index (loaded if available)
-let embeddings: Map<number, number[]> = new Map(); // chunkIdx → vector
-let embeddingsLoaded = false;
-let hasEmbeddings = false;
-
 let loaded = false;
 
 function tokenize(text: string): string[] {
@@ -68,7 +62,6 @@ function loadCorpus() {
 
   const dataDir = path.join(process.cwd(), "data");
 
-  // Load chunks
   const shardFiles = fs
     .readdirSync(dataDir)
     .filter((f) => f.startsWith("chunks-") && f.endsWith(".jsonl"))
@@ -77,9 +70,13 @@ function loadCorpus() {
   for (const file of shardFiles) {
     const lines = fs.readFileSync(path.join(dataDir, file), "utf-8").split("\n").filter(Boolean);
     for (const line of lines) {
-      const chunk = JSON.parse(line) as Chunk;
-      chunkIdToIdx.set(chunk.id, chunks.length);
-      chunks.push(chunk);
+      try {
+        const chunk = JSON.parse(line) as Chunk;
+        chunkIdToIdx.set(chunk.id, chunks.length);
+        chunks.push(chunk);
+      } catch {
+        // Skip malformed lines
+      }
     }
   }
 
@@ -103,32 +100,8 @@ function loadCorpus() {
 
   avgDocLength = docLengths.reduce((a, b) => a + b, 0) / docLengths.length;
 
-  // Load embeddings if available
-  const embFiles = fs
-    .readdirSync(dataDir)
-    .filter((f) => f.startsWith("embeddings-") && f.endsWith(".jsonl"))
-    .sort();
-
-  if (embFiles.length > 0) {
-    let embCount = 0;
-    for (const file of embFiles) {
-      const lines = fs.readFileSync(path.join(dataDir, file), "utf-8").split("\n").filter(Boolean);
-      for (const line of lines) {
-        const entry = JSON.parse(line) as { chunk_id: string; embedding: number[] };
-        const idx = chunkIdToIdx.get(entry.chunk_id);
-        if (idx !== undefined) {
-          embeddings.set(idx, entry.embedding);
-          embCount++;
-        }
-      }
-    }
-    hasEmbeddings = embCount > 0;
-    embeddingsLoaded = true;
-    console.log(`[search] Loaded ${embCount} embeddings (${((embCount / chunks.length) * 100).toFixed(1)}% coverage)`);
-  }
-
   loaded = true;
-  console.log(`[search] Loaded ${chunks.length} chunks, ${invertedIndex.size} unique terms, embeddings: ${hasEmbeddings}`);
+  console.log(`[search] Loaded ${chunks.length} chunks, ${invertedIndex.size} unique terms`);
 }
 
 function bm25Score(queryTokens: string[], docIdx: number): number {
@@ -164,9 +137,9 @@ function deduplicateResults(scored: Array<{ idx: number; score: number; matchTyp
     const chunk = chunks[idx];
     const url = getChunkUrl(chunk);
 
-    // Allow up to 4 chunks from same URL for more context
+    // Allow up to 2 chunks from same URL
     const urlCount = results.filter((r) => r.url === url).length;
-    if (urlCount >= 4) continue;
+    if (urlCount >= 2) continue;
 
     results.push({ chunk, score, url, matchType });
   }
@@ -199,18 +172,29 @@ function searchBM25(query: string, limit: number): SearchResult[] {
   return deduplicateResults(scored, limit);
 }
 
-// --- Semantic-only search ---
+// --- Supabase pgvector semantic search ---
 
-function searchSemantic(queryEmbedding: number[], limit: number): Array<{ idx: number; score: number }> {
-  const scored: Array<{ idx: number; score: number }> = [];
+async function searchSemanticSupabase(
+  queryEmbedding: number[],
+  limit: number
+): Promise<Array<{ idx: number; score: number }>> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.rpc("match_chunks", {
+    query_embedding: JSON.stringify(queryEmbedding),
+    match_count: limit * 3,
+  });
 
-  for (const [idx, embedding] of embeddings) {
-    const score = cosineSimilarity(queryEmbedding, embedding);
-    scored.push({ idx, score });
+  if (error || !data) {
+    console.warn("[search] Supabase semantic search failed:", error?.message);
+    return [];
   }
 
-  scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, limit * 3); // Return more candidates for hybrid merging
+  return (data as Array<{ id: string; similarity: number }>)
+    .map((row) => {
+      const idx = chunkIdToIdx.get(row.id);
+      return idx !== undefined ? { idx, score: row.similarity } : null;
+    })
+    .filter(Boolean) as Array<{ idx: number; score: number }>;
 }
 
 // --- Hybrid search ---
@@ -218,7 +202,7 @@ function searchSemantic(queryEmbedding: number[], limit: number): Array<{ idx: n
 async function searchHybrid(query: string, queryEmbedding: number[], limit: number): Promise<SearchResult[]> {
   const queryTokens = tokenize(query);
 
-  // Get BM25 scores for all candidates
+  // Get BM25 candidates
   const bm25Candidates = new Set<number>();
   for (const token of queryTokens) {
     const postings = invertedIndex.get(token);
@@ -227,8 +211,13 @@ async function searchHybrid(query: string, queryEmbedding: number[], limit: numb
     }
   }
 
-  // Get semantic candidates
-  const semanticResults = searchSemantic(queryEmbedding, limit);
+  // Get semantic candidates from Supabase
+  const semanticResults = await searchSemanticSupabase(queryEmbedding, limit);
+  if (semanticResults.length === 0) {
+    // Supabase returned nothing — fall back to BM25
+    return searchBM25(query, limit);
+  }
+
   const allCandidates = new Set([...bm25Candidates, ...semanticResults.map((r) => r.idx)]);
 
   // Compute BM25 scores and normalize
@@ -263,11 +252,7 @@ async function searchHybrid(query: string, queryEmbedding: number[], limit: numb
 export async function searchCorpus(query: string, limit: number = 8): Promise<SearchResult[]> {
   loadCorpus();
 
-  if (!hasEmbeddings) {
-    return searchBM25(query, limit);
-  }
-
-  // Try to embed the query for hybrid search
+  // Try hybrid search (BM25 + Supabase pgvector)
   const config = getEmbeddingProvider();
   if (!config) {
     return searchBM25(query, limit);
@@ -277,15 +262,9 @@ export async function searchCorpus(query: string, limit: number = 8): Promise<Se
     const queryEmbedding = await generateSingleEmbedding(query, config);
     return searchHybrid(query, queryEmbedding, limit);
   } catch (err) {
-    console.warn(`[search] Embedding failed, falling back to BM25: ${err}`);
+    console.warn(`[search] Hybrid search failed, falling back to BM25: ${err}`);
     return searchBM25(query, limit);
   }
-}
-
-// Sync version for cases where we can't await (falls back to BM25)
-export function searchCorpusSync(query: string, limit: number = 8): SearchResult[] {
-  loadCorpus();
-  return searchBM25(query, limit);
 }
 
 export function getCorpusStats() {
@@ -294,8 +273,5 @@ export function getCorpusStats() {
     totalChunks: chunks.length,
     uniqueTerms: invertedIndex.size,
     avgChunkLength: Math.round(avgDocLength),
-    hasEmbeddings,
-    embeddingCount: embeddings.size,
-    embeddingCoverage: chunks.length > 0 ? ((embeddings.size / chunks.length) * 100).toFixed(1) + "%" : "0%",
   };
 }

@@ -5,37 +5,37 @@ const FEATURES = [
     icon: "🔍",
     title: "Hybrid Search",
     description:
-      "Combines BM25 keyword matching with Gemini semantic embeddings for accurate retrieval across 72,000+ chunks from cpp.edu.",
+      "Combines BM25 keyword matching with Gemini semantic embeddings via Supabase pgvector for accurate retrieval across 72,000+ chunks from cpp.edu.",
   },
   {
     icon: "🛠",
-    title: "5-Tool Architecture",
+    title: "Agentic Tool-Calling",
     description:
-      "Claude Sonnet selects from specialized tools — corpus search, faculty lookup, academic programs, financial aid, and source documents — chaining up to 5 tool calls per query.",
+      "Claude Sonnet uses tool-calling to search the corpus before answering, ensuring every response is grounded in official CPP content.",
   },
   {
-    icon: "👤",
-    title: "Faculty Directory",
+    icon: "🧠",
+    title: "Semantic Understanding",
     description:
-      "Structured lookup of 2,000+ faculty with contact info, office hours, and locations — extracted and indexed from the corpus.",
+      "768-dimensional Gemini embeddings capture meaning — not just keywords — so the agent finds relevant answers even when phrasing differs.",
   },
   {
     icon: "📚",
-    title: "Academic Programs",
+    title: "8,000+ Pages Indexed",
     description:
-      "Browse 380+ degree programs and 760+ course listings. For detailed prerequisites and descriptions, the agent links to the official CPP Course Catalog.",
+      "Admissions, academics, faculty, financial aid, housing, dining, campus services, and more — all searchable from one conversation.",
   },
   {
-    icon: "💰",
-    title: "Financial Aid Guide",
+    icon: "📊",
+    title: "Analytics Dashboard",
     description:
-      "Search 460+ scholarships, grants, and aid programs with amounts, eligibility, and deadlines.",
+      "Real-time visibility into query volume, search quality scores, response times, and tool usage patterns.",
   },
   {
     icon: "🔗",
-    title: "Source Documents",
+    title: "Source Attribution",
     description:
-      "Direct links to 8,000+ official CPP pages so users can verify answers from authoritative sources.",
+      "Every answer cites the official CPP web pages it drew from, so users can verify information at the source.",
   },
 ];
 
@@ -43,9 +43,9 @@ const TECH_STACK = [
   { name: "Next.js 16", role: "Full-stack framework" },
   { name: "Claude Sonnet", role: "LLM with tool-calling" },
   { name: "Gemini Embeddings", role: "768d semantic vectors" },
+  { name: "Supabase pgvector", role: "Vector database" },
   { name: "BM25 + Cosine", role: "Hybrid retrieval" },
   { name: "Vercel", role: "Serverless deployment" },
-  { name: "TypeScript", role: "End-to-end type safety" },
 ];
 
 export default function LandingPage() {
