@@ -184,9 +184,23 @@ export default function ChatPage() {
     []
   );
 
+  const abortRef = useRef<AbortController | null>(null);
+
+  // Cancel in-flight request when component unmounts or conversation changes
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
+  }, [activeId]);
+
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim() || loading || !activeId) return;
+
+      // Cancel any previous in-flight request
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
 
       const userMessage: Message = { role: "user", content: text.trim() };
       const newMessages = [...messages, userMessage];
@@ -199,6 +213,7 @@ export default function ChatPage() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ messages: newMessages, sessionId: getSessionId() }),
+          signal: controller.signal,
         });
 
         const data = await res.json();
@@ -210,7 +225,9 @@ export default function ChatPage() {
           ...newMessages,
           { role: "assistant", content: assistantContent },
         ]);
-      } catch {
+      } catch (err) {
+        // Don’t show error if the request was intentionally aborted (user navigated away)
+        if (err instanceof DOMException && err.name === "AbortError") return;
         updateMessages(activeId, [
           ...newMessages,
           {

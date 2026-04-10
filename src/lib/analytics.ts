@@ -1,5 +1,4 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { createAdminClient } from "./supabase";
 
 export type SearchMode = "bm25" | "semantic" | "hybrid";
 
@@ -43,35 +42,72 @@ export interface AnalyticsSummary {
   searchModeUsage: Record<SearchMode, number>;
 }
 
-const ANALYTICS_DIR = path.join(process.cwd(), "data");
-const ANALYTICS_FILE = path.join(ANALYTICS_DIR, "analytics-log.jsonl");
-
-async function ensureAnalyticsDir() {
-  await fs.mkdir(ANALYTICS_DIR, { recursive: true });
-}
-
 export async function appendAnalyticsEntry(entry: AnalyticsEntry) {
-  await ensureAnalyticsDir();
-  await fs.appendFile(ANALYTICS_FILE, JSON.stringify(entry) + "\n", "utf-8");
+  const supabase = createAdminClient();
+  const { error } = await supabase.from("analytics").insert({
+    id: entry.id,
+    created_at: entry.timestamp,
+    session_id: entry.sessionId,
+    query: entry.query,
+    message_count: entry.messageCount,
+    provider: entry.provider,
+    response_time_ms: entry.responseTimeMs,
+    success: entry.success,
+    no_answer: entry.noAnswer,
+    status_code: entry.statusCode,
+    error_message: entry.errorMessage || null,
+    tool_calls: entry.toolCalls,
+    searches: entry.searches,
+    source_urls: entry.sourceUrls,
+    top_search_score: entry.topSearchScore,
+    avg_search_score: entry.avgSearchScore,
+    result_count: entry.resultCount,
+    search_modes: entry.searchModes,
+  });
+
+  if (error) {
+    console.error("[analytics] Failed to insert:", error.message);
+  }
 }
 
 export async function readAnalyticsEntries(limit?: number): Promise<AnalyticsEntry[]> {
-  try {
-    const raw = await fs.readFile(ANALYTICS_FILE, "utf-8");
-    const entries = raw
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => JSON.parse(line) as AnalyticsEntry)
-      .reverse();
+  const supabase = createAdminClient();
+  let query = supabase
+    .from("analytics")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-    return typeof limit === "number" ? entries.slice(0, limit) : entries;
-  } catch (error: unknown) {
-    const err = error as NodeJS.ErrnoException;
-    if (err.code === "ENOENT") {
-      return [];
-    }
-    throw error;
+  if (typeof limit === "number") {
+    query = query.limit(limit);
   }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error("[analytics] Failed to read:", error.message);
+    return [];
+  }
+
+  return (data || []).map((row) => ({
+    id: row.id,
+    timestamp: row.created_at,
+    sessionId: row.session_id,
+    query: row.query || "",
+    messageCount: row.message_count || 0,
+    provider: row.provider || "",
+    responseTimeMs: row.response_time_ms || 0,
+    success: row.success ?? true,
+    noAnswer: row.no_answer ?? false,
+    statusCode: row.status_code || 200,
+    errorMessage: row.error_message || undefined,
+    toolCalls: row.tool_calls || [],
+    searches: row.searches || [],
+    sourceUrls: row.source_urls || [],
+    topSearchScore: row.top_search_score,
+    avgSearchScore: row.avg_search_score,
+    resultCount: row.result_count || 0,
+    searchModes: row.search_modes || [],
+  }));
 }
 
 export function summarizeAnalytics(entries: AnalyticsEntry[]): AnalyticsSummary {
