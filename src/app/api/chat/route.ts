@@ -164,7 +164,7 @@ async function executeTool(
 ): Promise<string> {
   analytics.toolCalls.push(name);
 
-  const results = await searchCorpus(args.query, 15);
+  const results = await searchCorpus(args.query, 8);
   const normalizedResults = results.map((r, i) => ({
     rank: i + 1,
     title: r.chunk.title,
