@@ -515,7 +515,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ response: text });
   } catch (error: unknown) {
-    console.error("Chat API error:", error);
+    console.error("Chat API error:", error instanceof Error ? `${error.name}: ${error.message}\n${error.stack}` : error);
     const message = error instanceof Error ? error.message : "Internal server error";
     const userFacingMessage = getUserFacingErrorMessage(error);
 

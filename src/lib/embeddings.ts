@@ -33,18 +33,13 @@ interface ProviderConfig {
 export function getEmbeddingProvider(): ProviderConfig | null {
   const ollamaModel = process.env.OLLAMA_EMBED_MODEL || "nomic-embed-text";
   const ollamaUrl = process.env.OLLAMA_URL || "http://localhost:11434";
+  const explicit = process.env.EMBEDDING_PROVIDER;
 
-  // Check env vars in priority order
-  if (process.env.EMBEDDING_PROVIDER === "ollama" || (!process.env.OPENAI_API_KEY && !process.env.OPENROUTER_API_KEY && !process.env.EMBEDDING_PROVIDER)) {
-    return {
-      provider: "ollama",
-      baseUrl: ollamaUrl,
-      model: ollamaModel,
-      dimensions: ollamaModel === "nomic-embed-text" ? 768 : 768,
-    };
+  // Explicit provider override
+  if (explicit === "ollama") {
+    return { provider: "ollama", baseUrl: ollamaUrl, model: ollamaModel, dimensions: 768 };
   }
-
-  if (process.env.EMBEDDING_PROVIDER === "gemini" || (process.env.GOOGLE_API_KEY && !process.env.EMBEDDING_PROVIDER)) {
+  if (explicit === "gemini") {
     return {
       provider: "gemini",
       apiKey: process.env.GOOGLE_API_KEY,
@@ -53,8 +48,7 @@ export function getEmbeddingProvider(): ProviderConfig | null {
       dimensions: 768,
     };
   }
-
-  if (process.env.EMBEDDING_PROVIDER === "openai" || process.env.OPENAI_API_KEY) {
+  if (explicit === "openai") {
     return {
       provider: "openai",
       apiKey: process.env.OPENAI_API_KEY,
@@ -63,8 +57,7 @@ export function getEmbeddingProvider(): ProviderConfig | null {
       dimensions: 1536,
     };
   }
-
-  if (process.env.EMBEDDING_PROVIDER === "openrouter" || process.env.OPENROUTER_API_KEY) {
+  if (explicit === "openrouter") {
     return {
       provider: "openrouter",
       apiKey: process.env.OPENROUTER_API_KEY,
@@ -74,7 +67,37 @@ export function getEmbeddingProvider(): ProviderConfig | null {
     };
   }
 
-  return null;
+  // Auto-detect from available API keys (check cloud providers BEFORE ollama fallback)
+  if (process.env.GOOGLE_API_KEY) {
+    return {
+      provider: "gemini",
+      apiKey: process.env.GOOGLE_API_KEY,
+      baseUrl: "https://generativelanguage.googleapis.com/v1beta",
+      model: process.env.GEMINI_EMBED_MODEL || "gemini-embedding-001",
+      dimensions: 768,
+    };
+  }
+  if (process.env.OPENAI_API_KEY) {
+    return {
+      provider: "openai",
+      apiKey: process.env.OPENAI_API_KEY,
+      baseUrl: "https://api.openai.com/v1",
+      model: process.env.OPENAI_EMBED_MODEL || "text-embedding-3-small",
+      dimensions: 1536,
+    };
+  }
+  if (process.env.OPENROUTER_API_KEY) {
+    return {
+      provider: "openrouter",
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseUrl: "https://openrouter.ai/api/v1",
+      model: process.env.OPENROUTER_EMBED_MODEL || "openai/text-embedding-3-small",
+      dimensions: 1536,
+    };
+  }
+
+  // Last resort: try local Ollama (won't work on Vercel/serverless)
+  return { provider: "ollama", baseUrl: ollamaUrl, model: ollamaModel, dimensions: 768 };
 }
 
 // --- Embedding Generation ---
@@ -86,6 +109,7 @@ async function embedOllama(texts: string[], config: ProviderConfig): Promise<num
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: config.model, prompt: text }),
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!res.ok) throw new Error(`Ollama error ${res.status}: ${await res.text()}`);
@@ -135,6 +159,7 @@ async function embedGemini(texts: string[], config: ProviderConfig): Promise<num
           taskType: "RETRIEVAL_DOCUMENT",
           outputDimensionality: config.dimensions,
         }),
+        signal: AbortSignal.timeout(10000),
       }
     );
 
@@ -159,6 +184,7 @@ async function embedGeminiQuery(text: string, config: ProviderConfig): Promise<n
         taskType: "RETRIEVAL_QUERY",
         outputDimensionality: config.dimensions,
       }),
+      signal: AbortSignal.timeout(10000),
     }
   );
 
