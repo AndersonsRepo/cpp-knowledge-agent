@@ -356,6 +356,47 @@ async function handleOpenRouter(
   }, analytics);
 }
 
+// --- Follow-up suggestions ---
+
+async function generateSuggestions(
+  responseText: string,
+  query: string,
+  provider: Provider,
+  apiKey: string
+): Promise<string[]> {
+  const prompt = `Based on this question and answer about Cal Poly Pomona, suggest 2-3 natural follow-up questions a student might ask. Return ONLY a JSON array of strings, nothing else.
+
+Question: ${query}
+Answer: ${responseText.slice(0, 500)}`;
+
+  if (provider === "anthropic") {
+    const client = new Anthropic({ apiKey });
+    const res = await client.messages.create({
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
+      max_tokens: 256,
+      messages: [{ role: "user", content: prompt }],
+    });
+    const text = res.content.filter((b): b is Anthropic.TextBlock => b.type === "text").map((b) => b.text).join("");
+    const match = text.match(/\[[\s\S]*\]/);
+    return match ? JSON.parse(match[0]) : [];
+  }
+
+  const client = new OpenAI({
+    apiKey,
+    baseURL: provider === "openrouter" ? "https://openrouter.ai/api/v1" : undefined,
+  });
+  const res = await client.chat.completions.create({
+    model: provider === "openrouter"
+      ? (process.env.OPENROUTER_MODEL || "anthropic/claude-sonnet-4")
+      : (process.env.OPENAI_MODEL || "gpt-4o"),
+    max_tokens: 256,
+    messages: [{ role: "user", content: prompt }],
+  });
+  const text = res.choices[0]?.message?.content || "";
+  const match = text.match(/\[[\s\S]*\]/);
+  return match ? JSON.parse(match[0]) : [];
+}
+
 // --- Rate limiting ---
 
 const RATE_LIMIT = 30; // max requests per window
@@ -505,7 +546,15 @@ export async function POST(req: NextRequest) {
       searchModes,
     });
 
-    return NextResponse.json({ response: text });
+    // Generate follow-up suggestions
+    let suggestions: string[] = [];
+    try {
+      suggestions = await generateSuggestions(text, query, provider, apiKey);
+    } catch {
+      // Non-critical — return response without suggestions
+    }
+
+    return NextResponse.json({ response: text, suggestions });
   } catch (error: unknown) {
     console.error("Chat API error:", error instanceof Error ? `${error.name}: ${error.message}\n${error.stack}` : error);
     const message = error instanceof Error ? error.message : "Internal server error";

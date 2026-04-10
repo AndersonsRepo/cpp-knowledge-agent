@@ -10,6 +10,8 @@ import remarkGfm from "remark-gfm";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  suggestions?: string[];
+  feedback?: "up" | "down";
 }
 
 interface Conversation {
@@ -221,10 +223,12 @@ export default function ChatPage() {
           ? data.error
           : data.response;
 
-        updateMessages(activeId, [
-          ...newMessages,
-          { role: "assistant", content: assistantContent },
-        ]);
+        const assistantMsg: Message = { role: "assistant", content: assistantContent };
+        if (data.suggestions?.length) {
+          assistantMsg.suggestions = data.suggestions;
+        }
+
+        updateMessages(activeId, [...newMessages, assistantMsg]);
       } catch (err) {
         // Don’t show error if the request was intentionally aborted (user navigated away)
         if (err instanceof DOMException && err.name === "AbortError") return;
@@ -305,6 +309,36 @@ export default function ChatPage() {
     setEditingId(null);
     setEditingTitle("");
   }
+
+  const sendFeedback = useCallback(
+    async (messageIndex: number, helpful: boolean) => {
+      const msg = messages[messageIndex];
+      if (!msg || msg.role !== "assistant" || msg.feedback) return;
+
+      // Find the user query that preceded this assistant message
+      const userQuery = messages
+        .slice(0, messageIndex)
+        .reverse()
+        .find((m) => m.role === "user")?.content || "";
+
+      // Optimistically update UI
+      const updated = messages.map((m, i) =>
+        i === messageIndex ? { ...m, feedback: helpful ? "up" as const : "down" as const } : m
+      );
+      updateMessages(activeId, updated);
+
+      try {
+        await fetch("/api/feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId: getSessionId(), query: userQuery, helpful }),
+        });
+      } catch {
+        // Feedback is non-critical
+      }
+    },
+    [messages, activeId, updateMessages, getSessionId]
+  );
 
   const markdownComponents: Components = {
     a: ({ href, children }) => {
@@ -538,24 +572,74 @@ export default function ChatPage() {
                 key={i}
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
-                <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 ${
-                    msg.role === "user"
-                      ? "bg-[#1E4D2B] text-white"
-                      : "bg-white border border-gray-200 text-gray-800 shadow-sm"
-                  }`}
-                >
-                  {msg.role === "assistant" ? (
-                    <div className="prose prose-sm max-w-none prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-1 prose-td:border prose-td:border-gray-300 prose-td:px-3 prose-td:py-1">
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        components={markdownComponents}
+                <div className={`max-w-[80%] ${msg.role === "user" ? "" : "space-y-2"}`}>
+                  <div
+                    className={`rounded-2xl px-4 py-3 ${
+                      msg.role === "user"
+                        ? "bg-[#1E4D2B] text-white"
+                        : "bg-white border border-gray-200 text-gray-800 shadow-sm"
+                    }`}
+                  >
+                    {msg.role === "assistant" ? (
+                      <div className="prose prose-sm max-w-none prose-table:border-collapse prose-th:border prose-th:border-gray-300 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-1 prose-td:border prose-td:border-gray-300 prose-td:px-3 prose-td:py-1">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={markdownComponents}
+                        >
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-wrap">{msg.content}</p>
+                    )}
+                  </div>
+
+                  {msg.role === "assistant" && (
+                    <div className="flex items-center gap-1 pl-1">
+                      <button
+                        onClick={() => sendFeedback(i, true)}
+                        disabled={!!msg.feedback}
+                        className={`p-1.5 rounded-lg text-xs transition-colors ${
+                          msg.feedback === "up"
+                            ? "bg-green-100 text-green-700"
+                            : msg.feedback
+                              ? "text-gray-300 cursor-not-allowed"
+                              : "text-gray-400 hover:bg-green-50 hover:text-green-600"
+                        }`}
+                        title="Helpful"
                       >
-                        {msg.content}
-                      </ReactMarkdown>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+                      </button>
+                      <button
+                        onClick={() => sendFeedback(i, false)}
+                        disabled={!!msg.feedback}
+                        className={`p-1.5 rounded-lg text-xs transition-colors ${
+                          msg.feedback === "down"
+                            ? "bg-red-100 text-red-700"
+                            : msg.feedback
+                              ? "text-gray-300 cursor-not-allowed"
+                              : "text-gray-400 hover:bg-red-50 hover:text-red-600"
+                        }`}
+                        title="Not helpful"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
+                      </button>
                     </div>
-                  ) : (
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                  )}
+
+                  {msg.suggestions && msg.suggestions.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pl-1">
+                      {msg.suggestions.map((s, j) => (
+                        <button
+                          key={j}
+                          onClick={() => sendMessage(s)}
+                          disabled={loading}
+                          className="text-xs px-3 py-1.5 bg-white border border-[#1E4D2B]/20 rounded-full text-[#1E4D2B] hover:bg-[#1E4D2B] hover:text-white transition-colors disabled:opacity-50"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>
