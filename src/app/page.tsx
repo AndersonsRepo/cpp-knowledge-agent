@@ -62,6 +62,12 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             <Link
+              href="/architecture"
+              className="px-5 py-2 rounded-lg border border-green-200 font-semibold text-green-50 hover:bg-white hover:text-[#1E4D2B] transition-colors"
+            >
+              Architecture
+            </Link>
+            <Link
               href="/analytics"
               className="px-5 py-2 rounded-lg border border-green-200 font-semibold text-green-50 hover:bg-white hover:text-[#1E4D2B] transition-colors"
             >

@@ -73,15 +73,24 @@ interface ChatMessage {
   content: string;
 }
 
+interface SourceInfo {
+  title: string;
+  url: string;
+}
+
 interface ToolAnalyticsState {
   toolCalls: string[];
   searches: SearchAnalytics[];
+  sources: SourceInfo[];
+  lastQueryUsed: string;
 }
 
 function createToolAnalyticsState(): ToolAnalyticsState {
   return {
     toolCalls: [],
     searches: [],
+    sources: [],
+    lastQueryUsed: "",
   };
 }
 
@@ -183,6 +192,16 @@ async function executeTool(
     matchTypes: Array.from(new Set(normalizedResults.map((r) => r.matchType))),
     sourceUrls: Array.from(new Set(normalizedResults.map((r) => r.url))),
   });
+
+  // Track sources and query for searchMeta response
+  analytics.lastQueryUsed = args.query;
+  const seen = new Set(analytics.sources.map((s) => s.url));
+  for (const r of normalizedResults) {
+    if (!seen.has(r.url)) {
+      seen.add(r.url);
+      analytics.sources.push({ title: r.title, url: r.url });
+    }
+  }
 
   return JSON.stringify(normalizedResults, null, 2);
 }
@@ -554,7 +573,18 @@ export async function POST(req: NextRequest) {
       // Non-critical — return response without suggestions
     }
 
-    return NextResponse.json({ response: text, suggestions });
+    // Build search metadata for frontend display
+    const searchMeta = analytics.searches.length > 0
+      ? {
+          resultCount,
+          topScore: topSearchScore,
+          matchTypes: searchModes,
+          queryUsed: analytics.lastQueryUsed,
+          sources: analytics.sources.slice(0, 8),
+        }
+      : null;
+
+    return NextResponse.json({ response: text, suggestions, searchMeta });
   } catch (error: unknown) {
     console.error("Chat API error:", error instanceof Error ? `${error.name}: ${error.message}\n${error.stack}` : error);
     const message = error instanceof Error ? error.message : "Internal server error";

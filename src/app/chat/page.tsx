@@ -7,11 +7,20 @@ import remarkGfm from "remark-gfm";
 
 // --- Types ---
 
+interface SearchMeta {
+  resultCount: number;
+  topScore: number | null;
+  matchTypes: string[];
+  queryUsed: string;
+  sources: Array<{ title: string; url: string }>;
+}
+
 interface Message {
   role: "user" | "assistant";
   content: string;
   suggestions?: string[];
   feedback?: "up" | "down";
+  searchMeta?: SearchMeta;
 }
 
 interface Conversation {
@@ -226,6 +235,9 @@ export default function ChatPage() {
         const assistantMsg: Message = { role: "assistant", content: assistantContent };
         if (data.suggestions?.length) {
           assistantMsg.suggestions = data.suggestions;
+        }
+        if (data.searchMeta) {
+          assistantMsg.searchMeta = data.searchMeta;
         }
 
         updateMessages(activeId, [...newMessages, assistantMsg]);
@@ -477,8 +489,20 @@ export default function ChatPage() {
           ))}
         </div>
 
-        {/* Back to home */}
-        <div className="p-3 border-t border-[#1E4D2B]">
+        {/* Navigation */}
+        <div className="p-3 border-t border-[#1E4D2B] space-y-1">
+          <Link
+            href="/architecture"
+            className="block text-center text-sm text-green-300 hover:text-white transition-colors"
+          >
+            Architecture
+          </Link>
+          <Link
+            href="/analytics"
+            className="block text-center text-sm text-green-300 hover:text-white transition-colors"
+          >
+            Analytics
+          </Link>
           <Link
             href="/"
             className="block text-center text-sm text-green-300 hover:text-white transition-colors"
@@ -625,6 +649,39 @@ export default function ChatPage() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>
                       </button>
                     </div>
+                  )}
+
+                  {msg.searchMeta && (
+                    <details className="pl-1">
+                      <summary className="cursor-pointer text-xs text-gray-400 hover:text-gray-600 select-none">
+                        Search Details
+                      </summary>
+                      <div className="mt-1 rounded-lg border border-gray-200 bg-gray-50 p-3 text-xs text-gray-600 space-y-1.5">
+                        <p><span className="font-medium text-gray-700">Results found:</span> {msg.searchMeta.resultCount} chunks</p>
+                        <p><span className="font-medium text-gray-700">Top relevance:</span> {msg.searchMeta.topScore?.toFixed(2) ?? "N/A"}</p>
+                        <p><span className="font-medium text-gray-700">Search mode:</span> {msg.searchMeta.matchTypes.join(", ") || "N/A"}</p>
+                        <p><span className="font-medium text-gray-700">Query used:</span> {msg.searchMeta.queryUsed}</p>
+                        {msg.searchMeta.sources.length > 0 && (
+                          <div>
+                            <p className="font-medium text-gray-700 mb-1">Sources searched:</p>
+                            <ul className="space-y-0.5 pl-3">
+                              {msg.searchMeta.sources.slice(0, 5).map((s, j) => (
+                                <li key={j}>
+                                  <a
+                                    href={s.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[#1E4D2B] underline underline-offset-2 hover:text-[#163D22]"
+                                  >
+                                    {s.title}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </details>
                   )}
 
                   {msg.suggestions && msg.suggestions.length > 0 && (
