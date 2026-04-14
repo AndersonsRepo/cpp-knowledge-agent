@@ -8,32 +8,32 @@ const MOCK_CATALOG_PAGES = [
   {
     url: "https://catalog.cpp.edu/cs-2400",
     title: "CS 2400 — Data Structures and Advanced Programming",
-    content: `# CS 2400 — Data Structures and Advanced Programming (3 units)
+    content: `# CS 2400 — Data Structures and Advanced Programming (4 units)
 
 **Prerequisites:** CS 1400 with a grade of C or better; CS 1300 with a grade of C or better.
 
-**Description:** Design, implementation, and analysis of abstract data types, data structures, and their algorithms. Topics include stacks, queues, linked lists, trees, graphs, hash tables, sorting, searching, and algorithm complexity analysis. Programming assignments in Java or C++.
+**Description:** Design, implementation, and analysis of abstract data types, data structures, and their algorithms. Topics include stacks, queues, linked lists, trees, graphs, hash tables, sorting, searching, and algorithm complexity analysis. Programming assignments using an object-oriented language.
 
-**Components:** Lecture 2 hours, Activity 2 hours.
+**Components:** Lecture 3 hours, Activity 2 hours.
 
-**Grading Basis:** Graded
+**Department:** Computer Science — College of Science
 
-**Department:** Computer Science — College of Science`,
+*Source: CPP 2024-2025 University Catalog*`,
   },
   {
     url: "https://catalog.cpp.edu/cs-1400",
     title: "CS 1400 — Introduction to Programming and Problem Solving",
-    content: `# CS 1400 — Introduction to Programming and Problem Solving (3 units)
+    content: `# CS 1400 — Introduction to Programming and Problem Solving (4 units)
 
-**Prerequisites:** MAT 1050 or equivalent.
+**Prerequisites:** MAT 1050 with a grade of C or better, or math placement equivalent.
 
-**Description:** Introduction to programming concepts using an object-oriented language. Topics include data types, control structures, functions, arrays, classes, objects, and basic file I/O. Emphasis on problem solving, algorithm design, and structured programming.
+**Description:** Introduction to programming concepts using an object-oriented language. Topics include data types, control structures, functions, arrays, classes, objects, and basic file I/O. Emphasis on problem solving, algorithm design, and structured programming techniques.
 
-**Components:** Lecture 2 hours, Activity 2 hours.
+**Components:** Lecture 3 hours, Activity 2 hours.
 
-**Grading Basis:** Graded
+**Department:** Computer Science — College of Science
 
-**Department:** Computer Science — College of Science`,
+*Source: CPP 2024-2025 University Catalog*`,
   },
   {
     url: "https://catalog.cpp.edu/cs-3310",
@@ -42,28 +42,28 @@ const MOCK_CATALOG_PAGES = [
 
 **Prerequisites:** CS 2400 with a grade of C or better; CS 1300 with a grade of C or better; MAT 2250 with a grade of C or better.
 
-**Description:** Algorithm design techniques including divide-and-conquer, greedy, dynamic programming, backtracking, and branch-and-bound. Analysis of algorithm complexity. NP-completeness and approximation algorithms. Graph algorithms and network flow.
+**Description:** Algorithm design techniques including divide-and-conquer, greedy method, dynamic programming, backtracking, and branch-and-bound. Analysis of time and space complexity. Introduction to NP-completeness, approximation algorithms, and graph algorithms.
 
 **Components:** Lecture 3 hours.
 
-**Grading Basis:** Graded
+**Department:** Computer Science — College of Science
 
-**Department:** Computer Science — College of Science`,
+*Source: CPP 2024-2025 University Catalog*`,
   },
   {
     url: "https://catalog.cpp.edu/cs-2640",
-    title: "CS 2640 — Computer Organization and Assembly Language",
-    content: `# CS 2640 — Computer Organization and Assembly Language (3 units)
+    title: "CS 2640 — Computer Organization and Assembly Programming",
+    content: `# CS 2640 — Computer Organization and Assembly Programming (3 units)
 
 **Prerequisites:** CS 1400 with a grade of C or better.
 
-**Description:** Introduction to computer organization, machine language, and assembly language programming. Topics include data representation, CPU architecture, instruction sets, addressing modes, subroutines, interrupts, and I/O programming. Assembly language programming using MIPS or ARM architecture.
+**Description:** Introduction to computer organization, machine language, and assembly language programming. Topics include data representation, CPU architecture, instruction sets, addressing modes, subroutines, interrupts, and I/O operations.
 
 **Components:** Lecture 2 hours, Activity 2 hours.
 
-**Grading Basis:** Graded
+**Department:** Computer Science — College of Science
 
-**Department:** Computer Science — College of Science`,
+*Source: CPP 2024-2025 University Catalog*`,
   },
   {
     url: "https://catalog.cpp.edu/cs-3560",
@@ -72,13 +72,13 @@ const MOCK_CATALOG_PAGES = [
 
 **Prerequisites:** CS 2400 with a grade of C or better.
 
-**Description:** Object-oriented design principles and patterns. UML modeling. Design patterns including creational, structural, and behavioral patterns. Software development methodologies. Team-based projects using version control and agile practices.
+**Description:** Object-oriented design principles and patterns. UML modeling. Design patterns including creational, structural, and behavioral patterns. Software development methodologies and team-based projects.
 
 **Components:** Lecture 2 hours, Activity 2 hours.
 
-**Grading Basis:** Graded
+**Department:** Computer Science — College of Science
 
-**Department:** Computer Science — College of Science`,
+*Source: CPP 2024-2025 University Catalog*`,
   },
 ];
 
