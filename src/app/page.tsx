@@ -189,7 +189,7 @@ export default function LandingPage() {
           {[
             { stat: "72,499", label: "Text Chunks" },
             { stat: "8,042", label: "Pages Indexed" },
-            { stat: "2,027", label: "Faculty Entries" },
+            { stat: "1,546", label: "Faculty Entries" },
             { stat: "760+", label: "Courses" },
           ].map((s) => (
             <div key={s.label}>

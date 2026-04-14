@@ -165,7 +165,7 @@ We validated the search pipeline with a blind A/B test across 10 representative 
 Raw corpus chunks were processed through `scripts/extract-structured-data.ts` to generate structured JSON files. These are used for the landing page statistics and were used in the earlier multi-tool architecture. The extraction pipeline is entirely deterministic (regex-based, no LLM).
 
 ### Faculty Directory (`data/faculty.json`)
-- **2,027 entries** extracted from corpus
+- **1,546 entries** extracted from corpus
 - Fields: name, email, phone, office location, office hours, department, title, source URL
 - Extraction method: scan for `@cpp.edu` email patterns, look backwards for name headers, parse contact blocks
 - Two-pass enrichment: first pass extracts contacts, second pass enriches from dedicated office hours pages
@@ -176,9 +176,10 @@ Raw corpus chunks were processed through `scripts/extract-structured-data.ts` to
 - Three extraction patterns: bold+amount, header+description paragraph, bullet lists
 
 ### Academic Programs (`data/programs.json`)
-- **760 courses** with code, title, units, description, prerequisites
-- **387 degree programs** with name, degree type, college, total units, required courses
+- **760 courses** with code, title, and units; 56 include full descriptions, 14 include prerequisites (most entries are extracted from department pages and table rows — detailed catalog descriptions were not in the original corpus)
+- **387 degree programs** with name, degree type, college, and required course codes where available
 - Four course patterns matched (en-dash, no-dash, bold, table row)
+- **Note**: The ITC-provided corpus did not include `catalog.cpp.edu` pages, so detailed course descriptions are sparse. The admin portal's scraper is designed to fill this gap.
 
 ### Source Pages (`data/source-pages.json`)
 - **8,042 unique pages** from cpp.edu
@@ -324,7 +325,7 @@ broncobot/
 │   └── admin-schema.sql            # Supabase schema for admin portal + scraper schedules
 ├── data/
 │   ├── chunks-{0-14}.jsonl         # 72,499 text chunks (15 shards)
-│   ├── faculty.json                # 2,027 faculty entries
+│   ├── faculty.json                # 1,546 faculty entries
 │   ├── financial-aid.json          # 461 financial aid entries
 │   ├── programs.json               # 760 courses + 387 programs
 │   └── source-pages.json           # 8,042 indexed CPP pages
@@ -443,7 +444,7 @@ const nextConfig: NextConfig = {
 | Total text chunks | 72,499 |
 | Unique pages indexed | 8,042 |
 | Chunk embeddings (pgvector) | 72,499 (768d) |
-| Faculty entries | 2,027 |
+| Faculty entries | 1,546 |
 | Financial aid entries | 461 |
 | Courses | 760 |
 | Degree programs | 387 |
