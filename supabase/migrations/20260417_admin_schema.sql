@@ -1,11 +1,14 @@
--- Admin portal schema additions
--- Run this in Supabase SQL Editor
+-- Admin portal schema: ingestion provenance columns + scraper schedule registry.
 
--- Track how chunks were ingested
 ALTER TABLE chunks ADD COLUMN IF NOT EXISTS ingested_at TIMESTAMPTZ DEFAULT now();
 ALTER TABLE chunks ADD COLUMN IF NOT EXISTS ingested_by TEXT DEFAULT 'corpus';
 
--- Scraper schedules
+-- Backfill pre-existing rows so the corpus browser badge renders cleanly.
+UPDATE chunks SET ingested_by = 'corpus' WHERE ingested_by IS NULL;
+UPDATE chunks SET ingested_at = now() WHERE ingested_at IS NULL;
+
+CREATE INDEX IF NOT EXISTS chunks_ingested_at_idx ON chunks (ingested_at DESC);
+
 CREATE TABLE IF NOT EXISTS scraper_schedules (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
@@ -21,7 +24,6 @@ CREATE TABLE IF NOT EXISTS scraper_schedules (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- RPC to get corpus source breakdown
 CREATE OR REPLACE FUNCTION get_corpus_sources()
 RETURNS TABLE(source_url TEXT, count BIGINT, ingested_by TEXT) AS $$
   SELECT source_url, count(*)::BIGINT, COALESCE(ingested_by, 'corpus') as ingested_by
@@ -31,7 +33,6 @@ RETURNS TABLE(source_url TEXT, count BIGINT, ingested_by TEXT) AS $$
   LIMIT 100;
 $$ LANGUAGE sql;
 
--- Seed mock scraper schedules for demo
 INSERT INTO scraper_schedules (name, target_url, url_pattern, cron_expression, last_run_at, next_run_at, chunks_added, pages_crawled, enabled, requires_auth)
 VALUES
   ('CPP Course Catalog', 'https://catalog.cpp.edu', 'catalog.cpp.edu/**', '0 2 * * 0', '2026-04-13T02:00:00Z', '2026-04-20T02:00:00Z', 1147, 843, true, false),

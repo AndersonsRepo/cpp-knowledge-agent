@@ -35,7 +35,7 @@ interface ScrapeResult {
   chunksCreated: number;
   chunksEmbedded: number;
   errors: string[];
-  pages: Array<{ url: string; title: string }>;
+  pages: Array<{ url: string; title: string; chunks: number }>;
 }
 
 // --- Auth Gate ---
@@ -240,19 +240,34 @@ function CorpusBrowser({ token }: { token: string }) {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchChunks = useCallback(async () => {
     setLoading(true);
+    setError(null);
     const params = new URLSearchParams({ page: String(page) });
     if (search) params.set("search", search);
 
-    const res = await fetch(`/api/admin/corpus?${params}`, {
-      headers: { "x-admin-token": token },
-    });
-    const data = await res.json();
-    setChunks(data.chunks || []);
-    setTotal(data.total || 0);
-    setLoading(false);
+    try {
+      const res = await fetch(`/api/admin/corpus?${params}`, {
+        headers: { "x-admin-token": token },
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || `Request failed (${res.status})`);
+        setChunks([]);
+        setTotal(0);
+      } else {
+        setChunks(data.chunks || []);
+        setTotal(data.total || 0);
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setChunks([]);
+      setTotal(0);
+    } finally {
+      setLoading(false);
+    }
   }, [token, page, search]);
 
   useEffect(() => {
@@ -296,6 +311,18 @@ function CorpusBrowser({ token }: { token: string }) {
       <p className="text-xs text-gray-500">
         {total} total chunks {search && `matching "${search}"`}
       </p>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700">
+          <p className="font-medium mb-1">Failed to load corpus</p>
+          <p className="text-xs font-mono break-all">{error}</p>
+          <p className="text-xs text-red-600 mt-2">
+            If this mentions a missing column or relation, apply{" "}
+            <code>supabase/migrations/20260417_admin_schema.sql</code> in the
+            Supabase SQL Editor.
+          </p>
+        </div>
+      )}
 
       {loading ? (
         <p className="text-sm text-gray-400 py-8 text-center">Loading...</p>
@@ -379,11 +406,31 @@ function ScraperDashboard({ token }: { token: string }) {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<ScrapeResult | null>(null);
   const [logs, setLogs] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/scraper", { headers: { "x-admin-token": token } })
-      .then((r) => r.json())
-      .then((d) => setSchedules(d.schedules || []));
+    (async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch("/api/scraper", {
+          headers: { "x-admin-token": token },
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data.error || `Request failed (${res.status})`);
+          setSchedules([]);
+        } else {
+          setSchedules(data.schedules || []);
+        }
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
+        setSchedules([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, [token]);
 
   function formatDate(d: string | null) {
@@ -410,27 +457,16 @@ function ScraperDashboard({ token }: { token: string }) {
     setResult(null);
     setLogs([]);
 
-    // Simulate progress
+    // Animate a progress bar while the request is in flight. Real per-page
+    // results are populated from the response below (request is synchronous
+    // from the client's perspective — ~15-25s for 5 pages + embed).
     const interval = setInterval(() => {
       setProgress((p) => {
         if (p >= 90) return p;
-        const next = p + Math.random() * 15 + 5;
+        const next = p + Math.random() * 8 + 2;
         return Math.min(next, 90);
       });
-      setLogs((prev) => {
-        const mockPages = [
-          "catalog.cpp.edu/cs-2400 — 2 chunks",
-          "catalog.cpp.edu/cs-1400 — 2 chunks",
-          "catalog.cpp.edu/cs-3310 — 2 chunks",
-          "catalog.cpp.edu/cs-2640 — 2 chunks",
-          "catalog.cpp.edu/cs-3560 — 2 chunks",
-        ];
-        if (prev.length < mockPages.length) {
-          return [...prev, mockPages[prev.length]];
-        }
-        return prev;
-      });
-    }, 600);
+    }, 800);
 
     const res = await fetch("/api/scraper", {
       method: "POST",
@@ -444,8 +480,13 @@ function ScraperDashboard({ token }: { token: string }) {
     clearInterval(interval);
     setProgress(100);
 
-    const data = await res.json();
+    const data = (await res.json()) as ScrapeResult;
     setResult(data);
+    setLogs(
+      (data.pages || []).map(
+        (p) => `${p.url.replace(/^https?:\/\//, "")} — ${p.chunks} chunk${p.chunks === 1 ? "" : "s"} — ${p.title}`
+      )
+    );
 
     // Refresh schedules
     const updated = await fetch("/api/scraper", {
@@ -459,6 +500,25 @@ function ScraperDashboard({ token }: { token: string }) {
 
   return (
     <div className="space-y-4">
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-700">
+          <p className="font-medium mb-1">Failed to load scraper schedules</p>
+          <p className="text-xs font-mono break-all">{error}</p>
+          <p className="text-xs text-red-600 mt-2">
+            If this mentions a missing relation, apply{" "}
+            <code>supabase/migrations/20260417_admin_schema.sql</code> in the
+            Supabase SQL Editor.
+          </p>
+        </div>
+      )}
+      {!error && !loading && schedules.length === 0 && (
+        <p className="text-sm text-gray-400 py-8 text-center">
+          No scraper schedules configured yet.
+        </p>
+      )}
+      {loading && (
+        <p className="text-sm text-gray-400 py-8 text-center">Loading...</p>
+      )}
       {schedules.map((s) => (
         <div
           key={s.id}

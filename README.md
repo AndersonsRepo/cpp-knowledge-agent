@@ -321,8 +321,9 @@ broncobot/
 ├── scripts/
 │   ├── preprocess-corpus.ts        # Corpus preprocessor (strip boilerplate, chunk, shard)
 │   ├── embed-corpus.ts             # Batch embedding generator (resumable, Supabase upload)
-│   ├── extract-structured-data.ts  # Faculty/aid/program/source page extractor
-│   └── admin-schema.sql            # Supabase schema for admin portal + scraper schedules
+│   └── extract-structured-data.ts  # Faculty/aid/program/source page extractor
+├── supabase/
+│   └── migrations/                  # Versioned SQL: chunks, analytics, feedback, admin schema
 ├── data/
 │   ├── chunks-{0-14}.jsonl         # 72,499 text chunks (15 shards)
 │   ├── faculty.json                # 1,546 faculty entries
@@ -381,7 +382,7 @@ ADMIN_PASSWORD=your-admin-password
 
 ### 3. Set up Supabase
 
-Create a `chunks` table with a `vector(768)` column and HNSW index. Create an `analytics` table and `feedback` table for the dashboard. Add the `match_chunks` RPC function for vector similarity search. For the admin portal, run `scripts/admin-schema.sql` to add the `scraper_schedules` table and ingestion tracking columns.
+Run the SQL files in `supabase/migrations/` in order (`20260410_create_chunks.sql`, `20260411_create_analytics.sql`, `20260412_create_feedback.sql`, `20260417_admin_schema.sql`). This creates the `chunks` table with a `vector(768)` column and HNSW index, the `analytics` and `feedback` tables for the dashboard, the `match_chunks` RPC for vector similarity search, and the `scraper_schedules` table with ingestion-tracking columns for the admin portal.
 
 ### 4. Run locally
 
