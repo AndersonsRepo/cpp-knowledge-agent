@@ -2,6 +2,8 @@ import Link from "next/link";
 import { readAnalyticsEntries, summarizeAnalytics } from "@/lib/analytics";
 import { createAdminClient } from "@/lib/supabase";
 
+export const revalidate = 10;
+
 function formatPercent(value: number) {
   return `${value.toFixed(1)}%`;
 }
