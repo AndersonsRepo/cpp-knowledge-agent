@@ -234,6 +234,36 @@ function ContentUpload({ token }: { token: string }) {
 
 // --- Corpus Browser Tab ---
 
+function cleanTitle(raw: string | null | undefined): string {
+  if (!raw) return "Untitled";
+  const linkMatch = raw.trim().match(/^\[([^\]]+)\]\([^)]+\)\s*$/);
+  if (linkMatch) return linkMatch[1].trim();
+  return raw.replace(/^#+\s*/, "").trim() || "Untitled";
+}
+
+function cleanPreview(raw: string | null | undefined): string {
+  if (!raw) return "";
+  return raw
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/^#+\s+/gm, "")
+    .replace(/^\s*[*-]\s+/gm, "• ")
+    .replace(/\n{2,}/g, " · ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function prettifyUrl(url: string): string {
+  try {
+    const u = new URL(url);
+    const path = u.pathname === "/" ? "" : u.pathname;
+    const q = u.search ? u.search : "";
+    return `${u.host}${path}${q}`;
+  } catch {
+    return url;
+  }
+}
+
 function CorpusBrowser({ token }: { token: string }) {
   const [chunks, setChunks] = useState<CorpusChunk[]>([]);
   const [total, setTotal] = useState(0);
@@ -331,21 +361,42 @@ function CorpusBrowser({ token }: { token: string }) {
           {chunks.map((chunk) => (
             <div
               key={chunk.id}
-              className="bg-white border border-gray-200 rounded-xl p-4 text-sm"
+              className="bg-white border border-gray-200 rounded-xl p-4 text-sm hover:border-gray-300 transition-colors"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0 flex-1">
                   <p className="font-medium text-gray-900 truncate">
-                    {chunk.title}
+                    {cleanTitle(chunk.title)}
                   </p>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    {chunk.section} — chunk #{chunk.chunk_index}
+                    {cleanTitle(chunk.section)} · chunk #{chunk.chunk_index}
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">
-                    {chunk.source_url}
-                  </p>
-                  <p className="text-gray-600 mt-2 text-xs leading-relaxed">
-                    {chunk.content}
+                  {chunk.source_url && (
+                    <a
+                      href={chunk.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-1 text-xs text-[#1E4D2B] hover:text-[#0f3018] hover:underline break-all"
+                      title={chunk.source_url}
+                    >
+                      <span>{prettifyUrl(chunk.source_url)}</span>
+                      <svg
+                        className="w-3 h-3 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                  <p className="text-gray-600 mt-2 text-xs leading-relaxed line-clamp-3">
+                    {cleanPreview(chunk.content)}
                   </p>
                 </div>
                 <div className="flex flex-col items-end gap-1 flex-shrink-0">
