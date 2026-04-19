@@ -30,6 +30,14 @@ interface CorpusChunk {
   ingested_at: string;
 }
 
+interface CorpusSource {
+  source_url: string;
+  title: string;
+  chunk_count: number;
+  ingested_by: string;
+  latest_ingested_at: string | null;
+}
+
 interface ScrapeResult {
   pagesCrawled: number;
   chunksCreated: number;
@@ -265,17 +273,24 @@ function prettifyUrl(url: string): string {
 }
 
 function CorpusBrowser({ token }: { token: string }) {
+  const [view, setView] = useState<"chunks" | "sources">("chunks");
   const [chunks, setChunks] = useState<CorpusChunk[]>([]);
+  const [sources, setSources] = useState<CorpusSource[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchChunks = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     setError(null);
-    const params = new URLSearchParams({ page: String(page) });
+    const params = new URLSearchParams();
+    if (view === "sources") {
+      params.set("mode", "sources");
+    } else {
+      params.set("page", String(page));
+    }
     if (search) params.set("search", search);
 
     try {
@@ -286,7 +301,11 @@ function CorpusBrowser({ token }: { token: string }) {
       if (!res.ok) {
         setError(data.error || `Request failed (${res.status})`);
         setChunks([]);
+        setSources([]);
         setTotal(0);
+      } else if (view === "sources") {
+        setSources(data.sources || []);
+        setTotal((data.sources || []).length);
       } else {
         setChunks(data.chunks || []);
         setTotal(data.total || 0);
@@ -294,18 +313,24 @@ function CorpusBrowser({ token }: { token: string }) {
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
       setChunks([]);
+      setSources([]);
       setTotal(0);
     } finally {
       setLoading(false);
     }
-  }, [token, page, search]);
+  }, [token, view, page, search]);
 
   useEffect(() => {
-    fetchChunks();
-  }, [fetchChunks]);
+    fetchData();
+  }, [fetchData]);
 
-  async function handleDelete(sourceUrl: string) {
-    if (!confirm(`Delete all chunks from ${sourceUrl}?`)) return;
+  async function handleDeleteSource(sourceUrl: string, chunkCount: number) {
+    const countPart =
+      chunkCount > 0
+        ? `${chunkCount} chunk${chunkCount === 1 ? "" : "s"}`
+        : "all chunks";
+    const msg = `Delete ${countPart} from:\n\n${sourceUrl}\n\nThis cannot be undone.`;
+    if (!confirm(msg)) return;
     await fetch("/api/admin/corpus", {
       method: "DELETE",
       headers: {
@@ -314,23 +339,42 @@ function CorpusBrowser({ token }: { token: string }) {
       },
       body: JSON.stringify({ sourceUrl }),
     });
-    fetchChunks();
+    fetchData();
   }
 
   return (
     <div className="space-y-4">
+      <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
+        {(["chunks", "sources"] as const).map((v) => (
+          <button
+            key={v}
+            onClick={() => {
+              setView(v);
+              setPage(0);
+            }}
+            className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
+              view === v
+                ? "bg-white text-[#1E4D2B] shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            {v === "chunks" ? "Chunks" : "Sources (by URL)"}
+          </button>
+        ))}
+      </div>
+
       <div className="flex gap-3">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && (setPage(0), fetchChunks())}
-          placeholder="Search chunks..."
+          onKeyDown={(e) => e.key === "Enter" && (setPage(0), fetchData())}
+          placeholder={view === "sources" ? "Search by URL or title..." : "Search chunks..."}
           className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E4D2B]"
         />
         <button
           onClick={() => {
             setPage(0);
-            fetchChunks();
+            fetchData();
           }}
           className="px-4 py-2 bg-[#1E4D2B] text-white rounded-lg text-sm font-medium"
         >
@@ -339,7 +383,10 @@ function CorpusBrowser({ token }: { token: string }) {
       </div>
 
       <p className="text-xs text-gray-500">
-        {total} total chunks {search && `matching "${search}"`}
+        {view === "sources"
+          ? `${sources.length} source URL${sources.length === 1 ? "" : "s"} (top 100 by chunk count)`
+          : `${total} total chunks`}
+        {search && ` matching "${search}"`}
       </p>
 
       {error && (
@@ -347,15 +394,75 @@ function CorpusBrowser({ token }: { token: string }) {
           <p className="font-medium mb-1">Failed to load corpus</p>
           <p className="text-xs font-mono break-all">{error}</p>
           <p className="text-xs text-red-600 mt-2">
-            If this mentions a missing column or relation, apply{" "}
-            <code>supabase/migrations/20260417_admin_schema.sql</code> in the
-            Supabase SQL Editor.
+            If this mentions a missing column or relation, apply the latest
+            migrations in <code>supabase/migrations/</code> in the Supabase SQL
+            Editor.
           </p>
         </div>
       )}
 
       {loading ? (
         <p className="text-sm text-gray-400 py-8 text-center">Loading...</p>
+      ) : view === "sources" ? (
+        <div className="space-y-2">
+          {sources.map((src) => (
+            <div
+              key={src.source_url}
+              className="bg-white border border-gray-200 rounded-xl p-4 text-sm hover:border-gray-300 transition-colors"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-gray-900 truncate">
+                    {cleanTitle(src.title)}
+                  </p>
+                  <a
+                    href={src.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 mt-1 text-xs text-[#1E4D2B] hover:text-[#0f3018] hover:underline break-all"
+                    title={src.source_url}
+                  >
+                    <span>{prettifyUrl(src.source_url)}</span>
+                    <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                  <p className="text-xs text-gray-500 mt-2">
+                    {src.chunk_count.toLocaleString()} chunk{src.chunk_count === 1 ? "" : "s"}
+                    {src.latest_ingested_at && (
+                      <>
+                        {" · last ingested "}
+                        {new Date(src.latest_ingested_at).toLocaleDateString(
+                          "en-US",
+                          { month: "short", day: "numeric", year: "numeric" }
+                        )}
+                      </>
+                    )}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                      src.ingested_by === "corpus"
+                        ? "bg-gray-100 text-gray-600"
+                        : src.ingested_by === "scraper"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-green-100 text-green-700"
+                    }`}
+                  >
+                    {src.ingested_by || "corpus"}
+                  </span>
+                  <button
+                    onClick={() => handleDeleteSource(src.source_url, src.chunk_count)}
+                    className="text-[10px] text-red-500 hover:text-red-700 font-medium"
+                  >
+                    delete URL
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="space-y-2">
           {chunks.map((chunk) => (
@@ -413,10 +520,11 @@ function CorpusBrowser({ token }: { token: string }) {
                   </span>
                   {chunk.ingested_by !== "corpus" && (
                     <button
-                      onClick={() => handleDelete(chunk.source_url)}
+                      onClick={() => handleDeleteSource(chunk.source_url, 0)}
                       className="text-[10px] text-red-400 hover:text-red-600"
+                      title="Delete all chunks from this URL"
                     >
-                      delete source
+                      delete URL
                     </button>
                   )}
                 </div>
@@ -426,25 +534,27 @@ function CorpusBrowser({ token }: { token: string }) {
         </div>
       )}
 
-      <div className="flex items-center justify-between">
-        <button
-          onClick={() => setPage(Math.max(0, page - 1))}
-          disabled={page === 0}
-          className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg disabled:opacity-30"
-        >
-          Previous
-        </button>
-        <span className="text-xs text-gray-500">
-          Page {page + 1} of {Math.ceil(total / 20) || 1}
-        </span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={(page + 1) * 20 >= total}
-          className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg disabled:opacity-30"
-        >
-          Next
-        </button>
-      </div>
+      {view === "chunks" && (
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => setPage(Math.max(0, page - 1))}
+            disabled={page === 0}
+            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg disabled:opacity-30"
+          >
+            Previous
+          </button>
+          <span className="text-xs text-gray-500">
+            Page {page + 1} of {Math.ceil(total / 20) || 1}
+          </span>
+          <button
+            onClick={() => setPage(page + 1)}
+            disabled={(page + 1) * 20 >= total}
+            className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg disabled:opacity-30"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }

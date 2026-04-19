@@ -10,8 +10,20 @@ export async function GET(req: NextRequest) {
   const supabase = createAdminClient();
   const url = req.nextUrl.searchParams.get("source_url");
   const search = req.nextUrl.searchParams.get("search");
+  const mode = req.nextUrl.searchParams.get("mode"); // "sources" groups by URL
   const page = parseInt(req.nextUrl.searchParams.get("page") || "0");
   const limit = 20;
+
+  if (mode === "sources") {
+    const { data, error } = await supabase.rpc("list_corpus_sources", {
+      search_query: search || null,
+      result_limit: 100,
+    });
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ sources: data || [] });
+  }
 
   let query = supabase
     .from("chunks")
